@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'api',
     'front',
+    'actstream',
 ]
 
 MIDDLEWARE = [
@@ -75,8 +76,10 @@ WSGI_APPLICATION = 'myChild.wsgi.application'
 
 DATABASES = {
     'default': {
+        'NAME': 'db.sqlite3',
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        # 'USER': 'postgres',
+        # 'PASSWORD': 'sw33th0m3'
     }
 }
 
@@ -118,3 +121,13 @@ STATIC_URL = '/static/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads')
 MEDIA_URL = '/uploads/'
+
+#
+# ACTSTREAM_SETTINGS = {
+#     'MANAGER': 'actstream.managers.ActionManager',
+#     'FETCH_RELATIONS': True,
+#     'USE_PREFETCH': True,
+#     'USE_JSONFIELD': True,
+#     'GFK_FETCH_DEPTH': 1,
+# }
+

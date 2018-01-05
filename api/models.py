@@ -58,6 +58,9 @@ class Subject(BaseModel):
     principal_subsidiary = models.CharField(choices=PRINCIPAL_SUBSIDIARY, max_length=1, null=True, blank=True)
     report_mark_grade = models.CharField(choices=YES_NO, max_length=1, null=True, blank=True)
 
+    def __str__(self):
+        return '%s' % self.name
+
     class Meta:
         db_table = 'school_subjects'
 
@@ -152,6 +155,9 @@ class SchoolClass(BaseModel):
     next_term_end = models.DateTimeField()
     stage = models.CharField(max_length=12, null=True, blank=True)
 
+    def __str__(self):
+        return '%s %s' % (self.name, self.stream)
+
     class Meta:
         db_table = 'school_classes'
 
@@ -176,7 +182,6 @@ class Student(BaseModel):
 
 
 class Nok(BaseModel):
-    nok_id = models.IntegerField(blank=False, null=False)
     name = models.CharField(max_length=50, null=False, blank=False)
     occupation = models.CharField(max_length=155, null=True, blank=True)
     relationship = models.CharField(choices=NOK_TYPE, max_length=10, null=False, blank=False)

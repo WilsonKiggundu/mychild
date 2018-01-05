@@ -3,6 +3,14 @@
 {% csrf_token %}
 {{ form.non_field_errors }}
 
+{% if model.messages %}
+    <ul>
+    {% for message in model.messages %}
+        <li>{{ message }}</li>
+    {% endfor %}
+    </ul>
+{% endif %}
+
 {% for field in model.form %}
     {% if field.errors %}
         <div class="form-group has-error">

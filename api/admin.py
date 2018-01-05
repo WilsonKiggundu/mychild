@@ -24,6 +24,9 @@ admin.site.register(School)
 admin.site.register(SchoolClass)
 admin.site.register(SchoolCommunication)
 admin.site.register(SchoolEvent)
+admin.site.register(Subject)
+admin.site.register(SubjectGroup)
+admin.site.register(SubjectPaper)
 
 ''' Student '''
 admin.site.register(Student)

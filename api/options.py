@@ -1,3 +1,4 @@
+import datetime
 
 GENDER = (
     ('M', 'Male'),
@@ -26,7 +27,7 @@ STATUS = (
 CURRICULUM_LEVELS = (
     ('P', 'Primary'),
     ('O', 'O Level'),
-    ('P', 'A Level'),
+    ('A', 'A Level'),
 )
 
 ASSESSMENT_TYPES = (
@@ -76,4 +77,20 @@ IMPORTS = (
     ('2', 'Teachers'),
     ('3', 'Subjects'),
     ('4', 'Marks'),
+    ('5', 'Classes')
+)
+
+now = datetime.datetime.now()
+year = now.year
+
+YEARS = (
+    (year - 1, year - 1),
+    (year, year),
+    (year + 1, year + 1)
+)
+
+TERMS = (
+    ('1', '1'),
+    ('2', '2'),
+    ('3', '3'),
 )

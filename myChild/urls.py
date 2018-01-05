@@ -34,8 +34,10 @@ urlpatterns = [
     url(r'^api/', include(user_resource.urls)),
     url(r'^api/docs', include(user_resource.urls)),
 
-    url(r'^$', home, name='home'),
-    url(r'^home/$', home, name='home'),
+
+    # user login
+    url(r'^user/login/$', auth_login, name='auth-login'),
+    url(r'^user/signup/$', user_signup, name='signup'),
 
     # school
     url(r'^school/register/$', register_school, name='register-school'),
@@ -47,10 +49,15 @@ urlpatterns = [
     # messages
     url(r'^thanks/$', thanks, name='thanks'),
 
+    # stream
+    url(r'^$', get_stream, name='home'),
+    url(r'^home/$', get_stream, name='home'),
+
     # posts
     url(r'^post/create/$', create_post, name='create-post'),
 
     # imports
     url(r'^import/$', import_data, name='import-data'),
-    url(r'^template/$', get_template, name='get-template'),
+    url(r'^export/$', generate_template, name='export-data'),
+    url(r'^template/(?P<category>[0-9]{1})/$', get_template, name='get-template'),
 ]

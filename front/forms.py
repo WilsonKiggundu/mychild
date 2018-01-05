@@ -1,9 +1,11 @@
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django import forms
+from django.forms import ModelChoiceField
 
-from api.models import School, Profile, SchoolContactPerson
-from api.options import VIEWERS, IMPORTS
+from api.models import School, Profile, SchoolContactPerson, SchoolClass, Subject
+from api.options import VIEWERS, IMPORTS, YEARS, TERMS, CURRICULUM_LEVELS
+from front.fields import SubjectModelChoiceField
 
 
 class SchoolForm(forms.ModelForm):
@@ -16,6 +18,21 @@ class SchoolContactForm(forms.ModelForm):
     class Meta:
         model = SchoolContactPerson
         fields = '__all__'
+
+
+class LoginForm(forms.Form):
+    email = forms.CharField(required=True, label='Email', widget=forms.EmailInput)
+    password = forms.CharField(required=True, label='Password', widget=forms.PasswordInput)
+    remember_me = forms.BooleanField(required=False, label='Remember me', widget=forms.CheckboxInput)
+
+
+class SignupForm(forms.Form):
+    child_code = forms.CharField(required=True, label='My Child Code')
+    school_code = forms.CharField(required=True, label='School Code')
+    name = forms.CharField(required=True, label='Your name')
+    email = forms.CharField(required=True, label='Email', widget=forms.EmailInput)
+    password = forms.CharField(label='Password', widget=forms.PasswordInput)
+    confirm_password = forms.CharField(label='Confirm Password', widget=forms.PasswordInput)
 
 
 class UserForm(forms.ModelForm):
@@ -44,7 +61,6 @@ class UserForm(forms.ModelForm):
 
 
 class ProfileForm(forms.ModelForm):
-
     class Meta:
         model = Profile
         fields = ('type', 'school', 'user', 'telephone', 'bio')
@@ -59,7 +75,8 @@ class PostForm(forms.Form):
     title = forms.CharField(required=False, max_length=255)
     details = forms.CharField(max_length=2000, widget=forms.Textarea())
     files = forms.FileField(required=False, widget=forms.ClearableFileInput(attrs={'multiple': True, }))
-    viewers = forms.MultipleChoiceField(required=False, choices=VIEWERS, widget=forms.CheckboxSelectMultiple(attrs={'class': 'inline'}))
+    viewers = forms.MultipleChoiceField(required=False, choices=VIEWERS,
+                                        widget=forms.CheckboxSelectMultiple(attrs={'class': 'inline'}))
 
 
 class CommentForm(forms.Form):
@@ -68,5 +85,15 @@ class CommentForm(forms.Form):
 
 
 class ImportForm(forms.Form):
+    school = forms.ModelChoiceField(queryset=School.objects.all())
     category = forms.CharField(required=True, widget=forms.Select(choices=IMPORTS))
     file = forms.FileField(required=True)
+
+
+class ImportResultsForm(forms.Form):
+    school_class = forms.ModelChoiceField(queryset=SchoolClass.objects.all())
+    subject = SubjectModelChoiceField(queryset=Subject.objects.all())
+    year = forms.CharField(required=True, widget=forms.Select(choices=YEARS))
+    term = forms.CharField(required=True, widget=forms.Select(choices=TERMS))
+    level = forms.CharField(required=True, widget=forms.Select(choices=CURRICULUM_LEVELS))
+
