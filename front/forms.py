@@ -90,10 +90,30 @@ class ImportForm(forms.Form):
     file = forms.FileField(required=True)
 
 
-class ImportResultsForm(forms.Form):
-    school_class = forms.ModelChoiceField(queryset=SchoolClass.objects.all())
-    subject = SubjectModelChoiceField(queryset=Subject.objects.all())
+class GenerateResultsTemplateForm(forms.Form):
+    class_stream = forms.ModelChoiceField(queryset=SchoolClass.objects.all(), to_field_name='__str__')
+    subject = forms.ModelChoiceField(queryset=Subject.objects.all(), to_field_name='name')
     year = forms.CharField(required=True, widget=forms.Select(choices=YEARS))
     term = forms.CharField(required=True, widget=forms.Select(choices=TERMS))
     level = forms.CharField(required=True, widget=forms.Select(choices=CURRICULUM_LEVELS))
 
+
+class ImportStudentsForm(forms.Form):
+    file = forms.FileField(required=True)
+
+
+class ImportClassesForm(forms.Form):
+    file = forms.FileField(required=True)
+
+
+class ImportSubjectsForm(forms.Form):
+    file = forms.FileField(required=True)
+
+
+class ImportResultsForm(forms.Form):
+    class_stream = forms.ModelChoiceField(queryset=SchoolClass.objects.all(), to_field_name='__str__')
+    subject = SubjectModelChoiceField(queryset=Subject.objects.all(), to_field_name='name')
+    year = forms.CharField(required=True, widget=forms.Select(choices=YEARS))
+    term = forms.CharField(required=True, widget=forms.Select(choices=TERMS))
+    level = forms.CharField(required=True, widget=forms.Select(choices=CURRICULUM_LEVELS))
+    file = forms.FileField(required=True)

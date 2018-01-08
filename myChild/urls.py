@@ -34,6 +34,8 @@ urlpatterns = [
     url(r'^api/', include(user_resource.urls)),
     url(r'^api/docs', include(user_resource.urls)),
 
+    # stream
+    url('^activity/', include('actstream.urls')),
 
     # user login
     url(r'^user/login/$', auth_login, name='auth-login'),
@@ -57,7 +59,10 @@ urlpatterns = [
     url(r'^post/create/$', create_post, name='create-post'),
 
     # imports
-    url(r'^import/$', import_data, name='import-data'),
+    url(r'^import/students/$', import_students, name='import_students'),
+    url(r'^import/results/$', import_academic_results, name='import_academic_results'),
+    url(r'^import/classes/$', import_classes, name='import_classes'),
+    url(r'^import/subjects/$', import_subjects, name='import_subjects'),
     url(r'^export/$', generate_template, name='export-data'),
-    url(r'^template/(?P<category>[0-9]{1})/$', get_template, name='get-template'),
+    url(r'^generate/students/template/$', generate_students_list_template, name='students_list_template'),
 ]

@@ -65,7 +65,7 @@ ATTACHMENT_TYPE = (
 )
 
 VIEWERS = (
-    #('1', 'All Users'),
+    # ('1', 'All Users'),
     ('2', 'Teachers'),
     ('3', 'Parents'),
     ('4', 'Students'),
@@ -94,3 +94,11 @@ TERMS = (
     ('2', '2'),
     ('3', '3'),
 )
+
+
+class Imports:
+    students = 'students'
+    teachers = 'teachers'
+    subjects = 'subjects'
+    results = 'results'
+    classes = 'classes'

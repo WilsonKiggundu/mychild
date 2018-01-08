@@ -1,12 +1,17 @@
+import codecs
 import csv
 from io import BytesIO
 
+import xlrd
 import xlsxwriter as xlsxwriter
 import xlwt as xlwt
 from data_importer.importers import CSVImporter
+from django.contrib.auth.models import User
 from django.http import HttpResponse
 
-from api.models import Student
+from api.models import *
+from api.options import Imports
+from api.utils import generate_student_code
 
 
 class StudentCsvImportModel(CSVImporter):
@@ -33,7 +38,9 @@ def generate_academic_results_template(request):
     title = "Academic Results Upload Template"
     year = request.POST['year']
     term = request.POST['term']
-    school_class = request.POST['school_class']
+    class_stream = request.POST['class_stream'].split(' ')
+    school_class = class_stream[0]
+    stream = class_stream[1]
     subject = request.POST['subject']
     level = request.POST['level']
     upload_key = '1:2:3:4:5:6'  # request.GET['upload_key']
@@ -96,12 +103,15 @@ def generate_academic_results_template(request):
 
     # Row3 = Year/Term
     ws1.write(row_num, 0, "Year/Term")
-    ws1.write(row_num, 1, "%s / %s" % (year, term))
+    ws1.write(row_num, 1, "%s" % year)
+    ws1.write(row_num, 2, "Term %s" % term)
     row_num += 1
 
     # Row4 = Class/ Stream
     ws1.write(row_num, 0, "Class")
     ws1.write(row_num, 1, "%s" % school_class)
+    ws1.write(row_num, 2, "%s" % stream)
+    ws1.write(row_num, 3, "%s" % level)
     row_num += 1
 
     # Row5 = Subject
@@ -136,12 +146,15 @@ def generate_academic_results_template(request):
 
     # Row3 = Year/Term
     ws2.write(row_num, 0, "Year/Term")
-    ws2.write(row_num, 1, "%s %s" % (year, term))
+    ws2.write(row_num, 1, "%s" % year)
+    ws2.write(row_num, 1, "Term %s" % term)
     row_num += 1
 
     # Row4 = Class/ Stream
     ws2.write(row_num, 0, "Class")
     ws2.write(row_num, 1, "%s" % school_class)
+    ws2.write(row_num, 2, "%s" % stream)
+    ws2.write(row_num, 3, "%s" % level)
     row_num += 1
 
     # Row5 = Subject
@@ -176,12 +189,15 @@ def generate_academic_results_template(request):
 
     # Row3 = Year/Term
     ws3.write(row_num, 0, "Year/Term")
-    ws3.write(row_num, 1, "%s %s" % (year, term))
+    ws3.write(row_num, 1, "%s" % year)
+    ws3.write(row_num, 2, "Term %s" % term)
     row_num += 1
 
     # Row4 = Class/ Stream
     ws3.write(row_num, 0, "Class")
     ws3.write(row_num, 1, "%s" % school_class)
+    ws3.write(row_num, 2, "%s" % stream)
+    ws3.write(row_num, 3, "%s" % level)
     row_num += 1
 
     # Row5 = Subject
@@ -210,71 +226,70 @@ def generate_academic_results_template(request):
     return response
 
 
-def generate_class_list_template(request, f='CSV'):
-    if f == 'CSV':
-        response = HttpResponse(content_type='text/csv')
-        response['Content-Disposition'] = 'attachment; filename="school_classes_import.csv"'
+def generate_class_list_template(request):
+    school = request.user.profile.school
+    school_name = school.name
+    title = "School Classes"
 
-        writer = csv.writer(response)
+    # create a workbook in memory
+    output = BytesIO()
 
-        # header
+    wb = xlsxwriter.Workbook(output)
+    ws = wb.add_worksheet('School_Classes')
 
-        writer.writerow(SCHOOL_CLASS_COLUMNS)
+    h1_format = wb.add_format({'bold': True, 'font_size': 18, 'locked': True})
+    h2_format = wb.add_format({'bold': True, 'font_size': 15, 'locked': True})
+    bold_text = wb.add_format({'bold': True, 'font_size': 11})
 
-        return response
+    ws.write(0, 0, school_name, h1_format)
+    ws.write(1, 0, title, h2_format)
 
-    if f == 'EXCEL':
-        response = HttpResponse(content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
-        response['Content-Disposition'] = 'attachment; filename="school_classes_import.xlsx"'
+    for col_num in range(len(SCHOOL_CLASS_COLUMNS)):
+        ws.write(3, col_num, SCHOOL_CLASS_COLUMNS[col_num], bold_text)
 
-        wb = xlwt.Workbook(encoding='utf-8')
-        ws = wb.add_sheet('StudentData')
+    wb.close()
 
-        # Sheet header, first row
-        row_num = 0
+    output.seek(0)
 
-        font_style = xlwt.XFStyle()
-        font_style.font.bold = True
+    filename = "%s_classes_template.xlsx" % school_name
+    response = HttpResponse(output.read(),
+                            content_type="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
+    response['Content-Disposition'] = 'attachment; filename="' + filename + '"'
 
-        columns = SCHOOL_CLASS_COLUMNS
-
-        for col_num in range(len(columns)):
-            ws.write(row_num, col_num, columns[col_num], font_style)
-
-        wb.save(response)
-        return response
+    return response
 
 
-def generate_students_list_template(request, f='CSV'):
-    if f == 'CSV':
-        response = HttpResponse(content_type='text/csv')
-        response['Content-Disposition'] = 'attachment; filename="student_import.csv"'
+def generate_students_list_template(request):
+    school = request.user.profile.school
+    school_name = school.name
+    title = "Students List"
 
-        writer = csv.writer(response)
-        writer.writerow(STUDENT_IMPORT_COLUMNS)
+    # create a workbook in memory
+    output = BytesIO()
 
-        return response
+    wb = xlsxwriter.Workbook(output)
+    ws = wb.add_worksheet('Students_List')
 
-    if f == 'EXCEL':
-        response = HttpResponse(content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
-        response['Content-Disposition'] = 'attachment; filename="student_import.xlsx"'
+    h1_format = wb.add_format({'bold': True, 'font_size': 18, 'locked': True})
+    h2_format = wb.add_format({'bold': True, 'font_size': 15, 'locked': True})
+    bold_text = wb.add_format({'bold': True, 'font_size': 11})
 
-        wb = xlwt.Workbook(encoding='utf-8')
-        ws = wb.add_sheet('StudentData')
+    ws.write(0, 0, school_name, h1_format)
+    ws.write(1, 0, title, h2_format)
 
-        # Sheet header, first row
-        row_num = 0
+    for col_num in range(len(STUDENT_IMPORT_COLUMNS)):
+        ws.write(3, col_num, STUDENT_IMPORT_COLUMNS[col_num], bold_text)
 
-        font_style = xlwt.XFStyle()
-        font_style.font.bold = True
+    wb.close()
 
-        columns = STUDENT_IMPORT_COLUMNS
+    output.seek(0)
 
-        for col_num in range(len(columns)):
-            ws.write(row_num, col_num, columns[col_num], font_style)
+    filename = "%s_students_list_template.xlsx" % school_name
+    response = HttpResponse(output.read(),
+                            content_type="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
+    response['Content-Disposition'] = 'attachment; filename="' + filename + '"'
 
-        wb.save(response)
-        return response
+    return response
 
 
 def process_csv_file(request, ignore_first_line=True):
@@ -293,3 +308,183 @@ def process_csv_file(request, ignore_first_line=True):
             lines.append(line)
 
     return lines
+
+
+def process_excel_file(request, category=Imports.results):
+    file = request.FILES['file']
+    school_id = request.user.profile.school_id
+
+    book = xlrd.open_workbook(file_contents=file.read())
+    sheets = book.sheet_names()
+
+    for sheet in sheets:
+        ws = book.sheet_by_name(sheet)
+        rows = ws.get_rows()
+
+        # results
+        if category == Imports.results:
+
+            year = ws.cell(2, 1)
+            term = ws.cell(2, 2).split(' ')[1]  # Term 1
+            school_class = ws.cell(3, 1)
+            stream = ws.cell(3, 2)
+            level = ws.cell(3, 3)
+
+            for (i, row) in enumerate(rows):
+                if i <= 7:
+                    continue
+
+                student_id = ws.cell(i, 0)
+                if student_id is None:
+                    continue
+
+                if sheet == 'Subject_Area_Results':
+                    subject_area_1 = ws.cell(i, 2)
+                    subject_area_2 = ws.cell(i, 3)
+                    subject_area_3 = ws.cell(i, 4)
+                    subject_area_4 = ws.cell(i, 5)
+                    subject_area_5 = ws.cell(i, 6)
+                    subject_area_6 = ws.cell(i, 7)
+                    subject_area_7 = ws.cell(i, 8)
+                    subject_area_8 = ws.cell(i, 9)
+                    subject_area_9 = ws.cell(i, 10)
+                    subject_area_10 = ws.cell(i, 11)
+
+                if sheet == 'Subject_Results':
+                    if level == 'P' or level == 'O':
+                        mark = ws.cell(i, 2)
+                        grade = ws.cell(i, 3)
+                        stream_position = ws.cell(i, 4)
+                        class_position = ws.cell(i, 5)
+                        comment = ws.cell(i, 6)
+
+                    if level == 'A':
+                        grade = ws.cell(i, 2)
+                        points = ws.cell(i, 3)
+                        stream_position = ws.cell(i, 4)
+                        class_position = ws.cell(i, 5)
+                        comment = ws.cell(i, 6)
+
+                if sheet == 'Overall_Results':
+                    if level == 'P' or level == 'O':
+                        total_mark = ws.cell(i, 2)
+                        average_mark = ws.cell(i, 3)
+                        aggregate = ws.cell(i, 4)
+                        division = ws.cell(i, 5)
+                        stream_position = ws.cell(i, 6)
+                        class_position = ws.cell(i, 7)
+                        class_teacher_comment = ws.cell(i, 8)
+                        house_teacher_comment = ws.cell(i, 9)
+                        head_teacher_comment = ws.cell(i, 10)
+
+                    if level == 'A':
+                        result = ws.cell(i, 2)
+                        points = ws.cell(i, 3)
+                        class_teacher_comment = ws.cell(i, 4)
+                        house_teacher_comment = ws.cell(i, 5)
+                        head_teacher_comment = ws.cell(i, 6)
+
+                if sheet == 'Paper_Marks':
+                    if level == 'P':
+                        continue
+
+                    if level == 'O' or level == 'A':
+                        mark = ws.cell(i, 2)
+                        grade = ws.cell(i, 3)
+                        stream_position = ws.cell(i, 4)
+                        class_position = ws.cell(i, 5)
+                        comment = ws.cell(i, 6)
+
+        # students
+        elif category == Imports.students:
+            code = generate_student_code()
+
+            for (i, row) in enumerate(rows):
+                # skip the header row
+                if i < 1:
+                    continue
+
+                name = ws.cell(i, 0).split(' ')
+                first_name = name[0]
+                last_name = name[1]
+
+                admission_number = ws.cell(i, 1)
+                school_class = ws.cell(i, 2)
+                stream = ws.cell(i, 3)
+                gender = ws.cell(i, 4)
+                nationality = ws.cell(i, 5)
+                other_info = ws.cell(i, 6)
+                student_nin = ws.cell(i, 7)
+
+                father_name = ws.cell(i, 8)
+                father_telephone = ws.cell(i, 9)
+                father_email = ws.cell(i, 10)
+                father_occupation = ws.cell(i, 11)
+                father_nin = ws.cell(i, 12)
+
+                mother_name = ws.cell(i, 13)
+                mother_telephone = ws.cell(i, 14)
+                mother_email = ws.cell(i, 15)
+                mother_occupation = ws.cell(i, 16)
+                mother_nin = ws.cell(i, 17)
+
+                student = Student(first_name=first_name, last_name=last_name,
+                                  gender=gender, school_class=school_class, stream=stream, other_info=other_info,
+                                  nin=student_nin, admission_number=admission_number, school_id=school_id,
+                                  code=code)
+                student.save()
+
+                ''' add parents '''
+                if father_name:
+                    name = father_name.split(' ')
+                    user = User(email=father_email, username=father_email, is_active=False, first_name=name[0],
+                                last_name=name[1], )
+
+                    user.set_password('sw33th0m3')
+                    user.save()
+
+                    profile = Profile(user=user, type='Parent', )
+                    profile.save()
+
+                    father = Nok(name=father_name, student=student, occupation=father_occupation,
+                                 relationship='Father',
+                                 nin=father_nin, profile=profile)
+
+                    father.save()
+
+                if mother_name:
+                    name = mother_name.split(' ')
+                    user = User(email=mother_email, username=mother_email, is_active=False, first_name=name[0],
+                                last_name=name[1], )
+
+                    user.set_password('sw33th0m3')
+                    user.save()
+
+                    profile = Profile(user=user, type='Parent', )
+                    profile.save()
+
+                    mother = Nok(name=mother_name, student=student, occupation=mother_occupation,
+                                 relationship='Mother',
+                                 nin=mother_nin, profile=profile)
+
+                    mother.save()
+
+        # subjects
+        elif category == Imports.subjects:
+            continue
+
+        # classes
+        elif category == Imports.classes:
+            for (i, row) in enumerate(rows):
+                name = ws.cell(i, 0)
+                class_number = ws.cell(i, 1)
+                stream = ws.cell(i, 2)
+                level_short = ws.cell(i, 3)
+                curriculum = ws.cell(i, 4)
+                progression = ws.cell(i, 5)
+
+                school_class = SchoolClass(name=name, stream=stream, level_short=level_short,
+                                           progression=progression, class_number=class_number,
+                                           curriculum=curriculum, school_id=school_id)
+
+                school_class.save()

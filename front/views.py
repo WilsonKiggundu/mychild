@@ -192,106 +192,31 @@ def create_post(request):
     })
 
 
-def import_data(request):
-    form = ImportForm()
-
-    if request.method == "POST":
-        form = ImportForm(request.POST, request.FILES)
+def import_academic_results(request):
+    form = ImportResultsForm()
+    if request.method == 'POST':
+        form = ImportResultsForm(request.POST, request.FILES)
 
         if form.is_valid():
-            category = form.cleaned_data['category']
-            school_id = form.cleaned_data['school']
+            process_excel_file(request, Imports.students)
+            return HttpResponseRedirect(reverse('thanks'))
 
-            lines = process_csv_file(request, True)
+    return render(request, 'admin/import.html', {
+        'model': {
+            'form': form,
+            'action': 'import_academic_results'
+        }
+    })
 
-            for line in lines:
-                line = line.split(',')
 
-                if category == '1':
+def import_students(request):
+    form = ImportStudentsForm()
 
-                    code = generate_student_code()
+    if request.method == "POST":
+        form = ImportStudentsForm(request.POST, request.FILES)
 
-                    name = line[0].split(' ')
-                    first_name = name[0]
-                    last_name = name[1]
-
-                    admission_number = line[1]
-                    school_class = line[2]
-                    stream = line[3]
-                    gender = line[4]
-                    nationality = line[5]
-                    other_info = line[6]
-                    student_nin = line[7]
-
-                    father_name = line[8]
-                    father_telephone = line[9]
-                    father_email = line[10]
-                    father_occupation = line[11]
-                    father_nin = line[12]
-
-                    mother_name = line[13]
-                    mother_telephone = line[14]
-                    mother_email = line[15]
-                    mother_occupation = line[16]
-                    mother_nin = line[17]
-
-                    student = Student(first_name=first_name, last_name=last_name,
-                                      gender=gender, school_class=school_class, stream=stream, other_info=other_info,
-                                      nin=student_nin, admission_number=admission_number, school_id=school_id,
-                                      code=code)
-                    student.save()
-
-                    ''' add parents '''
-                    if father_name:
-                        name = father_name.split(' ')
-                        user = User(email=father_email, username=father_email, is_active=False, first_name=name[0],
-                                    last_name=name[1], )
-                        # user.save(commit=False)
-
-                        user.set_password('sw33th0m3')
-                        user.save()
-
-                        profile = Profile(user=user, type='Parent', )
-                        profile.save()
-
-                        father = Nok(name=father_name, student=student, occupation=father_occupation,
-                                     relationship='Father',
-                                     nin=father_nin, profile=profile)
-
-                        father.save()
-
-                    if mother_name:
-                        name = mother_name.split(' ')
-                        user = User(email=mother_email, username=mother_email, is_active=False, first_name=name[0],
-                                    last_name=name[1], )
-                        # user.save(commit=False)
-
-                        user.set_password('sw33th0m3')
-                        user.save()
-
-                        profile = Profile(user=user, type='Parent', )
-                        profile.save()
-
-                        mother = Nok(name=mother_name, student=student, occupation=mother_occupation,
-                                     relationship='Mother',
-                                     nin=mother_nin, profile=profile)
-
-                        mother.save()
-
-                elif category == '5':  # Import classes
-                    name = line[0]
-                    class_number = line[1]
-                    stream = line[2]
-                    level_short = line[3]
-                    curriculum = line[4]
-                    progression = line[5]
-
-                    school_class = SchoolClass(name=name, stream=stream, level_short=level_short,
-                                               progression=progression, class_number=class_number,
-                                               curriculum=curriculum, school_id=school_id)
-
-                    school_class.save()
-
+        if form.is_valid():
+            process_excel_file(request, Imports.students)
             return HttpResponseRedirect(reverse('thanks'))
 
     return render(request, 'admin/import.html', {
@@ -302,11 +227,47 @@ def import_data(request):
     })
 
 
+def import_classes(request):
+    form = ImportClassesForm()
+
+    if request.method == "POST":
+        form = ImportClassesForm(request.POST, request.FILES)
+
+        if form.is_valid():
+            process_excel_file(request, Imports.classes)
+            return HttpResponseRedirect(reverse('thanks'))
+
+    return render(request, 'admin/import.html', {
+        'model': {
+            'form': form,
+            'action': 'import_classes'
+        }
+    })
+
+
+def import_subjects(request):
+    form = ImportSubjectsForm()
+
+    if request.method == "POST":
+        form = ImportSubjectsForm(request.POST, request.FILES)
+
+        if form.is_valid():
+            process_excel_file(request, Imports.subjects)
+            return HttpResponseRedirect(reverse('thanks'))
+
+    return render(request, 'admin/import.html', {
+        'model': {
+            'form': form,
+            'action': 'import_subjects'
+        }
+    })
+
+
 def generate_template(request):
-    form = ImportResultsForm()
+    form = GenerateResultsTemplateForm()
 
     if request.method == 'POST':
-        form = ImportResultsForm(request.POST)
+        form = GenerateResultsTemplateForm(request.POST)
         if form.is_valid():
             return generate_academic_results_template(request)
 
@@ -318,8 +279,5 @@ def generate_template(request):
     })
 
 
-def get_template(request, category='1'):
-    if category == '1':
-        return generate_students_list_template(request, 'CSV')
-    if category == '5':
-        return generate_class_list_template(request, 'CSV')
+def get_students_list_template(request):
+    return generate_students_list_template(request)

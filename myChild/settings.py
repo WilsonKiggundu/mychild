@@ -31,14 +31,25 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
+    'django.contrib.sites',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'api',
     'front',
+    'api',
     'actstream',
 ]
+
+
+ACTSTREAM_SETTINGS = {
+    'MANAGER': 'api.managers.ApiActionManager',
+    'FETCH_RELATIONS': True,
+    'USE_PREFETCH': True,
+    'USE_JSONFIELD': False,
+    'GFK_FETCH_DEPTH': 1,
+}
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -122,12 +133,4 @@ STATIC_URL = '/static/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads')
 MEDIA_URL = '/uploads/'
 
-#
-# ACTSTREAM_SETTINGS = {
-#     'MANAGER': 'actstream.managers.ActionManager',
-#     'FETCH_RELATIONS': True,
-#     'USE_PREFETCH': True,
-#     'USE_JSONFIELD': True,
-#     'GFK_FETCH_DEPTH': 1,
-# }
 
