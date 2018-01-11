@@ -102,7 +102,6 @@ class Staff(BaseModel):
 
 class Profile(BaseModel):
     user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, blank=True)
-    psm_id = models.IntegerField(null=True, blank=True)
     bio = models.TextField(null=True, blank=True)
     type = models.CharField(choices=PROFILE_TYPE, max_length=15, blank=False, null=False)
     twitter_handle = models.CharField(max_length=25, null=True, blank=True)
@@ -163,19 +162,19 @@ class SchoolClass(BaseModel):
 
 
 class Student(BaseModel):
-    student_id = models.IntegerField(unique=True, null=True, blank=True)
     code = models.CharField(max_length=15, unique=True, null=True, blank=True)
     first_name = models.CharField(max_length=25, blank=False, null=False)
     last_name = models.CharField(max_length=25, blank=False, null=False)
-    gender = models.CharField(max_length=2, choices=GENDER, blank=False, null=False)
-    date_of_birth = models.DateField(blank=True, null=True)
-    religion = models.CharField(max_length=25, blank=True, null=True)
-    level = models.CharField(choices=CURRICULUM_LEVELS, max_length=1, null=True, blank=True)
+    admission_number = models.CharField(max_length=35, null=True, blank=True)
     school_class = models.CharField(max_length=20, null=True, blank=True)
     stream = models.CharField(max_length=20, null=True, blank=True)
+    gender = models.CharField(max_length=2, choices=GENDER, blank=False, null=False)
+    nationality = models.CharField(max_length=20, null=True, blank=True)
     other_info = models.TextField(null=True, blank=True)
-    admission_number = models.CharField(max_length=35, null=True, blank=True)
     nin = models.CharField(max_length=20, null=True, blank=True, verbose_name="National Identification Number")
+
+    def __str__(self):
+        return '%s %s' % (self.first_name, self.last_name)
 
     class Meta:
         db_table = 'student_general'
@@ -238,3 +237,130 @@ class Like(models.Model):
 
     class Meta:
         db_table = 'user_likes'
+
+
+class SchoolSubjectClass(BaseModel):
+    school_class = models.ForeignKey(SchoolClass)
+    subject = models.ForeignKey(Subject)
+    subject_paper = models.ForeignKey(SubjectPaper)
+    compulsory = models.CharField(choices=YES_NO, max_length=1)
+    pass
+
+
+class ResultsBaseModel(BaseModel):
+    student = models.ForeignKey(Student, null=False, blank=False)
+    year = models.PositiveIntegerField(null=False, blank=False)
+    term = models.PositiveIntegerField(null=False, blank=False)
+    school_subject_class = models.ForeignKey(SchoolSubjectClass, null=False, blank=False)
+    school_class = models.CharField(max_length=15, null=False, blank=False)
+    stream = models.CharField(max_length=15, null=False, blank=False)
+    type = models.PositiveSmallIntegerField(null=False, blank=False)
+    subject = models.ForeignKey(Subject, null=False, blank=False)
+
+    class Meta:
+        abstract = True
+
+
+class AcademicsResultsLocalPrimarySubject(ResultsBaseModel):
+    result = models.CharField(max_length=3)
+    comment = models.TextField(null=True, blank=True)
+
+    class Meta:
+        verbose_name = "Primary Subject Results"
+        db_table = 'academics_results_loc_p_subject'
+
+
+class AcademicsResultsMarks(ResultsBaseModel):
+    subject_paper = models.CharField(max_length=3, null=True, blank=True)
+    mark = models.CharField(max_length=6)
+    grade = models.CharField(max_length=2)
+    stream_position = models.PositiveIntegerField(null=True, blank=True)
+    class_position = models.PositiveIntegerField(null=True, blank=True)
+    comment = models.TextField()
+
+    class Meta:
+        verbose_name = "Student Marks"
+        db_table = 'academics_results_marks'
+
+
+class AcademicsResultsLocalPrimaryOverall(ResultsBaseModel):
+    total_marks = models.CharField(max_length=4)
+    average_mark = models.CharField(max_length=4)
+    aggregate = models.PositiveIntegerField(blank=True, null=True)
+    division = models.CharField(max_length=3)
+    stream_position = models.PositiveIntegerField(null=True, blank=True)
+    class_position = models.PositiveIntegerField(null=True, blank=True)
+    class_teacher_comment = models.TextField()
+    house_teacher_comment = models.TextField()
+    head_teacher_comment = models.TextField()
+
+    class Meta:
+        verbose_name = "Primary Overall Results"
+        db_table = 'academics_results_loc_p_overall'
+
+
+class AcademicsResultsLocalOLevelSubject(ResultsBaseModel):
+    mark = models.CharField(max_length=6)
+    grade = models.CharField(max_length=2)
+    stream_position = models.PositiveIntegerField(null=True, blank=True)
+    class_position = models.PositiveIntegerField(null=True, blank=True)
+    comment = models.TextField()
+
+    class Meta:
+        verbose_name = "O-level Subject Results"
+        db_table = 'academics_results_loc_o_subject'
+
+
+class AcademicsResultsLocalOLevelOverall(ResultsBaseModel):
+    total_marks = models.CharField(max_length=4)
+    average_mark = models.CharField(max_length=4)
+    aggregate = models.PositiveIntegerField(blank=True, null=True)
+    division = models.CharField(max_length=3)
+    stream_position = models.PositiveIntegerField(null=True, blank=True)
+    class_position = models.PositiveIntegerField(null=True, blank=True)
+    class_teacher_comment = models.TextField()
+    house_teacher_comment = models.TextField()
+    head_teacher_comment = models.TextField()
+
+    class Meta:
+        verbose_name = "O-level Overall Results"
+        db_table = 'academics_results_loc_o_overall'
+
+
+class AcademicsResultsLocalALevelSubject(ResultsBaseModel):
+    grade = models.CharField(max_length=2)
+    points = models.PositiveIntegerField(null=True, blank=True)
+    stream_position = models.PositiveIntegerField(null=True, blank=True)
+    class_position = models.PositiveIntegerField(null=True, blank=True)
+    comment = models.TextField()
+
+    class Meta:
+        verbose_name = "A-level Subject Results"
+        db_table = 'academics_results_loc_a_subject'
+
+
+class AcademicsResultsLocalALevelOverall(ResultsBaseModel):
+    result = models.CharField(max_length=8)
+    points = models.PositiveIntegerField(blank=True, null=True)
+    class_teacher_comment = models.TextField()
+    house_teacher_comment = models.TextField()
+    head_teacher_comment = models.TextField()
+
+    class Meta:
+        verbose_name = "A-level Overall Results"
+        db_table = 'academics_results_loc_a_overall'
+
+
+# class AcademicsResultsIntPrimarySubject(ResultsBaseModel):
+#     class Meta:
+#         db_table = 'academics_results_int_p_subject'
+#
+#
+# class AcademicsResultsIntSubject(ResultsBaseModel):
+#     class Meta:
+#         db_table = 'academics_results_int_subject'
+#
+#
+# class AcademicsResultsIntOverall(ResultsBaseModel):
+#     class Meta:
+#         db_table = 'academics_results_int_overall'

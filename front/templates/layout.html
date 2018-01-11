@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>{{ title }}</title>
+
+    {% load staticfiles %}
+
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'font-awesome/css/font-awesome.css' %}" rel="stylesheet">
+    <link href="{% static 'css/plugins/iCheck/custom.css' %}" rel="stylesheet">
+
+    <!-- FooTable -->
+    <link href="{% static 'css/plugins/footable/footable.core.css' %}" rel="stylesheet">
+
+
+    <link href="{% static 'css/plugins/steps/jquery.steps.css' %}" rel="stylesheet">
+
+    <!-- Toastr style -->
+    <link href="{% static 'css/plugins/toastr/toastr.min.css' %}" rel="stylesheet">
+
+    <!-- Gritter -->
+    <link href="{% static 'js/plugins/gritter/jquery.gritter.css' %}" rel="stylesheet">
+
+    <link href="{% static 'css/animate.css' %}" rel="stylesheet">
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+    <link href="{% static 'css/custom.css' %}" rel="stylesheet">
+
+</head>
+
+<body>
+
+    <div id="wrapper">
+
+    <nav class="navbar-default navbar-static-side" role="navigation">
+        <div class="sidebar-collapse">
+            <ul class="nav metismenu" id="side-menu">
+                <li class="nav-header">
+                    <div class="dropdown profile-element"> <span>
+                            <img alt="image" class="img-circle" src="{% static 'img/profile_small.jpg' %}" />
+                             </span>
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                            <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">David Williams</strong>
+                             </span> <span class="text-muted text-xs block">Art Director <b class="caret"></b></span> </span> </a>
+                        <ul class="dropdown-menu animated fadeInRight m-t-xs">
+                            <li><a href="profile.html">Profile</a></li>
+                            <li><a href="contacts.html">Contacts</a></li>
+                            <li><a href="mailbox.html">Mailbox</a></li>
+                            <li class="divider"></li>
+                            <li><a href="login.html">Logout</a></li>
+                        </ul>
+                    </div>
+                    <div class="logo-element">
+                        IN+
+                    </div>
+                </li>
+                <li>
+                    <a href="layouts.html"><i class="fa fa-diamond"></i> <span class="nav-label">Layouts</span></a>
+                </li>
+                <li>
+                    <a href="metrics.html"><i class="fa fa-pie-chart"></i> <span class="nav-label">Metrics</span>  </a>
+                </li>
+                <li>
+                    <a href="widgets.html"><i class="fa fa-flask"></i> <span class="nav-label">Widgets</span></a>
+                </li>
+
+            </ul>
+
+        </div>
+    </nav>
+
+        <div id="page-wrapper" class="gray-bg">
+        <div class="row border-bottom">
+        <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
+        <div class="navbar-header">
+            <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
+            <form role="search" class="navbar-form-custom" action="http://webapplayers.com/inspinia_admin-v2.7.1/search_results.html">
+                <div class="form-group">
+                    <input type="text" placeholder="Search for something..." class="form-control" name="top-search" id="top-search">
+                </div>
+            </form>
+        </div>
+            <ul class="nav navbar-top-links navbar-right">
+                <li>
+                    <span class="m-r-sm text-muted welcome-message">Welcome to INSPINIA+ Admin Theme.</span>
+                </li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
+                        <i class="fa fa-envelope"></i>  <span class="label label-warning">16</span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-messages">
+                        <li>
+                            <div class="dropdown-messages-box">
+                                <a href="profile.html" class="pull-left">
+                                    <img alt="image" class="img-circle" src="img/a7.jpg">
+                                </a>
+                                <div class="media-body">
+                                    <small class="pull-right">46h ago</small>
+                                    <strong>Mike Loreipsum</strong> started following <strong>Monica Smith</strong>. <br>
+                                    <small class="text-muted">3 days ago at 7:58 pm - 10.06.2014</small>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <div class="dropdown-messages-box">
+                                <a href="profile.html" class="pull-left">
+                                    <img alt="image" class="img-circle" src="img/a4.jpg">
+                                </a>
+                                <div class="media-body ">
+                                    <small class="pull-right text-navy">5h ago</small>
+                                    <strong>Chris Johnatan Overtunk</strong> started following <strong>Monica Smith</strong>. <br>
+                                    <small class="text-muted">Yesterday 1:21 pm - 11.06.2014</small>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <div class="dropdown-messages-box">
+                                <a href="profile.html" class="pull-left">
+                                    <img alt="image" class="img-circle" src="img/profile.jpg">
+                                </a>
+                                <div class="media-body ">
+                                    <small class="pull-right">23h ago</small>
+                                    <strong>Monica Smith</strong> love <strong>Kim Smith</strong>. <br>
+                                    <small class="text-muted">2 days ago at 2:30 am - 11.06.2014</small>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <div class="text-center link-block">
+                                <a href="mailbox.html">
+                                    <i class="fa fa-envelope"></i> <strong>Read All Messages</strong>
+                                </a>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
+                        <i class="fa fa-bell"></i>  <span class="label label-primary">8</span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-alerts">
+                        <li>
+                            <a href="mailbox.html">
+                                <div>
+                                    <i class="fa fa-envelope fa-fw"></i> You have 16 messages
+                                    <span class="pull-right text-muted small">4 minutes ago</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="profile.html">
+                                <div>
+                                    <i class="fa fa-twitter fa-fw"></i> 3 New Followers
+                                    <span class="pull-right text-muted small">12 minutes ago</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="grid_options.html">
+                                <div>
+                                    <i class="fa fa-upload fa-fw"></i> Server Rebooted
+                                    <span class="pull-right text-muted small">4 minutes ago</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <div class="text-center link-block">
+                                <a href="notifications.html">
+                                    <strong>See All Alerts</strong>
+                                    <i class="fa fa-angle-right"></i>
+                                </a>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+
+
+                <li>
+                    <a href="login.html">
+                        <i class="fa fa-sign-out"></i> Log out
+                    </a>
+                </li>
+            </ul>
+
+        </nav>
+        </div>
+            <div class="row wrapper border-bottom white-bg page-heading">
+                <div class="col-lg-10">
+                    <h2>Activity stream</h2>
+                    <ol class="breadcrumb">
+                        <li>
+                            <a href="index-2.html">Home</a>
+                        </li>
+                        <li>
+                            <a>App views</a>
+                        </li>
+                        <li class="active">
+                            <strong>Activity stream</strong>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+            <div class="wrapper wrapper-content  animated fadeInRight">
+
+                <div class="row">
+                    <div class="col-lg-5">
+                        <div class="ibox ">
+                            <div class="ibox-title">
+                                <h5>Expended activity stream</h5>
+                            </div>
+
+                            <div class="ibox-content">
+
+                                <div class="activity-stream">
+                                    <div class="stream">
+                                        <div class="stream-badge">
+                                            <i class="fa fa-pencil"></i>
+                                        </div>
+                                        <div class="stream-panel">
+                                            <div class="stream-info">
+                                                <a href="#">
+                                                    <img src="img/a5.jpg" />
+                                                    <span>Karen Miggel</span>
+                                                    <span class="date">Today at 01:32:40 am</span>
+                                                </a>
+                                            </div>
+                                            Add new note to the <a href="#">Martex</a>  project.
+                                        </div>
+                                    </div>
+
+                                    <div class="stream">
+                                        <div class="stream-badge">
+                                            <i class="fa fa-commenting-o"></i>
+                                        </div>
+                                        <div class="stream-panel">
+                                            <div class="stream-info">
+                                                <a href="#">
+                                                    <img src="img/a4.jpg" />
+                                                    <span>John Mikkens</span>
+                                                    <span class="date">Yesterday at 10:00:20 am</span>
+                                                </a>
+                                            </div>
+                                            Commented on <a href="#">Ariana</a> profile.
+                                        </div>
+                                    </div>
+                                    <div class="stream">
+                                        <div class="stream-badge">
+                                            <i class="fa fa-circle"></i>
+                                        </div>
+                                        <div class="stream-panel">
+                                            <div class="stream-info">
+                                                <a href="#">
+                                                    <img src="img/a2.jpg" />
+                                                    <img src="img/a3.jpg" />
+                                                    <img src="img/a4.jpg" />
+                                                    <span>Mike Johnson, Monica Smith and Karen Dortmund</span>
+                                                    <span class="date">Yesterday at 02:13:20 am</span>
+                                                </a>
+                                            </div>
+                                            Changed status of third stage in the <a href="#">Vertex</a> project.
+                                        </div>
+                                    </div>
+                                    <div class="stream">
+                                        <div class="stream-badge">
+                                            <i class="fa fa-circle"></i>
+                                        </div>
+                                        <div class="stream-panel">
+                                            <div class="stream-info">
+                                                <a href="#">
+                                                    <img src="img/a6.jpg" />
+                                                    <span>Jessica Smith</span>
+                                                    <span class="date">Yesterday at 08:14:41 am</span>
+                                                </a>
+                                            </div>
+                                            Add new files to own file sharing place.
+                                        </div>
+                                    </div>
+                                    <div class="stream">
+                                        <div class="stream-badge">
+                                            <i class="fa fa-send bg-primary"></i>
+                                        </div>
+                                        <div class="stream-panel">
+                                            <div class="stream-info">
+                                                <a href="#">
+                                                    <img src="img/a7.jpg" />
+                                                    <img src="img/a1.jpg" />
+                                                    <span>Martha Farter and Mike Rodgers</span>
+                                                    <span class="date">Yesterday at 04:18:13 am</span>
+                                                </a>
+                                            </div>
+                                            Sent email to all users participating in new project.
+                                        </div>
+                                    </div>
+                                    <div class="stream">
+                                        <div class="stream-badge">
+                                            <i class="fa fa-tag bg-warning"></i>
+                                        </div>
+                                        <div class="stream-panel">
+                                            <div class="stream-info">
+                                                <a href="#">
+                                                    <img src="img/a7.jpg" />
+                                                    <span>Mark Mickens</span>
+                                                    <span class="date">Yesterday at 06:00:30 am</span>
+                                                </a>
+                                            </div>
+                                            Has been taged in the latest comments about the new project.
+                                        </div>
+                                    </div>
+                                    <div class="stream">
+                                        <div class="stream-badge">
+                                            <i class="fa fa-circle"></i>
+                                        </div>
+                                        <div class="stream-panel">
+                                            <div class="stream-info">
+                                                <a href="#">
+                                                    <img src="img/a8.jpg" />
+                                                    <span>Mike Johnson</span>
+                                                    <span class="date">Yesterday at 02:13:20 am</span>
+                                                </a>
+                                            </div>
+                                            Changed status of second stage in the latest project.
+                                        </div>
+                                    </div>
+                                    <div class="stream">
+                                        <div class="stream-badge">
+                                            <i class="fa fa-circle"></i>
+                                        </div>
+                                        <div class="stream-panel">
+                                            <div class="stream-info">
+                                                <a href="#">
+                                                    <img src="img/a1.jpg" />
+                                                    <span>Jessica Smith</span>
+                                                    <span class="date">Yesterday at 08:14:41 am</span>
+                                                </a>
+                                            </div>
+                                            Add new files to own file sharing place.
+                                        </div>
+                                    </div>
+                                    <div class="stream">
+                                        <div class="stream-badge">
+                                            <i class="fa fa-circle"></i>
+                                        </div>
+                                        <div class="stream-panel">
+                                            <div class="stream-info">
+                                                <a href="#">
+                                                    <img src="img/a6.jpg" />
+                                                    <span>Jessica Smith</span>
+                                                    <span class="date">Yesterday at 08:14:41 am</span>
+                                                </a>
+                                            </div>
+                                            Add new files to own file sharing place.
+                                        </div>
+                                    </div>
+                                    <div class="stream">
+                                        <div class="stream-badge">
+                                            <i class="fa fa-send"></i>
+                                        </div>
+                                        <div class="stream-panel">
+                                            <div class="stream-info">
+                                                <a href="#">
+                                                    <img src="img/a7.jpg" />
+                                                    <span>Martha Farter</span>
+                                                    <span class="date">Yesterday at 04:18:13 am</span>
+                                                </a>
+                                            </div>
+                                            Sent email to all users participating in new project.
+                                        </div>
+                                    </div>
+                                    <div class="stream">
+                                        <div class="stream-badge">
+                                            <i class="fa fa-sliders bg-success"></i>
+                                        </div>
+                                        <div class="stream-panel">
+                                            <div class="stream-info">
+                                                <a href="#">
+                                                    <img src="img/a2.jpg" />
+                                                    <span>Mark Mickens</span>
+                                                    <span class="date">Yesterday at 06:00:30 am</span>
+                                                </a>
+                                            </div>
+                                            Has been taged in the latest comments about the new project.
+                                        </div>
+                                    </div>
+                                    <div class="stream">
+                                        <div class="stream-badge">
+                                            <i class="fa fa-circle"></i>
+                                        </div>
+                                        <div class="stream-panel">
+                                            <div class="stream-info">
+                                                <a href="#">
+                                                    <img src="img/a8.jpg" />
+                                                    <span>Mike Johnson</span>
+                                                    <span class="date">Yesterday at 02:13:20 am</span>
+                                                </a>
+                                            </div>
+                                            Changed status of second stage in the latest project.
+                                        </div>
+                                    </div>
+                                    <div class="stream">
+                                        <div class="stream-badge">
+                                            <i class="fa fa-circle"></i>
+                                        </div>
+                                        <div class="stream-panel">
+                                            <div class="stream-info">
+                                                <a href="#">
+                                                    <img src="img/a1.jpg" />
+                                                    <span>Jessica Smith</span>
+                                                    <span class="date">Yesterday at 08:14:41 am</span>
+                                                </a>
+                                            </div>
+                                            Add new files to own file sharing place.
+                                        </div>
+                                    </div>
+                                    <div class="stream">
+                                        <div class="stream-badge">
+                                            <i class="fa fa-pencil"></i>
+                                        </div>
+                                        <div class="stream-panel">
+                                            <div class="stream-info">
+                                                <a href="#">
+                                                    <img src="img/a5.jpg" />
+                                                    <img src="img/a2.jpg" />
+                                                    <span>Karen Johnson and Sasha Miggel</span>
+                                                    <span class="date">Today at 01:32:40 am</span>
+                                                </a>
+                                            </div>
+                                            Add new note to the <a href="#">Martex</a>  project.
+                                        </div>
+                                    </div>
+
+                                    <div class="stream">
+                                        <div class="stream-badge">
+                                            <i class="fa fa-commenting-o"></i>
+                                        </div>
+                                        <div class="stream-panel">
+                                            <div class="stream-info">
+                                                <a href="#">
+                                                    <img src="img/a4.jpg" />
+                                                    <span>John Mikkens</span>
+                                                    <span class="date">Yesterday at 10:00:20 am</span>
+                                                </a>
+                                            </div>
+                                            Commented on <a href="#">Ariana</a> profile.
+                                        </div>
+                                    </div>
+                                    <div class="stream">
+                                        <div class="stream-badge">
+                                            <i class="fa fa-circle"></i>
+                                        </div>
+                                        <div class="stream-panel">
+                                            <div class="stream-info">
+                                                <a href="#">
+                                                    <img src="img/a2.jpg" />
+                                                    <span>Mike Johnson</span>
+                                                    <span class="date">Yesterday at 02:13:20 am</span>
+                                                </a>
+                                            </div>
+                                            Changed status of third stage in the <a href="#">Vertex</a> project.
+                                        </div>
+                                    </div>
+
+                                    <div class="stream">
+                                        <div class="stream-badge">
+                                            <i class="fa fa-circle"></i>
+                                        </div>
+                                        <div class="stream-panel">
+                                            <div class="stream-info">
+                                                <a href="#">
+                                                    <img src="img/a6.jpg" />
+                                                    <span>Jessica Smith</span>
+                                                    <span class="date">Yesterday at 08:14:41 am</span>
+                                                </a>
+                                            </div>
+                                            Add new files to own file sharing place.
+
+                                        </div>
+                                    </div>
+
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-7">
+                        <div class="ibox ">
+                            <div class="ibox-title">
+                                <h5>Basic activity stream</h5>
+                            </div>
+
+                            <div class="ibox-content">
+
+                                <div class="stream-small">
+                                    <span class="label label-primary"> Add</span>
+                                    <span class="text-muted"> Today at 10:30:50 pm </span> / <a href="#">Mike Smith</a>  Added new contact to the user group
+                                </div>
+                                <div class="stream-small">
+                                    <span class="label label-success"> Comment</span>
+                                    <span class="text-muted"> Today at 08:10:50 am </span> / <a href="#">Michael Miggel</a>  Commented on Ariana profile.
+                                </div>
+                                <div class="stream-small">
+                                    <span class="label label-success"> Comment</span>
+                                    <span class="text-muted"> Today at 04:30:33 am </span> / <a href="#">Monica Jackson</a>  Commented on public board.
+                                </div>
+                                <div class="stream-small">
+                                    <span class="label label-success"> Comment</span>
+                                    <span class="text-muted"> Today at 11:43:59 am </span> / <a href="#">Jessica Smith</a>  Commented on public board.
+                                </div>
+                                <div class="stream-small">
+                                    <span class="label label-primary"> Add</span>
+                                    <span class="text-muted"> Yesterday at 10:02:33 pm </span> / <a href="#">Camila Farter</a> Added new file to project.
+                                </div>
+                                <div class="stream-small">
+                                    <span class="label label-warning"> Activity</span>
+                                    <span class="text-muted"> Today at 08:10:50 am </span> / <a href="#">John Dernex</a>  Add new item to stage zero.
+                                </div>
+                                <div class="stream-small">
+                                    <span class="label label-warning"> Activity</span>
+                                    <span class="text-muted"> Yesterday at 10:32:12 am </span> / <a href="#">Andrew Williams</a>  Joined to the new group.
+                                </div>
+                                <div class="stream-small">
+                                    <span class="label label-warning"> Activity</span>
+                                    <span class="text-muted"> Today at 08:10:50 am </span> / <a href="#">Michael Miggel</a>  Commented on Ariana profile.
+                                </div>
+                                <div class="stream-small">
+                                    <span class="label label-warning"> Activity</span>
+                                    <span class="text-muted"> Today at 04:30:33 am </span> / <a href="#">Monica Jackson</a>  Commented on public board.
+                                </div>
+                                <div class="stream-small">
+                                    <span class="label label-default"> Note</span>
+                                    <span class="text-muted"> Today at 08:10:50 am </span> / <a href="#">Michael Miggel</a>  Commented on Ariana profile.
+                                </div>
+                                <div class="stream-small">
+                                    <span class="label label-default"> Note</span>
+                                    <span class="text-muted"> Today at 04:30:33 am </span> / <a href="#">Monica Jackson</a>  Commented on public board.
+                                </div>
+                                <div class="stream-small">
+                                    <span class="label label-default"> Note</span>
+                                    <span class="text-muted"> Today at 11:43:59 am </span> / <a href="#">Jessica Smith</a>  Commented on public board.
+                                </div>
+                                <div class="stream-small">
+                                    <span class="label label-default"> Note</span>
+                                    <span class="text-muted"> Today at 08:10:50 am </span> / <a href="#">John Dernex</a>  Add new item to stage zero.
+                                </div>
+                                <div class="stream-small">
+                                    <span class="label label-default"> Note</span>
+                                    <span class="text-muted"> Yesterday at 10:32:12 am </span> / <a href="#">Andrew Williams</a>  Joined to the new group.
+                                </div>
+                                <div class="stream-small">
+                                    <span class="label label-default"> Note</span>
+                                    <span class="text-muted"> Today at 08:10:50 am </span> / <a href="#">Michael Miggel</a>  Commented on Ariana profile.
+                                </div>
+                                <div class="stream-small">
+                                    <span class="label label-default"> Note</span>
+                                    <span class="text-muted"> Today at 04:30:33 am </span> / <a href="#">Monica Jackson</a>  Commented on public board.
+                                </div>
+                                <div class="stream-small">
+                                    <span class="label label-default"> Note</span>
+                                    <span class="text-muted"> Today at 08:10:50 am </span> / <a href="#">John Dernex</a>  Add new item to stage zero.
+                                </div>
+                                <div class="stream-small">
+                                    <span class="label label-default"> Note</span>
+                                    <span class="text-muted"> Yesterday at 10:32:12 am </span> / <a href="#">Andrew Williams</a>  Joined to the new group.
+                                </div>
+                                <div class="stream-small">
+                                    <span class="label label-default"> Note</span>
+                                    <span class="text-muted"> Today at 08:10:50 am </span> / <a href="#">Michael Miggel</a>  Commented on Ariana profile.
+                                </div>
+                                <div class="stream-small">
+                                    <span class="label label-default"> Note</span>
+                                    <span class="text-muted"> Today at 04:30:33 am </span> / <a href="#">Monica Jackson</a>  Commented on public board.
+                                </div>
+                                <div class="stream-small">
+                                    <span class="label label-success"> Comment</span>
+                                    <span class="text-muted"> Today at 08:10:50 am </span> / <a href="#">Michael Miggel</a>  Commented on Ariana profile.
+                                </div>
+                                <div class="stream-small">
+                                    <span class="label label-success"> Comment</span>
+                                    <span class="text-muted"> Today at 04:30:33 am </span> / <a href="#">Monica Jackson</a>  Commented on public board.
+                                </div>
+                                <div class="stream-small">
+                                    <span class="label label-success"> Comment</span>
+                                    <span class="text-muted"> Today at 11:43:59 am </span> / <a href="#">Jessica Smith</a>  Commented on public board.
+                                </div>
+                                <div class="stream-small">
+                                    <span class="label label-warning"> Activity</span>
+                                    <span class="text-muted"> Today at 08:10:50 am </span> / <a href="#">John Dernex</a>  Add new item to stage zero.
+                                </div>
+                                <div class="stream-small">
+                                    <span class="label label-warning"> Activity</span>
+                                    <span class="text-muted"> Yesterday at 10:32:12 am </span> / <a href="#">Andrew Williams</a>  Joined to the new group.
+                                </div>
+                                <div class="stream-small">
+                                    <span class="label label-warning"> Activity</span>
+                                    <span class="text-muted"> Today at 08:10:50 am </span> / <a href="#">Michael Miggel</a>  Commented on Ariana profile.
+                                </div>
+                                <div class="stream-small">
+                                    <span class="label label-warning"> Activity</span>
+                                    <span class="text-muted"> Today at 04:30:33 am </span> / <a href="#">Monica Jackson</a>  Commented on public board.
+                                </div>
+                                <div class="stream-small">
+                                    <span class="label label-default"> Note</span>
+                                    <span class="text-muted"> Today at 08:10:50 am </span> / <a href="#">Michael Miggel</a>  Commented on Ariana profile.
+                                </div>
+                                <div class="stream-small">
+                                    <span class="label label-default"> Note</span>
+                                    <span class="text-muted"> Today at 04:30:33 am </span> / <a href="#">Monica Jackson</a>  Commented on public board.
+                                </div>
+                                <div class="stream-small">
+                                    <span class="label label-default"> Note</span>
+                                    <span class="text-muted"> Today at 11:43:59 am </span> / <a href="#">Jessica Smith</a>  Commented on public board.
+                                </div>
+                                <div class="stream-small">
+                                    <span class="label label-default"> Note</span>
+                                    <span class="text-muted"> Today at 08:10:50 am </span> / <a href="#">John Dernex</a>  Add new item to stage zero.
+                                </div>
+                                <div class="stream-small">
+                                    <span class="label label-default"> Note</span>
+                                    <span class="text-muted"> Yesterday at 10:32:12 am </span> / <a href="#">Andrew Williams</a>  Joined to the new group.
+                                </div>
+                                <div class="stream-small">
+                                    <span class="label label-default"> Note</span>
+                                    <span class="text-muted"> Today at 08:10:50 am </span> / <a href="#">Michael Miggel</a>  Commented on Ariana profile.
+                                </div>
+                                <div class="stream-small">
+                                    <span class="label label-default"> Note</span>
+                                    <span class="text-muted"> Today at 04:30:33 am </span> / <a href="#">Monica Jackson</a>  Commented on public board.
+                                </div>
+                                <div class="stream-small">
+                                    <span class="label label-default"> Note</span>
+                                    <span class="text-muted"> Today at 08:10:50 am </span> / <a href="#">Michael Miggel</a>  Commented on Ariana profile.
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <div class="footer">
+            <div class="pull-right">
+                10GB of <strong>250GB</strong> Free.
+            </div>
+            <div>
+                <strong>Copyright</strong> Example Company &copy; 2014-2017
+            </div>
+        </div>
+
+        </div>
+        </div>
+
+
+
+    <!-- Mainly scripts -->
+    <script src="js/jquery-3.1.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/plugins/metisMenu/jquery.metisMenu.js"></script>
+    <script src="js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+
+    <!-- Custom and plugin javascript -->
+    <script src="js/inspinia.js"></script>
+    <script src="js/plugins/pace/pace.min.js"></script>
+
+</body>
+
+
+<!-- Mirrored from webapplayers.com/inspinia_admin-v2.7.1/activity_stream.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 14 Aug 2017 07:37:43 GMT -->
+</html>

@@ -7,6 +7,7 @@ import xlsxwriter as xlsxwriter
 import xlwt as xlwt
 from data_importer.importers import CSVImporter
 from django.contrib.auth.models import User
+from django.db import IntegrityError
 from django.http import HttpResponse
 
 from api.models import *
@@ -29,6 +30,8 @@ STUDENT_IMPORT_COLUMNS = ['NAME', 'ADMISSION_NUMBER', 'CLASS', 'STREAM', 'SEX',
                           'MOTHER_OCCUPATION', 'MOTHER_NIN']
 
 SCHOOL_CLASS_COLUMNS = ['CLASS', 'CLASS_NUMBER', 'STREAM', 'LEVEL_SHORT', 'CURRICULUM', 'PROGRESSION']
+SUBJECTS_COLUMNS = ['NAME', 'SHORT_NAME', 'CODE', 'CURRICULUM', 'GROUP', 'SUBJECT AREA', 'STANDARD', 'LEVEL']
+SUBJECT_GROUP_COLUMNS = ['GROUP', 'NAME', 'LEVEL']
 
 
 def generate_academic_results_template(request):
@@ -292,25 +295,48 @@ def generate_students_list_template(request):
     return response
 
 
-def process_csv_file(request, ignore_first_line=True):
-    csv_file = request.FILES['file']
+def generate_subjects_list_template(request):
+    school = request.user.profile.school
+    school_name = school.name
+    title = "Subjects List"
 
-    file_data = csv_file.read().decode('utf-8')
-    data_lines = file_data.split('\n')
+    # create a workbook in memory
+    output = BytesIO()
 
-    lines = []
+    wb = xlsxwriter.Workbook(output)
+    h1_format = wb.add_format({'bold': True, 'font_size': 18, 'locked': True})
+    h2_format = wb.add_format({'bold': True, 'font_size': 15, 'locked': True})
+    bold_text = wb.add_format({'bold': True, 'font_size': 11})
 
-    for index, line in enumerate(data_lines):
-        if index == 0 and ignore_first_line:
-            continue
+    ws = wb.add_worksheet('Subjects')
 
-        if line:
-            lines.append(line)
+    ws.write(0, 0, school_name, h1_format)
+    ws.write(1, 0, title, h2_format)
 
-    return lines
+    for col_num in range(len(SUBJECTS_COLUMNS)):
+        ws.write(3, col_num, SUBJECTS_COLUMNS[col_num], bold_text)
+
+    ws = wb.add_worksheet('Groups')
+
+    ws.write(0, 0, school_name, h1_format)
+    ws.write(1, 0, title, h2_format)
+
+    for col_num in range(len(SUBJECT_GROUP_COLUMNS)):
+        ws.write(3, col_num, SUBJECT_GROUP_COLUMNS[col_num], bold_text)
+
+    wb.close()
+
+    output.seek(0)
+
+    filename = "%s_subjects_list_template.xlsx" % school_name
+    response = HttpResponse(output.read(),
+                            content_type="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
+    response['Content-Disposition'] = 'attachment; filename="' + filename + '"'
+
+    return response
 
 
-def process_excel_file(request, category=Imports.results):
+def process_excel_file(request, category):
     file = request.FILES['file']
     school_id = request.user.profile.school_id
 
@@ -397,81 +423,115 @@ def process_excel_file(request, category=Imports.results):
 
         # students
         elif category == Imports.students:
-            code = generate_student_code()
 
             for (i, row) in enumerate(rows):
                 # skip the header row
-                if i < 1:
-                    continue
+                if i >= 4:
+                    name = ws.cell(i, 0).value.split(' ')
 
-                name = ws.cell(i, 0).split(' ')
-                first_name = name[0]
-                last_name = name[1]
+                    first_name = name[0]
+                    last_name = name[1]
 
-                admission_number = ws.cell(i, 1)
-                school_class = ws.cell(i, 2)
-                stream = ws.cell(i, 3)
-                gender = ws.cell(i, 4)
-                nationality = ws.cell(i, 5)
-                other_info = ws.cell(i, 6)
-                student_nin = ws.cell(i, 7)
+                    admission_number = ws.cell(i, 1).value
 
-                father_name = ws.cell(i, 8)
-                father_telephone = ws.cell(i, 9)
-                father_email = ws.cell(i, 10)
-                father_occupation = ws.cell(i, 11)
-                father_nin = ws.cell(i, 12)
+                    code = generate_student_code(admission_number=admission_number)
 
-                mother_name = ws.cell(i, 13)
-                mother_telephone = ws.cell(i, 14)
-                mother_email = ws.cell(i, 15)
-                mother_occupation = ws.cell(i, 16)
-                mother_nin = ws.cell(i, 17)
+                    school_class = ws.cell(i, 2).value
+                    stream = ws.cell(i, 3).value
+                    gender = ws.cell(i, 4).value
+                    nationality = ws.cell(i, 5).value
+                    other_info = ws.cell(i, 6).value
+                    student_nin = ws.cell(i, 7).value
 
-                student = Student(first_name=first_name, last_name=last_name,
-                                  gender=gender, school_class=school_class, stream=stream, other_info=other_info,
-                                  nin=student_nin, admission_number=admission_number, school_id=school_id,
-                                  code=code)
-                student.save()
+                    father_name = ws.cell(i, 8).value
+                    father_telephone = ws.cell(i, 9).value
+                    father_email = ws.cell(i, 10).value
+                    father_occupation = ws.cell(i, 11).value
+                    father_nin = ws.cell(i, 12).value
 
-                ''' add parents '''
-                if father_name:
-                    name = father_name.split(' ')
-                    user = User(email=father_email, username=father_email, is_active=False, first_name=name[0],
-                                last_name=name[1], )
+                    mother_name = ws.cell(i, 13).value
+                    mother_telephone = ws.cell(i, 14).value
+                    mother_email = ws.cell(i, 15).value
+                    mother_occupation = ws.cell(i, 16).value
+                    mother_nin = ws.cell(i, 17).value
 
-                    user.set_password('sw33th0m3')
-                    user.save()
+                    try:
+                        student = Student(first_name=first_name, last_name=last_name, nationality=nationality,
+                                          gender=gender, school_class=school_class, stream=stream,
+                                          other_info=other_info,
+                                          nin=student_nin, admission_number=admission_number, school_id=school_id,
+                                          code=code)
+                        student.save()
 
-                    profile = Profile(user=user, type='Parent', )
-                    profile.save()
+                        ''' add parents '''
+                        if father_name:
+                            name = father_name.split(' ')
+                            user = User(email=father_email, username=father_email, is_active=True, first_name=name[0],
+                                        last_name=name[1], )
 
-                    father = Nok(name=father_name, student=student, occupation=father_occupation,
-                                 relationship='Father',
-                                 nin=father_nin, profile=profile)
+                            user.set_password('sw33th0m3')
+                            user.save()
 
-                    father.save()
+                            profile = Profile(user=user, telephone=father_telephone, type='Parent', )
+                            profile.save()
 
-                if mother_name:
-                    name = mother_name.split(' ')
-                    user = User(email=mother_email, username=mother_email, is_active=False, first_name=name[0],
-                                last_name=name[1], )
+                            father = Nok(name=father_name, student=student, occupation=father_occupation,
+                                         relationship='Father',
+                                         nin=father_nin, profile=profile)
 
-                    user.set_password('sw33th0m3')
-                    user.save()
+                            father.save()
 
-                    profile = Profile(user=user, type='Parent', )
-                    profile.save()
+                        if mother_name:
+                            name = mother_name.split(' ')
+                            user = User(email=mother_email, username=mother_email, is_active=True, first_name=name[0],
+                                        last_name=name[1], )
 
-                    mother = Nok(name=mother_name, student=student, occupation=mother_occupation,
-                                 relationship='Mother',
-                                 nin=mother_nin, profile=profile)
+                            user.set_password('sw33th0m3')
+                            user.save()
 
-                    mother.save()
+                            profile = Profile(user=user, telephone=mother_telephone, type='Parent', )
+                            profile.save()
+
+                            mother = Nok(name=mother_name, student=student, occupation=mother_occupation,
+                                         relationship='Mother',
+                                         nin=mother_nin, profile=profile)
+
+                            mother.save()
+
+                    except IntegrityError:
+                        pass
 
         # subjects
         elif category == Imports.subjects:
-            continue
+            if sheet == 'Subjects':
+                for (i, row) in enumerate(rows):
+                    if i <= 3:
+                        continue
+
+                    name = ws.cell(i, 0)
+                    short_name = ws.cell(i, 1)
+                    code = ws.cell(i, 2)
+                    curriculum = ws.cell(i, 3)
+                    group = ws.cell(i, 4)
+                    subject_area = ws.cell(i, 5)
+                    standard = ws.cell(i, 6)
+                    level = ws.cell(i, 7)
+
+                    subject = Subject(name=name, short=short_name, code=code, curriculum=curriculum,
+                                      group=group, area=subject_area, standard=standard, level=level)
+
+                    subject.save()
+            else:
+                for (i, row) in enumerate(rows):
+                    if i <= 3:
+                        continue
+
+                    name = ws.cell(i, 0)
+                    group = ws.cell(i, 1)
+                    level = ws.cell(i, 2)
+
+                    subject_group = SubjectGroup(name=name, group=group, level=level)
+                    subject_group.save()
 
         # classes
         elif category == Imports.classes:

@@ -28,6 +28,8 @@ def auth_login(request):
             user = authenticate(request, username=email, password=password)
 
             if user:
+                login(request, user)
+
                 return HttpResponseRedirect(reverse('home'))
             messages.append("Invalid email and/or password")
 
@@ -149,7 +151,6 @@ def create_profile(request):
 
 
 def thanks(request):
-    # logout(request)
     return render(request, 'thanks.html')
 
 
@@ -192,6 +193,11 @@ def create_post(request):
     })
 
 
+# =================
+# Imports
+# =================
+
+
 def import_academic_results(request):
     form = ImportResultsForm()
     if request.method == 'POST':
@@ -222,7 +228,7 @@ def import_students(request):
     return render(request, 'admin/import.html', {
         'model': {
             'form': form,
-            'action': 'import-data'
+            'action': 'import_students'
         }
     })
 
@@ -263,7 +269,7 @@ def import_subjects(request):
     })
 
 
-def generate_template(request):
+def generate_results_template(request):
     form = GenerateResultsTemplateForm()
 
     if request.method == 'POST':
@@ -277,7 +283,3 @@ def generate_template(request):
             'action': 'export-data'
         }
     })
-
-
-def get_students_list_template(request):
-    return generate_students_list_template(request)

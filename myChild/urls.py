@@ -25,7 +25,7 @@ profile_resource = ProfileResource()
 user_resource = UserResource()
 
 urlpatterns = [
-    url(r'^admin/', admin.site.urls),
+    url(r'^administration/', include(admin.site.urls), name='admin'),
 
     # api
     url(r'^api/', include(school_resource.urls)),
@@ -52,8 +52,8 @@ urlpatterns = [
     url(r'^thanks/$', thanks, name='thanks'),
 
     # stream
-    url(r'^$', get_stream, name='home'),
-    url(r'^home/$', get_stream, name='home'),
+    url(r'^$', home, name='home'),
+    url(r'^home/$', home, name='home'),
 
     # posts
     url(r'^post/create/$', create_post, name='create-post'),
@@ -63,6 +63,10 @@ urlpatterns = [
     url(r'^import/results/$', import_academic_results, name='import_academic_results'),
     url(r'^import/classes/$', import_classes, name='import_classes'),
     url(r'^import/subjects/$', import_subjects, name='import_subjects'),
-    url(r'^export/$', generate_template, name='export-data'),
+
+    # exports
     url(r'^generate/students/template/$', generate_students_list_template, name='students_list_template'),
+    url(r'^generate/subjects/template/$', generate_subjects_list_template, name='subjects_list_template'),
+    url(r'^generate/results/template/$', generate_results_template, name='results_template'),
+    url(r'^generate/classes/template/$', generate_class_list_template, name='class_list_template'),
 ]
