@@ -25,9 +25,9 @@ STATUS = (
 )
 
 CURRICULUM_LEVELS = (
-    ('P', 'Primary'),
-    ('O', 'O Level'),
-    ('A', 'A Level'),
+    ('Primary', 'Primary'),
+    ('O level', 'O level'),
+    ('A level', 'A level'),
 )
 
 ASSESSMENT_TYPES = (

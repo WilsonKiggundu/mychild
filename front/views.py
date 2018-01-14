@@ -1,5 +1,5 @@
 from actstream.models import Action, user_stream
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
@@ -16,8 +16,7 @@ from front.forms import *
 # Create your views here.
 
 def auth_login(request):
-    form = LoginForm()
-    messages = []
+    message = None
 
     if request.method == 'POST':
         form = LoginForm(request.POST)
@@ -29,17 +28,18 @@ def auth_login(request):
 
             if user:
                 login(request, user)
-
                 return HttpResponseRedirect(reverse('home'))
-            messages.append("Invalid email and/or password")
 
-    return render(request, 'form.html', {
-        'model': {
-            'form': form,
-            'action': 'auth-login',
-            'messages': messages
-        }
+            message = "Invalid email and/or password"
+
+    return render(request, 'user/login.html', {
+        'message': message
     })
+
+
+def auth_logout(request):
+    logout(request)
+    return HttpResponseRedirect(reverse('auth-login'))
 
 
 def user_signup(request):
@@ -53,7 +53,7 @@ def user_signup(request):
             email = request.POST['email']
             password = request.POST['password']
 
-    return render(request, 'form.html', {
+    return render(request, 'user/register.html', {
         'model': {
             'form': form,
             'action': 'signup',
@@ -67,6 +67,7 @@ def get_stream(request):
     return render(request, 'stream.html', {'stream': stream})
 
 
+@login_required
 def home(request):
     return render(request, 'home.html')
 
@@ -127,6 +128,24 @@ def register_school(request):
     })
 
 
+@login_required
+def get_students(request):
+    students = Student.objects.filter(school_id__exact=request.user.profile.school_id)
+    return render(request, 'students/index.html', {'students': students})
+
+
+@login_required
+def student_details(request, student_id):
+    student = Student.objects.filter(pk=student_id, school_id__exact=request.user.profile.school_id).first()
+    return render(request, 'students/details.html', {'student': student})
+
+
+@login_required
+def get_parents(request):
+    parents = Nok.objects.filter(school_id__exact=request.user.profile.school_id,)
+    return render(request, 'parents/index.html', {'parents': parents})
+
+
 @require_http_methods(["POST"])
 @login_required
 def create_profile(request):
@@ -150,6 +169,17 @@ def create_profile(request):
             })
 
 
+@login_required
+def user_profile(request, profile_id=None):
+    user = request.user
+    if profile_id is not None:
+        user = User.objects.filter(profile__id__exact=profile_id).first()
+
+    return render(request, 'user/profile.html', {
+        'user': user
+    })
+
+
 def thanks(request):
     return render(request, 'thanks.html')
 
@@ -157,19 +187,26 @@ def thanks(request):
 ''' User posts '''
 
 
+@login_required
 @require_http_methods(["GET", "POST"])
 def create_post(request):
-    form = PostForm({'author': request.user.id})
+    user_id = request.user.id
+    school_id = request.user.profile.school_id
+
+    form = NewsFeedForm()
 
     if request.method == 'POST':
-        form = PostForm(request.POST, request.FILES)
+        form = NewsFeedForm(request.POST, request.FILES)
 
-        title = request.POST['title']
         details = request.POST['details']
-        viewers = request.POST['viewers']
 
         if form.is_valid():
-            post = Post(author=request.user, type='Blog', title=title, details=details, viewers=viewers)
+            post = NewsFeed(
+                author=request.user,
+                details=details,
+                school_id=school_id,
+                author_id=user_id,
+            )
 
             try:
                 post.save()
@@ -198,13 +235,14 @@ def create_post(request):
 # =================
 
 
+@login_required
 def import_academic_results(request):
     form = ImportResultsForm()
     if request.method == 'POST':
         form = ImportResultsForm(request.POST, request.FILES)
 
         if form.is_valid():
-            process_excel_file(request, Imports.students)
+            process_excel_file(request, Imports.results)
             return HttpResponseRedirect(reverse('thanks'))
 
     return render(request, 'admin/import.html', {
@@ -215,6 +253,7 @@ def import_academic_results(request):
     })
 
 
+@login_required
 def import_students(request):
     form = ImportStudentsForm()
 
@@ -233,6 +272,7 @@ def import_students(request):
     })
 
 
+@login_required
 def import_classes(request):
     form = ImportClassesForm()
 
@@ -251,6 +291,7 @@ def import_classes(request):
     })
 
 
+@login_required
 def import_subjects(request):
     form = ImportSubjectsForm()
 
@@ -269,6 +310,7 @@ def import_subjects(request):
     })
 
 
+@login_required
 def generate_results_template(request):
     form = GenerateResultsTemplateForm()
 
@@ -280,6 +322,6 @@ def generate_results_template(request):
     return render(request, 'form.html', {
         'model': {
             'form': form,
-            'action': 'export-data'
+            'action': 'results_template'
         }
     })

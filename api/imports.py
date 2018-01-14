@@ -41,12 +41,15 @@ def generate_academic_results_template(request):
     title = "Academic Results Upload Template"
     year = request.POST['year']
     term = request.POST['term']
-    class_stream = request.POST['class_stream'].split(' ')
-    school_class = class_stream[0]
-    stream = class_stream[1]
+    class_id = request.POST['school_class']
     subject = request.POST['subject']
-    level = request.POST['level']
-    upload_key = '1:2:3:4:5:6'  # request.GET['upload_key']
+
+    school_class = SchoolClass.objects.filter(pk=class_id).first()
+
+    level = school_class.level
+    level_short = school_class.level_short
+    class_name = school_class.name
+    stream = school_class.stream
 
     ws1_name = 'Subject_Area_Results'
     ws2_name = 'Subject_Results'
@@ -63,7 +66,7 @@ def generate_academic_results_template(request):
                    'Stream Position', 'Class Position', 'Class Teacher Comment', 'House Teacher Comment',
                    'Head Teacher Comment']
 
-    if level == 'O':
+    if level_short == 'O':
         ws1_name = 'Paper_Results'
 
         ws1_columns = ['ID', 'Student', 'Mark', 'Grade', 'Stream Position', 'Class Position', 'Comment']
@@ -71,7 +74,7 @@ def generate_academic_results_template(request):
         ws3_columns = ['ID', 'Student', 'Total Marks', 'Average Mark', 'Aggregate in 8', 'Division', 'Stream Position',
                        'Class Position', 'Class Teacher Comment', 'House Teacher Comment', 'Head Teacher Comment']
 
-    elif level == 'A':
+    elif level_short == 'A':
         ws1_name = 'Paper_Results'
 
         ws1_columns = ['ID', 'Student', 'Mark', 'Grade', 'Stream Position', 'Class Position', 'Comment']
@@ -80,7 +83,7 @@ def generate_academic_results_template(request):
                        'Head Teacher Comment']
 
     # students = Student.objects.filter(school_id=school_id, school_class=school_class, stream=stream)
-    students = Student.objects.filter(school_id=school_id, )
+    students = Student.objects.filter(school_id=school_id, school_class=class_name, )
 
     # create a workbook in memory
     output = BytesIO()
@@ -93,41 +96,46 @@ def generate_academic_results_template(request):
 
     ws1 = wb.add_worksheet(ws1_name)
 
+    h1_format = wb.add_format({'bold': True, 'font_size': 18, 'locked': 1})
+    h2_format = wb.add_format({'bold': True, 'font_size': 15, 'locked': 1})
+    bold_text = wb.add_format({'bold': True, 'font_size': 11})
+    locked = wb.add_format({'locked': 1})
+
     # Sheet header, first row
     row_num = 0
 
     # Row1 = School Name
-    ws1.write(row_num, 0, school_name)
+    ws1.merge_range('A1:G1', school_name, h1_format)
     row_num += 1
 
     # Row2 = Document Title
-    ws1.write(row_num, 0, title)
+    ws1.merge_range('A2:G2', title, h2_format)
     row_num += 1
 
     # Row3 = Year/Term
-    ws1.write(row_num, 0, "Year/Term")
+    ws1.write(row_num, 0, "Year/Term", bold_text)
     ws1.write(row_num, 1, "%s" % year)
     ws1.write(row_num, 2, "Term %s" % term)
     row_num += 1
 
     # Row4 = Class/ Stream
-    ws1.write(row_num, 0, "Class")
-    ws1.write(row_num, 1, "%s" % school_class)
+    ws1.write(row_num, 0, "Class", bold_text)
+    ws1.write(row_num, 1, "%s" % class_name)
     ws1.write(row_num, 2, "%s" % stream)
     ws1.write(row_num, 3, "%s" % level)
     row_num += 1
 
     # Row5 = Subject
-    ws1.write(row_num, 0, "Subject")
+    ws1.write(row_num, 0, "Subject", bold_text)
     ws1.write(row_num, 1, subject)
     row_num += 2
 
     for col_num in range(len(ws1_columns)):
-        ws1.write(row_num, col_num, ws1_columns[col_num])
+        ws1.write(row_num, col_num, ws1_columns[col_num], bold_text)
 
     row_num += 1
     for student in students:
-        ws1.write(row_num, 0, student.id)
+        ws1.write(row_num, 0, student.id, locked)
         ws1.write(row_num, 1, "%s %s" % (student.first_name, student.last_name))
         row_num += 1
 
@@ -140,33 +148,33 @@ def generate_academic_results_template(request):
     row_num = 0
 
     # Row1 = School Name
-    ws2.write(row_num, 0, school_name)
+    ws2.merge_range('A1:G1', school_name, h1_format)
     row_num += 1
 
     # Row2 = Document Title
-    ws2.write(row_num, 0, title)
+    ws2.merge_range('A2:G2', title, h2_format)
     row_num += 1
 
     # Row3 = Year/Term
-    ws2.write(row_num, 0, "Year/Term")
+    ws2.write(row_num, 0, "Year/Term", bold_text)
     ws2.write(row_num, 1, "%s" % year)
     ws2.write(row_num, 1, "Term %s" % term)
     row_num += 1
 
     # Row4 = Class/ Stream
-    ws2.write(row_num, 0, "Class")
+    ws2.write(row_num, 0, "Class", bold_text)
     ws2.write(row_num, 1, "%s" % school_class)
     ws2.write(row_num, 2, "%s" % stream)
     ws2.write(row_num, 3, "%s" % level)
     row_num += 1
 
     # Row5 = Subject
-    ws2.write(row_num, 0, "Subject")
+    ws2.write(row_num, 0, "Subject", bold_text)
     ws2.write(row_num, 1, subject)
     row_num += 2
 
     for col_num in range(len(ws2_columns)):
-        ws2.write(row_num, col_num, ws2_columns[col_num])
+        ws2.write(row_num, col_num, ws2_columns[col_num], bold_text)
 
     row_num += 1
     for student in students:
@@ -183,33 +191,33 @@ def generate_academic_results_template(request):
     row_num = 0
 
     # Row1 = School Name
-    ws3.write(row_num, 0, school_name)
+    ws3.merge_range('A1:K1', school_name, h1_format)
     row_num += 1
 
     # Row2 = Document Title
-    ws3.write(row_num, 0, title)
+    ws3.merge_range('A2:K2', title, h2_format)
     row_num += 1
 
     # Row3 = Year/Term
-    ws3.write(row_num, 0, "Year/Term")
+    ws3.write(row_num, 0, "Year/Term", bold_text)
     ws3.write(row_num, 1, "%s" % year)
     ws3.write(row_num, 2, "Term %s" % term)
     row_num += 1
 
     # Row4 = Class/ Stream
-    ws3.write(row_num, 0, "Class")
+    ws3.write(row_num, 0, "Class", bold_text)
     ws3.write(row_num, 1, "%s" % school_class)
     ws3.write(row_num, 2, "%s" % stream)
     ws3.write(row_num, 3, "%s" % level)
     row_num += 1
 
     # Row5 = Subject
-    ws3.write(row_num, 0, "Subject")
+    ws3.write(row_num, 0, "Subject", bold_text)
     ws3.write(row_num, 1, subject)
     row_num += 2
 
     for col_num in range(len(ws3_columns)):
-        ws3.write(row_num, col_num, ws3_columns[col_num])
+        ws3.write(row_num, col_num, ws3_columns[col_num], bold_text)
 
     row_num += 1
     for student in students:
@@ -221,7 +229,7 @@ def generate_academic_results_template(request):
 
     output.seek(0)
 
-    filename = "%s_T%s_%s_%s_results_template.xlsx" % (year, term, school_class, subject)
+    filename = "%s_Term%s_%s_%s_results.xlsx" % (year, term, school_class, subject)
     response = HttpResponse(output.read(),
                             content_type="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
     response['Content-Disposition'] = 'attachment; filename="' + filename + '"'
@@ -350,76 +358,185 @@ def process_excel_file(request, category):
         # results
         if category == Imports.results:
 
-            year = ws.cell(2, 1)
-            term = ws.cell(2, 2).split(' ')[1]  # Term 1
-            school_class = ws.cell(3, 1)
-            stream = ws.cell(3, 2)
-            level = ws.cell(3, 3)
+            try:
+                year = ws.cell(2, 1).value
+                term_label = ws.cell(2, 2).value  # Term 1
 
-            for (i, row) in enumerate(rows):
-                if i <= 7:
-                    continue
+                term = term_label.split(' ')[1]
 
-                student_id = ws.cell(i, 0)
-                if student_id is None:
-                    continue
+                school_class = ws.cell(3, 1).value
+                stream = ws.cell(3, 2).value
+                level = ws.cell(3, 3).value
 
-                if sheet == 'Subject_Area_Results':
-                    subject_area_1 = ws.cell(i, 2)
-                    subject_area_2 = ws.cell(i, 3)
-                    subject_area_3 = ws.cell(i, 4)
-                    subject_area_4 = ws.cell(i, 5)
-                    subject_area_5 = ws.cell(i, 6)
-                    subject_area_6 = ws.cell(i, 7)
-                    subject_area_7 = ws.cell(i, 8)
-                    subject_area_8 = ws.cell(i, 9)
-                    subject_area_9 = ws.cell(i, 10)
-                    subject_area_10 = ws.cell(i, 11)
+                if level == 'Primary':
+                    level = 'P'
+                elif level == 'O level':
+                    level = 'O'
+                elif level == 'A level':
+                    level = 'A'
 
-                if sheet == 'Subject_Results':
-                    if level == 'P' or level == 'O':
-                        mark = ws.cell(i, 2)
-                        grade = ws.cell(i, 3)
-                        stream_position = ws.cell(i, 4)
-                        class_position = ws.cell(i, 5)
-                        comment = ws.cell(i, 6)
+                subject_name = ws.cell(4, 1).value
+                subject = Subject.objects.filter(name=subject_name, school_id=school_id).first()
+                subject_id = subject.id
 
-                    if level == 'A':
-                        grade = ws.cell(i, 2)
-                        points = ws.cell(i, 3)
-                        stream_position = ws.cell(i, 4)
-                        class_position = ws.cell(i, 5)
-                        comment = ws.cell(i, 6)
-
-                if sheet == 'Overall_Results':
-                    if level == 'P' or level == 'O':
-                        total_mark = ws.cell(i, 2)
-                        average_mark = ws.cell(i, 3)
-                        aggregate = ws.cell(i, 4)
-                        division = ws.cell(i, 5)
-                        stream_position = ws.cell(i, 6)
-                        class_position = ws.cell(i, 7)
-                        class_teacher_comment = ws.cell(i, 8)
-                        house_teacher_comment = ws.cell(i, 9)
-                        head_teacher_comment = ws.cell(i, 10)
-
-                    if level == 'A':
-                        result = ws.cell(i, 2)
-                        points = ws.cell(i, 3)
-                        class_teacher_comment = ws.cell(i, 4)
-                        house_teacher_comment = ws.cell(i, 5)
-                        head_teacher_comment = ws.cell(i, 6)
-
-                if sheet == 'Paper_Marks':
-                    if level == 'P':
+                for (i, row) in enumerate(rows):
+                    if i <= 7:
                         continue
 
-                    if level == 'O' or level == 'A':
-                        mark = ws.cell(i, 2)
-                        grade = ws.cell(i, 3)
-                        stream_position = ws.cell(i, 4)
-                        class_position = ws.cell(i, 5)
-                        comment = ws.cell(i, 6)
+                    student_id = ws.cell(i, 0).value
+                    if student_id is None:
+                        continue
+
+                    if sheet == 'Subject_Area_Results':
+                        subject_area_1 = ws.cell(i, 2).value
+                        subject_area_2 = ws.cell(i, 3).value
+                        subject_area_3 = ws.cell(i, 4).value
+                        subject_area_4 = ws.cell(i, 5).value
+                        subject_area_5 = ws.cell(i, 6).value
+                        subject_area_6 = ws.cell(i, 7).value
+                        subject_area_7 = ws.cell(i, 8).value
+                        subject_area_8 = ws.cell(i, 9).value
+                        subject_area_9 = ws.cell(i, 10).value
+                        subject_area_10 = ws.cell(i, 11).value
+
+                        AcademicsResultsLocalPrimarySubject(
+                            student_id=student_id, school_id=school_id, school_class=school_class, stream=stream,
+                            term=term, year=year,
+                            # TODO: complete this
+                        ).save()
+
+                    if sheet == 'Subject_Results':
+                        if level == 'P' or level == 'O':
+                            mark = ws.cell(i, 2).value
+
+                            # save nothing if there is no mark to save
+                            if mark is None:
+                                continue
+
+                            grade = ws.cell(i, 3).value
+                            stream_position = ws.cell(i, 4).value
+                            class_position = ws.cell(i, 5).value
+                            comment = ws.cell(i, 6).value
+
+                            try:
+                                if level == 'O':
+                                    AcademicsResultsLocalOLevelSubject(
+                                        school_id=school_id, student_id=student_id,
+                                        mark=mark, grade=grade, year=year, term=term,
+                                        class_position=class_position,
+                                        stream_position=stream_position,
+                                        school_class=school_class,
+                                        stream=stream, subject=subject,
+                                        comment=comment
+                                    ).save()
+
+                                if level == 'P':
+                                    AcademicsResultsLocalPrimarySubject(
+                                        school_id=school_id, student_id=student_id,
+                                        result=mark, grade=grade, year=year, term=term,
+                                        class_position=class_position,
+                                        stream_position=stream_position,
+                                        school_class=school_class,
+                                        stream=stream, subject=subject,
+                                        comment=comment
+                                    ).save()
+
+                            except():
+                                pass
+
+                        if level == 'A':
+                            grade = ws.cell(i, 2).value
+                            points = ws.cell(i, 3).value
+                            stream_position = ws.cell(i, 4).value
+                            class_position = ws.cell(i, 5).value
+                            comment = ws.cell(i, 6).value
+
+                    if sheet == 'Overall_Results':
+                        if level == 'P' or level == 'O':
+                            total_mark = ws.cell(i, 2).value
+
+                            # save nothing if there is no mark to save
+                            if total_mark is None:
+                                continue
+
+                            average_mark = ws.cell(i, 3).value
+                            aggregate = ws.cell(i, 4).value
+                            division = ws.cell(i, 5).value
+                            stream_position = ws.cell(i, 6).value
+                            class_position = ws.cell(i, 7).value
+                            class_teacher_comment = ws.cell(i, 8).value
+                            house_teacher_comment = ws.cell(i, 9).value
+                            head_teacher_comment = ws.cell(i, 10).value
+
+                            if level == 'P':
+                                AcademicsResultsLocalPrimaryOverall(
+                                    total_marks=total_mark, average_mark=average_mark, aggregate=aggregate,
+                                    division=division, class_position=class_position, stream_position=stream_position,
+                                    class_teacher_comment=class_teacher_comment,
+                                    house_teacher_comment=house_teacher_comment,
+                                    head_teacher_comment=head_teacher_comment,
+                                    school_class=school_class, stream=stream, term=term, year=year,
+                                    student_id=student_id, school_id=school_id, subject_id=subject_id
+                                ).save()
+
+                            elif level == 'O':
+                                AcademicsResultsLocalOLevelOverall(
+                                    total_marks=total_mark, average_mark=average_mark, aggregate=aggregate,
+                                    division=division, class_position=class_position, stream_position=stream_position,
+                                    class_teacher_comment=class_teacher_comment,
+                                    house_teacher_comment=house_teacher_comment,
+                                    head_teacher_comment=head_teacher_comment,
+                                    school_class=school_class, stream=stream, term=term, year=year,
+                                    student_id=student_id, school_id=school_id, subject_id=subject_id
+                                ).save()
+
+                        if level == 'A':
+                            result = ws.cell(i, 2).value
+
+                            # save nothing if there is no mark to save
+                            if result is None:
+                                continue
+
+                            points = ws.cell(i, 3).value
+                            class_teacher_comment = ws.cell(i, 4).value
+                            house_teacher_comment = ws.cell(i, 5).value
+                            head_teacher_comment = ws.cell(i, 6).value
+
+                            AcademicsResultsLocalALevelOverall(
+                                points=points,
+                                class_teacher_comment=class_teacher_comment,
+                                house_teacher_comment=house_teacher_comment,
+                                head_teacher_comment=head_teacher_comment,
+                                school_id=school_id,
+                                student_id=student_id,
+                                school_class=school_class,
+                                stream=stream,
+                                term=term, year=year
+                            ).save()
+
+                    if sheet == 'Paper_Results':
+                        if level == 'P':
+                            continue
+
+                        if level == 'O' or level == 'A':
+                            mark = ws.cell(i, 2).value
+
+                            # save nothing if there is no mark to save
+                            if mark is None:
+                                continue
+
+                            grade = ws.cell(i, 3).value
+                            stream_position = ws.cell(i, 4).value
+                            class_position = ws.cell(i, 5).value
+                            comment = ws.cell(i, 6).value
+
+                            AcademicsResultsMarks(
+                                grade=grade, stream_position=stream_position, class_position=class_position,
+                                comment=comment, student_id=student_id, school_id=school_id, type=1,
+                                subject_id=subject_id, school_class=school_class, stream=stream, year=year, term=term,
+                            ).save()
+            except():
+                pass
 
         # students
         elif category == Imports.students:
@@ -508,43 +625,81 @@ def process_excel_file(request, category):
                     if i <= 3:
                         continue
 
-                    name = ws.cell(i, 0)
-                    short_name = ws.cell(i, 1)
-                    code = ws.cell(i, 2)
-                    curriculum = ws.cell(i, 3)
-                    group = ws.cell(i, 4)
-                    subject_area = ws.cell(i, 5)
-                    standard = ws.cell(i, 6)
-                    level = ws.cell(i, 7)
+                    name = ws.cell(i, 0).value
+                    short_name = ws.cell(i, 1).value
+                    code = ws.cell(i, 2).value
+                    curriculum = ws.cell(i, 3).value
+                    group = ws.cell(i, 4).value
+                    subject_area = ws.cell(i, 5).value
+                    standard = ws.cell(i, 6).value
+                    level = ws.cell(i, 7).value
 
-                    subject = Subject(name=name, short=short_name, code=code, curriculum=curriculum,
-                                      group=group, area=subject_area, standard=standard, level=level)
+                    exists = Subject.objects.filter(
+                        name__exact=name,
+                        code__exact=code,
+                        level__exact=level,
+                        school_id__exact=school_id
+                    ).count() > 0
 
-                    subject.save()
+                    if not exists:
+                        Subject(
+                            name=name,
+                            short=short_name,
+                            code=code,
+                            curriculum=curriculum,
+                            group=group,
+                            area=subject_area,
+                            standard=standard,
+                            level=level,
+                            school_id=school_id
+                        ).save()
             else:
                 for (i, row) in enumerate(rows):
                     if i <= 3:
                         continue
 
-                    name = ws.cell(i, 0)
-                    group = ws.cell(i, 1)
-                    level = ws.cell(i, 2)
+                    name = ws.cell(i, 0).value
+                    group = ws.cell(i, 1).value
+                    level = ws.cell(i, 2).value
 
-                    subject_group = SubjectGroup(name=name, group=group, level=level)
-                    subject_group.save()
+                    exists = SubjectGroup.objects.filter(
+                        name__exact=name,
+                        group__exact=group,
+                        level__exact=level,
+                        school_id__exact=school_id
+                    ).count() > 0
+
+                    if not exists:
+
+                        SubjectGroup(
+                            name=name,
+                            group=group,
+                            level=level
+                        ).save()
 
         # classes
         elif category == Imports.classes:
             for (i, row) in enumerate(rows):
-                name = ws.cell(i, 0)
-                class_number = ws.cell(i, 1)
-                stream = ws.cell(i, 2)
-                level_short = ws.cell(i, 3)
-                curriculum = ws.cell(i, 4)
-                progression = ws.cell(i, 5)
 
-                school_class = SchoolClass(name=name, stream=stream, level_short=level_short,
-                                           progression=progression, class_number=class_number,
-                                           curriculum=curriculum, school_id=school_id)
+                if i <= 3:
+                    continue
 
-                school_class.save()
+                name = ws.cell(i, 0).value
+                class_number = ws.cell(i, 1).value
+                stream = ws.cell(i, 2).value
+                level_short = ws.cell(i, 3).value
+                curriculum = ws.cell(i, 4).value
+
+                # pass if class already exists
+                exists = SchoolClass.objects.filter(name__exact=name,
+                                                    stream__exact=stream,
+                                                    school_id=school_id).count() > 0
+                if not exists:
+                    SchoolClass(
+                        name=name,
+                        stream=stream,
+                        level_short=level_short,
+                        class_number=class_number,
+                        curriculum=curriculum,
+                        school_id=school_id
+                    ).save()

@@ -2,17 +2,574 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="58532479-0472-4a50-9da8-b1a022f53c8a" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/front/templates/layout.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/front/static/img/myChild_icon.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/front/static/css/styles.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/front/templates/parents/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/front/templates/students/details.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/front/templates/students/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/front/templates/user/layout.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/front/templates/user/profile.html" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/css/animate.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/css/patterns/3.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/css/patterns/4.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/css/patterns/header-profile-skin-1.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/css/patterns/header-profile-skin-2.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/css/patterns/header-profile-skin-3.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/css/patterns/header-profile.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/css/patterns/shattered.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/css/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/css/plugins/blueimp/css/blueimp-gallery.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/css/plugins/blueimp/img/error.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/css/plugins/blueimp/img/error.svg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/css/plugins/blueimp/img/loading.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/css/plugins/blueimp/img/play-pause.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/css/plugins/blueimp/img/play-pause.svg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/css/plugins/blueimp/img/video-play.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/css/plugins/blueimp/img/video-play.svg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/css/plugins/bootstrap-markdown/bootstrap-markdown.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/css/plugins/bootstrap-tagsinput/bootstrap-tagsinput.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/css/plugins/bootstrapSocial/bootstrap-social.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/css/plugins/bootstrapTour/bootstrap-tour.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/css/plugins/c3/c3.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/css/plugins/chartist/chartist.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/css/plugins/chosen/bootstrap-chosen.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/css/plugins/chosen/chosen-sprite.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/css/plugins/chosen/chosen-sprite@2x.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/css/plugins/clockpicker/clockpicker.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/css/plugins/codemirror/ambiance.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/css/plugins/codemirror/codemirror.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/css/plugins/colorpicker/bootstrap-colorpicker.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/css/plugins/cropper/cropper.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/css/plugins/dataTables/datatables.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/css/plugins/datapicker/datepicker3.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/css/plugins/daterangepicker/daterangepicker-bs3.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/css/plugins/dropzone/basic.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/css/plugins/dropzone/dropzone.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/css/plugins/dualListbox/bootstrap-duallistbox.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/css/plugins/fonts/glyphicons-halflings-regular-2.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/css/plugins/fonts/glyphicons-halflings-regular-3.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/css/plugins/fonts/glyphicons-halflings-regular-4.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/css/plugins/fonts/glyphicons-halflings-regular.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/css/plugins/fonts/glyphicons-halflings-regulard41d.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/css/plugins/footable/fonts/footable.eot" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/css/plugins/footable/fonts/footable.svg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/css/plugins/footable/fonts/footable.ttf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/css/plugins/footable/fonts/footable.woff" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/css/plugins/footable/fonts/footabled41d.eot" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/css/plugins/footable/footable.core.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/css/plugins/fullcalendar/fullcalendar.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/css/plugins/fullcalendar/fullcalendar.print.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/css/plugins/iCheck/custom.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/css/plugins/iCheck/green.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/css/plugins/iCheck/green@2x.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/css/plugins/images/bootstrap-colorpicker/alpha-horizontal.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/css/plugins/images/bootstrap-colorpicker/alpha.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/css/plugins/images/bootstrap-colorpicker/hue-horizontal.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/css/plugins/images/bootstrap-colorpicker/hue.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/css/plugins/images/bootstrap-colorpicker/saturation.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/css/plugins/images/sprite-skin-flat.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/css/plugins/ionRangeSlider/ion.rangeSlider.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/css/plugins/ionRangeSlider/ion.rangeSlider.skinFlat.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/css/plugins/jQueryUI/images/animated-overlay.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/css/plugins/jQueryUI/images/ui-bg_flat_0_aaaaaa_40x100.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/css/plugins/jQueryUI/images/ui-bg_flat_75_ffffff_40x100.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/css/plugins/jQueryUI/images/ui-bg_glass_55_fbf9ee_1x400.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/css/plugins/jQueryUI/images/ui-bg_glass_65_ffffff_1x400.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/css/plugins/jQueryUI/images/ui-bg_glass_75_dadada_1x400.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/css/plugins/jQueryUI/images/ui-bg_glass_75_e6e6e6_1x400.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/css/plugins/jQueryUI/images/ui-bg_glass_95_fef1ec_1x400.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/css/plugins/jQueryUI/images/ui-bg_highlight-soft_75_cccccc_1x100.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/css/plugins/jQueryUI/images/ui-icons_222222_256x240.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/css/plugins/jQueryUI/images/ui-icons_2e83ff_256x240.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/css/plugins/jQueryUI/images/ui-icons_454545_256x240.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/css/plugins/jQueryUI/images/ui-icons_888888_256x240.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/css/plugins/jQueryUI/images/ui-icons_cd0a0a_256x240.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/css/plugins/jQueryUI/jquery-ui-1.10.4.custom.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/css/plugins/jQueryUI/jquery-ui.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/css/plugins/jasny/jasny-bootstrap.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/css/plugins/jqGrid/ui.jqgrid.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/css/plugins/jsTree/style.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/css/plugins/ladda/ladda-themeless.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/css/plugins/morris/morris-0.4.3.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/css/plugins/nouslider/jquery.nouislider.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/css/plugins/select2/select2.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/css/plugins/slick/ajax-loader.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/css/plugins/slick/fonts/slick.eot" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/css/plugins/slick/fonts/slick.svg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/css/plugins/slick/fonts/slick.ttf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/css/plugins/slick/fonts/slick.woff" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/css/plugins/slick/fonts/slickd41d.eot" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/css/plugins/slick/slick-theme.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/css/plugins/slick/slick.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/css/plugins/steps/jquery.steps.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/css/plugins/summernote/font/summernote6659.eot" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/css/plugins/summernote/font/summernote6659.ttf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/css/plugins/summernote/font/summernote6659.woff" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/css/plugins/summernote/font/summernoted41d.eot" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/css/plugins/summernote/summernote-bs3.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/css/plugins/summernote/summernote.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/css/plugins/sweetalert/sweetalert.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/css/plugins/switchery/switchery.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/css/plugins/textSpinners/spinners.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/css/plugins/toastr/toastr.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/css/plugins/touchspin/jquery.bootstrap-touchspin.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/css/style.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/email_templates/action.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/email_templates/alert.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/email_templates/billing.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/email_templates/img/header.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/email_templates/styles.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/font-awesome/css/font-awesome.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/font-awesome/css/font-awesome.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/font-awesome/fonts/fontawesome-webfont3e6e.eot" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/font-awesome/fonts/fontawesome-webfont3e6e.svg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/font-awesome/fonts/fontawesome-webfont3e6e.ttf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/font-awesome/fonts/fontawesome-webfont3e6e.woff" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/font-awesome/fonts/fontawesome-webfont3e6e.woff2" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/font-awesome/fonts/fontawesome-webfontd41d.eot" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/a1.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/a2.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/a3.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/a4.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/a5.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/a6.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/a7.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/a8.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/angular_logo.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/dashboard4_1.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/dashboard4_2.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/email_1.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/email_2.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/email_3.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/16/Spain.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/16/United-States.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Abkhazia.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Afghanistan.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Aland.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Albania.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Algeria.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/American-Samoa.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Andorra.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Angola.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Anguilla.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Antarctica.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Antigua-and-Barbuda.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Argentina.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Armenia.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Aruba.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Australia.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Austria.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Azerbaijan.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Bahamas.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Bahrain.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Bangladesh.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Barbados.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Basque-Country.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Belarus.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Belgium.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Belize.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Benin.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Bermuda.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Bhutan.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Bolivia.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Bosnia-and-Herzegovina.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Botswana.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Brazil.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/British-Antarctic-Territory.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/British-Virgin-Islands.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Brunei.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Bulgaria.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Burkina-Faso.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Burundi.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Cambodia.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Cameroon.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Canada.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Canary-Islands.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Cape-Verde.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Cayman-Islands.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Central-African-Republic.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Chad.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Chile.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/China.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Christmas-Island.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Cocos-Keeling-Islands.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Colombia.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Commonwealth.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Comoros.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Cook-Islands.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Costa-Rica.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Cote-dIvoire.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Croatia.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Cuba.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Curacao.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Cyprus.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Czech-Republic.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Democratic-Republic-of-the-Congo.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Denmark.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Djibouti.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Dominica.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Dominican-Republic.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/East-Timor.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Ecuador.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Egypt.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/El-Salvador.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/England.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Equatorial-Guinea.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Eritrea.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Estonia.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Ethiopia.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/European-Union.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Falkland-Islands.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Faroes.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Fiji.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Finland.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/France.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/French-Polynesia.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/French-Southern-Territories.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Gabon.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Gambia.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Georgia.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Germany.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Ghana.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Gibraltar.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/GoSquared.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Greece.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Greenland.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Grenada.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Guam.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Guatemala.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Guernsey.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Guinea-Bissau.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Guinea.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Guyana.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Haiti.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Honduras.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Hong-Kong.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Hungary.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Iceland.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/India.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Indonesia.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Iran.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Iraq.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Ireland.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Isle-of-Man.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Israel.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Italy.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Jamaica.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Japan.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Jersey.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Jordan.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Kazakhstan.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Kenya.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Kiribati.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Kosovo.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Kuwait.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Kyrgyzstan.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Laos.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Latvia.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Lebanon.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Lesotho.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Liberia.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Libya.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Liechtenstein.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Lithuania.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Luxembourg.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Macau.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Macedonia.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Madagascar.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Malawi.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Malaysia.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Maldives.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Mali.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Malta.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Mars.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Marshall-Islands.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Martinique.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Mauritania.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Mauritius.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Mayotte.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Mexico.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Micronesia.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Moldova.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Monaco.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Mongolia.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Montenegro.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Montserrat.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Morocco.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Mozambique.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Myanmar.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/NATO.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Nagorno-Karabakh.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Namibia.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Nauru.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Nepal.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Netherlands-Antilles.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Netherlands.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/New-Caledonia.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/New-Zealand.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Nicaragua.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Niger.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Nigeria.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Niue.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Norfolk-Island.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/North-Korea.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Northern-Cyprus.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Northern-Mariana-Islands.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Norway.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Olympics.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Oman.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Pakistan.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Palau.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Palestine.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Panama.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Papua-New-Guinea.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Paraguay.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Peru.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Philippines.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Pitcairn-Islands.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Poland.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Portugal.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Puerto-Rico.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Qatar.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Red-Cross.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Republic-of-the-Congo.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Romania.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Russia.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Rwanda.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Saint-Barthelemy.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Saint-Helena.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Saint-Kitts-and-Nevis.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Saint-Lucia.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Saint-Martin.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Saint-Vincent-and-the-Grenadines.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Samoa.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/San-Marino.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Sao-Tome-and-Principe.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Saudi-Arabia.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Scotland.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Senegal.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Serbia.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Seychelles.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Sierra-Leone.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Singapore.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Slovakia.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Slovenia.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Solomon-Islands.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Somalia.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Somaliland.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/South-Africa.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/South-Georgia-and-the-South-Sandwich-Islands.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/South-Korea.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/South-Ossetia.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/South-Sudan.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Spain.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Sri-Lanka.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Sudan.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Suriname.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Swaziland.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Sweden.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Switzerland.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Syria.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Taiwan.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Tajikistan.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Tanzania.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Thailand.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Togo.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Tokelau.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Tonga.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Trinidad-and-Tobago.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Tunisia.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Turkey.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Turkmenistan.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Turks-and-Caicos-Islands.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Tuvalu.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/US-Virgin-Islands.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Uganda.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Ukraine.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/United-Arab-Emirates.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/United-Kingdom.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/United-Nations.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/United-States.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Unknown.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Uruguay.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Uzbekistan.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Vanuatu.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Vatican-City.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Venezuela.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Vietnam.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Wales.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Wallis-And-Futuna.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Western-Sahara.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Yemen.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Zambia.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/flags/32/Zimbabwe.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/full_height.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/gallery/1.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/gallery/10.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/gallery/10s.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/gallery/11.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/gallery/11s.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/gallery/12.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/gallery/12s.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/gallery/1s.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/gallery/2.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/gallery/2s.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/gallery/3.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/gallery/3s.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/gallery/4.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/gallery/4s.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/gallery/5.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/gallery/5s.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/gallery/6.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/gallery/6s.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/gallery/7.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/gallery/7s.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/gallery/8.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/gallery/8s.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/gallery/9.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/gallery/9s.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/html_logo.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/landing/avatar1.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/landing/avatar2.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/landing/avatar3.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/landing/avatar_all.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/landing/dashboard.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/landing/header_one.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/landing/header_two.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/landing/iphone.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/landing/laptop.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/landing/perspective.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/landing/word_map.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/meteor_logo.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/mvc_logo.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/off_canvas.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/p1.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/p2.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/p3.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/p_big1.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/p_big2.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/p_big3.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/profile.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/profile_big.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/profile_small.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/rails_logo.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/starter_logo.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/img/zender_logo.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/js/bootstrap.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/js/bootstrap.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/js/demo/chartjs-demo.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/js/demo/flot-demo.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/js/demo/morris-demo.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/js/demo/peity-demo.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/js/demo/rickshaw-demo.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/js/demo/sparkline-demo.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/js/inspinia.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/js/jquery-2.1.1.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/js/jquery-3.1.1.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/js/plugins/blueimp/jquery.blueimp-gallery.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/js/plugins/bootstrap-markdown/bootstrap-markdown.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/js/plugins/bootstrap-markdown/markdown.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/js/plugins/bootstrap-tagsinput/bootstrap-tagsinput.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/js/plugins/bootstrapTour/bootstrap-tour.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/js/plugins/c3/c3.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/js/plugins/chartJs/Chart.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/js/plugins/chartist/chartist.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/js/plugins/chosen/chosen.jquery.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/js/plugins/clipboard/clipboard.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/js/plugins/clockpicker/clockpicker.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/js/plugins/codemirror/codemirror.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/js/plugins/codemirror/mode/javascript/javascript.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/js/plugins/codemirror/mode/xml/xml.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/js/plugins/colorpicker/bootstrap-colorpicker.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/js/plugins/cropper/cropper.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/js/plugins/d3/d3.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/js/plugins/dataTables/datatables.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/js/plugins/datamaps/datamaps.all.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/js/plugins/datapicker/bootstrap-datepicker.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/js/plugins/daterangepicker/daterangepicker.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/js/plugins/diff_match_patch/javascript/diff_match_patch.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/js/plugins/dotdotdot/jquery.dotdotdot.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/js/plugins/dropzone/dropzone.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/js/plugins/dualListbox/jquery.bootstrap-duallistbox.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/js/plugins/easypiechart/jquery.easypiechart.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/js/plugins/flot/curvedLines.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/js/plugins/flot/jquery.flot.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/js/plugins/flot/jquery.flot.pie.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/js/plugins/flot/jquery.flot.resize.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/js/plugins/flot/jquery.flot.spline.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/js/plugins/flot/jquery.flot.symbol.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/js/plugins/flot/jquery.flot.time.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/js/plugins/flot/jquery.flot.tooltip.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/js/plugins/footable/footable.all.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/js/plugins/fullcalendar/fullcalendar.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/js/plugins/fullcalendar/moment.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/js/plugins/gritter/images/gritter-light.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/js/plugins/gritter/images/gritter.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/js/plugins/gritter/images/ie-spacer.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/js/plugins/gritter/jquery.gritter.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/js/plugins/gritter/jquery.gritter.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/js/plugins/i18next/i18next.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/js/plugins/iCheck/icheck.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/js/plugins/idle-timer/idle-timer.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/js/plugins/ionRangeSlider/ion.rangeSlider.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/js/plugins/jasny/jasny-bootstrap.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/js/plugins/jqGrid/i18n/grid.locale-en.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/js/plugins/jqGrid/jquery.jqGrid.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/js/plugins/jquery-ui/jquery-ui.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/js/plugins/jsKnob/jquery.knob.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/js/plugins/jsTree/jstree.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/js/plugins/jvectormap/jquery-jvectormap-2.0.2.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/js/plugins/jvectormap/jquery-jvectormap-world-mill-en.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/js/plugins/ladda/ladda.jquery.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/js/plugins/ladda/ladda.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/js/plugins/ladda/spin.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/js/plugins/masonary/masonry.pkgd.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/js/plugins/metisMenu/jquery.metisMenu.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/js/plugins/morris/morris.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/js/plugins/morris/raphael-2.1.0.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/js/plugins/nestable/jquery.nestable.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/js/plugins/nouslider/jquery.nouislider.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/js/plugins/pace/pace.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/js/plugins/pdfjs/pdf.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/js/plugins/peity/jquery.peity.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/js/plugins/preetyTextDiff/jquery.pretty-text-diff.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/js/plugins/pwstrength/pwstrength-bootstrap.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/js/plugins/pwstrength/zxcvbn.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/js/plugins/rickshaw/rickshaw.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/js/plugins/rickshaw/vendor/d3.v3.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/js/plugins/select2/select2.full.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/js/plugins/slick/slick.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/js/plugins/slimscroll/jquery.slimscroll.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/js/plugins/sparkline/jquery.sparkline.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/js/plugins/steps/jquery.steps.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/js/plugins/summernote/summernote.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/js/plugins/sweetalert/sweetalert.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/js/plugins/switchery/switchery.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/js/plugins/tinycon/tinycon.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/js/plugins/toastr/toastr.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/js/plugins/topojson/topojson.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/js/plugins/touchpunch/jquery.ui.touch-punch.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/js/plugins/touchspin/jquery.bootstrap-touchspin.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/js/plugins/typehead/bootstrap3-typeahead.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/js/plugins/validate/jquery.validate.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/js/plugins/video/responsible-video.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/front/static/js/plugins/wow/wow.min.js" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db.sqlite3" afterPath="$PROJECT_DIR$/db.sqlite3" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/api/admin.py" afterPath="$PROJECT_DIR$/api/admin.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/api/imports.py" afterPath="$PROJECT_DIR$/api/imports.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/api/models.py" afterPath="$PROJECT_DIR$/api/models.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/api/utils.py" afterPath="$PROJECT_DIR$/api/utils.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/front/templates/admin/import.html" afterPath="$PROJECT_DIR$/front/templates/admin/import.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/api/options.py" afterPath="$PROJECT_DIR$/api/options.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/front/forms.py" afterPath="$PROJECT_DIR$/front/forms.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/front/static/css/bootstrap.min.css" afterPath="$PROJECT_DIR$/front/static/css/bootstrap.min.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/front/templates/home.html" afterPath="$PROJECT_DIR$/front/templates/home.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/front/templates/thanks.html" afterPath="$PROJECT_DIR$/front/templates/thanks.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/front/templates/layout.html" afterPath="$PROJECT_DIR$/front/templates/layout.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/front/templates/user/login.html" afterPath="$PROJECT_DIR$/front/templates/user/login.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/front/templates/user/register.html" afterPath="$PROJECT_DIR$/front/templates/user/register.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/front/views.py" afterPath="$PROJECT_DIR$/front/views.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/myChild/settings.py" afterPath="$PROJECT_DIR$/myChild/settings.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/myChild/urls.py" afterPath="$PROJECT_DIR$/myChild/urls.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -43,82 +600,90 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file leaf-file-name="options.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/api/options.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="624">
-              <caret line="26" column="0" lean-forward="false" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/front/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="406">
-              <caret line="225" column="53" lean-forward="true" selection-start-line="225" selection-start-column="53" selection-end-line="225" selection-end-column="53" />
+            <state relative-caret-position="379">
+              <caret line="141" column="0" lean-forward="true" selection-start-line="141" selection-start-column="0" selection-end-line="141" selection-end-column="0" />
               <folding>
                 <element signature="e#0#48#0" expanded="true" />
-                <element signature="e#1208#1608#0" expanded="false" />
-                <element signature="e#1855#2620#0" expanded="false" />
-                <element signature="e#2696#3357#0" expanded="false" />
-                <element signature="e#3441#3986#0" expanded="false" />
-                <element signature="e#4144#5152#0" expanded="false" />
-                <element signature="e#5249#5677#0" expanded="false" />
-                <element signature="e#6173#6592#0" expanded="false" />
-                <element signature="e#6629#7052#0" expanded="false" />
-                <element signature="e#7099#7458#0" expanded="false" />
+                <element signature="e#4104#4649#0" expanded="false" />
+                <element signature="e#6273#6700#0" expanded="false" />
+                <element signature="e#6753#7176#0" expanded="false" />
+                <element signature="e#7228#7647#0" expanded="false" />
+                <element signature="e#7700#8123#0" expanded="false" />
+                <element signature="e#8186#8550#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="thanks.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/front/templates/thanks.html">
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/front/templates/parents/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="24">
-              <caret line="1" column="5" lean-forward="false" selection-start-line="1" selection-start-column="5" selection-end-line="1" selection-end-column="5" />
+            <state relative-caret-position="216">
+              <caret line="27" column="53" lean-forward="true" selection-start-line="27" selection-start-column="53" selection-end-line="27" selection-end-column="53" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="home.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/front/templates/home.html">
+      <file leaf-file-name="details.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/front/templates/students/details.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
-              <caret line="5" column="7" lean-forward="true" selection-start-line="5" selection-start-column="7" selection-end-line="5" selection-end-column="7" />
+            <state relative-caret-position="185">
+              <caret line="89" column="19" lean-forward="true" selection-start-line="89" selection-start-column="19" selection-end-line="89" selection-end-column="19" />
+              <folding>
+                <element signature="e#693#713#0#HTML" expanded="true" />
+                <element signature="e#1119#1139#0#HTML" expanded="true" />
+                <element signature="e#1559#1579#0#HTML" expanded="true" />
+                <element signature="e#2780#2800#0#HTML" expanded="true" />
+                <element signature="e#3030#3050#0#HTML" expanded="true" />
+                <element signature="e#3285#3305#0#HTML" expanded="true" />
+                <element signature="e#3636#3656#0#HTML" expanded="true" />
+                <element signature="e#3861#3881#0#HTML" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/front/templates/students/index.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="689">
+              <caret line="143" column="14" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="143" selection-end-column="14" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="admin.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/api/admin.py">
+      <file leaf-file-name="profile.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/front/templates/user/profile.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="395">
-              <caret line="36" column="37" lean-forward="false" selection-start-line="36" selection-start-column="37" selection-end-line="36" selection-end-column="37" />
-              <folding />
+            <state relative-caret-position="216">
+              <caret line="9" column="21" lean-forward="true" selection-start-line="9" selection-start-column="21" selection-end-line="9" selection-end-column="21" />
+              <folding>
+                <element signature="e#986#992#0#HTML" expanded="true" />
+                <element signature="e#4774#4780#0#HTML" expanded="true" />
+                <element signature="e#4780#4786#0#HTML" expanded="true" />
+                <element signature="e#5154#5160#0#HTML" expanded="true" />
+                <element signature="e#5160#5166#0#HTML" expanded="true" />
+                <element signature="e#5613#5619#0#HTML" expanded="true" />
+                <element signature="e#5619#5625#0#HTML" expanded="true" />
+                <element signature="e#6091#6097#0#HTML" expanded="true" />
+                <element signature="e#6097#6103#0#HTML" expanded="true" />
+                <element signature="e#6562#6568#0#HTML" expanded="true" />
+                <element signature="e#6568#6574#0#HTML" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="import.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/front/templates/admin/import.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="48">
-              <caret line="2" column="35" lean-forward="true" selection-start-line="2" selection-start-column="35" selection-end-line="2" selection-end-column="35" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="models.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/api/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="211">
-              <caret line="251" column="63" lean-forward="true" selection-start-line="251" selection-start-column="63" selection-end-line="251" selection-end-column="63" />
+            <state relative-caret-position="-1541">
+              <caret line="108" column="62" lean-forward="true" selection-start-line="108" selection-start-column="62" selection-end-line="108" selection-end-column="62" />
               <folding>
                 <element signature="e#0#43#0" expanded="true" />
               </folding>
@@ -126,30 +691,41 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="imports.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/api/imports.py">
+      <file leaf-file-name="home.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/front/templates/home.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="486" column="37" lean-forward="false" selection-start-line="486" selection-start-column="37" selection-end-line="486" selection-end-column="37" />
+            <state relative-caret-position="467">
+              <caret line="137" column="34" lean-forward="true" selection-start-line="137" selection-start-column="34" selection-end-line="137" selection-end-column="34" />
               <folding>
-                <element signature="e#0#13#0" expanded="true" />
-                <element signature="e#7600#8610#0" expanded="false" />
-                <element signature="e#8663#9681#0" expanded="false" />
-                <element signature="e#9734#10980#0" expanded="false" />
-                <element signature="e#11362#14316#0" expanded="false" />
-                <element signature="e#17979#19105#0" expanded="false" />
-                <element signature="e#19169#19767#0" expanded="false" />
+                <element signature="n#style#0;n#div#1;n#div#2;n#li#3;n#ul#0;n#div#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="utils.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/api/utils.py">
+      <file leaf-file-name="form.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/front/templates/form.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="72">
-              <caret line="6" column="42" lean-forward="false" selection-start-line="6" selection-start-column="42" selection-end-line="6" selection-end-column="42" />
+            <state relative-caret-position="240">
+              <caret line="10" column="9" lean-forward="false" selection-start-line="10" selection-start-column="9" selection-end-line="10" selection-end-column="9" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="layout.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/front/templates/layout.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="792">
+              <caret line="236" column="0" lean-forward="true" selection-start-line="236" selection-start-column="0" selection-end-line="236" selection-end-column="0" />
+              <folding>
+                <element signature="n#div#0;n#div#0;n#header#0;n#body#0;n#html#0;n#!!top" expanded="false" />
+                <element signature="n#div#1;n#body#0;n#html#0;n#!!top" expanded="false" />
+                <element signature="e#15399#15405#0#HTML" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#li#0;n#ul#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#li#2;n#ul#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#li#4;n#ul#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -157,8 +733,8 @@
       <file leaf-file-name="urls.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/myChild/urls.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="179">
-              <caret line="32" column="50" lean-forward="true" selection-start-line="32" selection-start-column="50" selection-end-line="32" selection-end-column="50" />
+            <state relative-caret-position="403">
+              <caret line="52" column="63" lean-forward="true" selection-start-line="52" selection-start-column="63" selection-end-line="52" selection-end-column="63" />
               <folding>
                 <element signature="e#641#682#0" expanded="true" />
               </folding>
@@ -172,6 +748,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Python Script" />
+        <option value="CSS File" />
         <option value="HTML File" />
       </list>
     </option>
@@ -202,22 +779,31 @@
         <option value="$PROJECT_DIR$/front/__init__.py" />
         <option value="$PROJECT_DIR$/myChild/apps.py" />
         <option value="$PROJECT_DIR$/api/signals.py" />
-        <option value="$PROJECT_DIR$/myChild/settings.py" />
         <option value="$PROJECT_DIR$/api/apps.py" />
         <option value="$PROJECT_DIR$/myChild/__init__.py" />
         <option value="$PROJECT_DIR$/api/__init__.py" />
-        <option value="$PROJECT_DIR$/api/options.py" />
-        <option value="$PROJECT_DIR$/front/forms.py" />
-        <option value="$PROJECT_DIR$/front/templates/layout.html" />
-        <option value="$PROJECT_DIR$/front/views.py" />
         <option value="$PROJECT_DIR$/front/templates/thanks.html" />
         <option value="$PROJECT_DIR$/api/utils.py" />
         <option value="$PROJECT_DIR$/front/templates/admin/import.html" />
-        <option value="$PROJECT_DIR$/front/templates/home.html" />
-        <option value="$PROJECT_DIR$/myChild/urls.py" />
         <option value="$PROJECT_DIR$/api/imports.py" />
-        <option value="$PROJECT_DIR$/api/admin.py" />
+        <option value="$PROJECT_DIR$/api/options.py" />
+        <option value="$PROJECT_DIR$/front/forms.py" />
         <option value="$PROJECT_DIR$/api/models.py" />
+        <option value="$PROJECT_DIR$/api/admin.py" />
+        <option value="$PROJECT_DIR$/front/templates/user/register.html" />
+        <option value="$PROJECT_DIR$/front/templates/user/login.html" />
+        <option value="$PROJECT_DIR$/front/static/css/styles.css" />
+        <option value="$PROJECT_DIR$/front/templates/user/layout.html" />
+        <option value="$PROJECT_DIR$/myChild/settings.py" />
+        <option value="$PROJECT_DIR$/front/templates/user/profile.html" />
+        <option value="$PROJECT_DIR$/front/templates/home.html" />
+        <option value="$PROJECT_DIR$/front/templates/students/index.html" />
+        <option value="$PROJECT_DIR$/front/templates/layout.html" />
+        <option value="$PROJECT_DIR$/myChild/urls.py" />
+        <option value="$PROJECT_DIR$/front/templates/profile/index.html" />
+        <option value="$PROJECT_DIR$/front/views.py" />
+        <option value="$PROJECT_DIR$/front/templates/parents/index.html" />
+        <option value="$PROJECT_DIR$/front/templates/students/details.html" />
       </list>
     </option>
   </component>
@@ -228,10 +814,10 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="275" />
-    <option name="y" value="9" />
-    <option name="width" value="1934" />
-    <option name="height" value="1036" />
+    <option name="x" value="-9" />
+    <option name="y" value="-9" />
+    <option name="width" value="1938" />
+    <option name="height" value="1048" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -241,12 +827,15 @@
             <id />
           </State>
           <State>
+            <id>Python</id>
+          </State>
+          <State>
             <id>Spelling</id>
           </State>
         </expanded-state>
         <selected-state>
           <State>
-            <id>SpellCheckingInspection</id>
+            <id>PyCompatibilityInspection</id>
           </State>
         </selected-state>
       </profile-state>
@@ -270,6 +859,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
@@ -299,7 +889,28 @@
               <item name="myChild" type="462c0819:PsiDirectoryNode" />
               <item name="front" type="462c0819:PsiDirectoryNode" />
               <item name="templates" type="462c0819:PsiDirectoryNode" />
-              <item name="admin" type="462c0819:PsiDirectoryNode" />
+              <item name="parents" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="myChild" type="b2602c69:ProjectViewProjectNode" />
+              <item name="myChild" type="462c0819:PsiDirectoryNode" />
+              <item name="front" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+              <item name="profile" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="myChild" type="b2602c69:ProjectViewProjectNode" />
+              <item name="myChild" type="462c0819:PsiDirectoryNode" />
+              <item name="front" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+              <item name="students" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="myChild" type="b2602c69:ProjectViewProjectNode" />
+              <item name="myChild" type="462c0819:PsiDirectoryNode" />
+              <item name="front" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+              <item name="user" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="myChild" type="b2602c69:ProjectViewProjectNode" />
@@ -314,13 +925,21 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
+    <property name="list.type.of.created.stylesheet" value="CSS" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\Code\Python\Django\myChild\front\templates\parents" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\Code\Python\Django\myChild\front\static\img" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -372,9 +991,10 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-9" y="-9" width="2578" height="1048" extended-state="6" />
+    <frame x="-9" y="-9" width="1938" height="1048" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18632813" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15677084" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32894737" sideWeight="0.50208336" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -410,76 +1030,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/api/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="84">
-          <caret line="11" column="29" lean-forward="false" selection-start-line="11" selection-start-column="29" selection-end-line="11" selection-end-column="29" />
-          <folding>
-            <element signature="e#0#14#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/api/admin.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="231">
-          <caret line="13" column="31" lean-forward="false" selection-start-line="13" selection-start-column="31" selection-end-line="13" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/api/apps.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/api/imports.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1092">
-          <caret line="56" column="36" lean-forward="false" selection-start-line="56" selection-start-column="36" selection-end-line="56" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/api/resources.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1176">
-          <caret line="64" column="17" lean-forward="true" selection-start-line="64" selection-start-column="17" selection-end-line="64" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/myChild/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="609">
-          <caret line="29" column="0" lean-forward="false" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/api/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/myChild/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="399">
-          <caret line="23" column="36" lean-forward="false" selection-start-line="23" selection-start-column="36" selection-end-line="23" selection-end-column="36" />
-          <folding>
-            <element signature="e#641#682#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/api/migrations/0005_auto_20171228_2231.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/front/admin.py" />
     <entry file="file://$PROJECT_DIR$/front/templates/school/register.html">
       <provider selected="true" editor-type-id="text-editor">
@@ -528,13 +1078,6 @@
         <state relative-caret-position="293">
           <caret line="299" column="8" lean-forward="false" selection-start-line="299" selection-start-column="8" selection-end-line="299" selection-end-column="8" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/front/templates/form.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="10" column="9" lean-forward="false" selection-start-line="10" selection-start-column="9" selection-end-line="10" selection-end-column="9" />
         </state>
       </provider>
     </entry>
@@ -620,14 +1163,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/myChild/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1549">
-          <caret line="42" column="0" lean-forward="true" selection-start-line="42" selection-start-column="0" selection-end-line="42" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/myChild/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -670,72 +1205,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://C:/Program Files (x86)/Python36-32/Lib/site-packages/django/contrib/auth/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="293">
-          <caret line="368" column="6" lean-forward="false" selection-start-line="368" selection-start-column="6" selection-end-line="368" selection-end-column="6" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/front/forms.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2040">
-          <caret line="92" column="6" lean-forward="false" selection-start-line="92" selection-start-column="6" selection-end-line="92" selection-end-column="6" />
-          <folding>
-            <element signature="e#0#54#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/front/templates/activity_stream.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="168">
           <caret line="7" column="26" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="865" selection-end-column="0" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/front/templates/layout.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2256">
-          <caret line="94" column="44" lean-forward="false" selection-start-line="94" selection-start-column="44" selection-end-line="94" selection-end-column="44" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/api/options.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="624">
-          <caret line="26" column="0" lean-forward="false" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/api/utils.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="72">
-          <caret line="6" column="42" lean-forward="false" selection-start-line="6" selection-start-column="42" selection-end-line="6" selection-end-column="42" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/front/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="406">
-          <caret line="225" column="53" lean-forward="true" selection-start-line="225" selection-start-column="53" selection-end-line="225" selection-end-column="53" />
-          <folding>
-            <element signature="e#0#48#0" expanded="true" />
-            <element signature="e#1208#1608#0" expanded="false" />
-            <element signature="e#1855#2620#0" expanded="false" />
-            <element signature="e#2696#3357#0" expanded="false" />
-            <element signature="e#3441#3986#0" expanded="false" />
-            <element signature="e#4144#5152#0" expanded="false" />
-            <element signature="e#5249#5677#0" expanded="false" />
-            <element signature="e#6173#6592#0" expanded="false" />
-            <element signature="e#6629#7052#0" expanded="false" />
-            <element signature="e#7099#7458#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -750,59 +1224,238 @@
     <entry file="file://$PROJECT_DIR$/front/templates/admin/import.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="48">
-          <caret line="2" column="35" lean-forward="true" selection-start-line="2" selection-start-column="35" selection-end-line="2" selection-end-column="35" />
+          <caret line="2" column="35" lean-forward="false" selection-start-line="2" selection-start-column="35" selection-end-line="2" selection-end-column="35" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/myChild/urls.py">
+    <entry file="file://$PROJECT_DIR$/api/utils.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="179">
-          <caret line="32" column="50" lean-forward="true" selection-start-line="32" selection-start-column="50" selection-end-line="32" selection-end-column="50" />
-          <folding>
-            <element signature="e#641#682#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="72">
+          <caret line="6" column="42" lean-forward="false" selection-start-line="6" selection-start-column="42" selection-end-line="6" selection-end-column="42" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/front/templates/home.html">
+    <entry file="file://$PROJECT_DIR$/api/options.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="5" column="7" lean-forward="true" selection-start-line="5" selection-start-column="7" selection-end-line="5" selection-end-column="7" />
+        <state relative-caret-position="283">
+          <caret line="54" column="0" lean-forward="false" selection-start-line="54" selection-start-column="0" selection-end-line="54" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/api/migrations/0003_auto_20171228_2224.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-504">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/front/forms.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="227">
+          <caret line="72" column="18" lean-forward="false" selection-start-line="72" selection-start-column="18" selection-end-line="72" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/Program Files (x86)/Python36-32/Lib/site-packages/django/contrib/auth/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1333">
+          <caret line="368" column="6" lean-forward="false" selection-start-line="368" selection-start-column="6" selection-end-line="368" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/api/admin.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="504">
+          <caret line="23" column="0" lean-forward="false" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/api/imports.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="486" column="37" lean-forward="false" selection-start-line="486" selection-start-column="37" selection-end-line="486" selection-end-column="37" />
+        <state relative-caret-position="995">
+          <caret line="645" column="38" lean-forward="false" selection-start-line="645" selection-start-column="38" selection-end-line="645" selection-end-column="38" />
           <folding>
             <element signature="e#0#13#0" expanded="true" />
-            <element signature="e#7600#8610#0" expanded="false" />
-            <element signature="e#8663#9681#0" expanded="false" />
-            <element signature="e#9734#10980#0" expanded="false" />
-            <element signature="e#11362#14316#0" expanded="false" />
-            <element signature="e#17979#19105#0" expanded="false" />
-            <element signature="e#19169#19767#0" expanded="false" />
+            <element signature="e#1270#8099#0" expanded="false" />
+            <element signature="e#8149#9159#0" expanded="false" />
+            <element signature="e#9212#10230#0" expanded="false" />
+            <element signature="e#10283#11529#0" expanded="false" />
+            <element signature="e#11911#21023#0" expanded="false" />
+            <element signature="e#13914#16213#0" expanded="false" />
+            <element signature="e#16290#19907#0" expanded="false" />
+            <element signature="e#21090#24620#0" expanded="false" />
+            <element signature="e#26844#27807#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/api/admin.py">
+    <entry file="file://$PROJECT_DIR$/front/templates/user/register.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="72">
+          <caret line="3" column="0" lean-forward="true" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/front/templates/user/login.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="299">
+          <caret line="58" column="8" lean-forward="true" selection-start-line="58" selection-start-column="8" selection-end-line="58" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/front/static/css/styles.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="144">
+          <caret line="6" column="21" lean-forward="false" selection-start-line="6" selection-start-column="21" selection-end-line="6" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/myChild/settings.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="395">
-          <caret line="36" column="37" lean-forward="false" selection-start-line="36" selection-start-column="37" selection-end-line="36" selection-end-column="37" />
+          <caret line="123" column="15" lean-forward="true" selection-start-line="123" selection-start-column="15" selection-end-line="123" selection-end-column="15" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/front/templates/user/layout.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="216">
+          <caret line="39" column="34" lean-forward="true" selection-start-line="39" selection-start-column="34" selection-end-line="39" selection-end-column="34" />
+          <folding>
+            <element signature="n#style#0;n#img#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/front/templates/form.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="10" column="9" lean-forward="false" selection-start-line="10" selection-start-column="9" selection-end-line="10" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/front/templates/home.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="467">
+          <caret line="137" column="34" lean-forward="true" selection-start-line="137" selection-start-column="34" selection-end-line="137" selection-end-column="34" />
+          <folding>
+            <element signature="n#style#0;n#div#1;n#div#2;n#li#3;n#ul#0;n#div#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/front/templates/user/profile.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="216">
+          <caret line="9" column="21" lean-forward="true" selection-start-line="9" selection-start-column="21" selection-end-line="9" selection-end-column="21" />
+          <folding>
+            <element signature="e#986#992#0#HTML" expanded="true" />
+            <element signature="e#4774#4780#0#HTML" expanded="true" />
+            <element signature="e#4780#4786#0#HTML" expanded="true" />
+            <element signature="e#5154#5160#0#HTML" expanded="true" />
+            <element signature="e#5160#5166#0#HTML" expanded="true" />
+            <element signature="e#5613#5619#0#HTML" expanded="true" />
+            <element signature="e#5619#5625#0#HTML" expanded="true" />
+            <element signature="e#6091#6097#0#HTML" expanded="true" />
+            <element signature="e#6097#6103#0#HTML" expanded="true" />
+            <element signature="e#6562#6568#0#HTML" expanded="true" />
+            <element signature="e#6568#6574#0#HTML" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/front/templates/students/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="689">
+          <caret line="143" column="14" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="143" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/myChild/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="403">
+          <caret line="52" column="63" lean-forward="true" selection-start-line="52" selection-start-column="63" selection-end-line="52" selection-end-column="63" />
+          <folding>
+            <element signature="e#641#682#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/front/templates/layout.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="792">
+          <caret line="236" column="0" lean-forward="true" selection-start-line="236" selection-start-column="0" selection-end-line="236" selection-end-column="0" />
+          <folding>
+            <element signature="n#div#0;n#div#0;n#header#0;n#body#0;n#html#0;n#!!top" expanded="false" />
+            <element signature="n#div#1;n#body#0;n#html#0;n#!!top" expanded="false" />
+            <element signature="e#15399#15405#0#HTML" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#li#0;n#ul#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#li#2;n#ul#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#li#4;n#ul#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/api/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="211">
-          <caret line="251" column="63" lean-forward="true" selection-start-line="251" selection-start-column="63" selection-end-line="251" selection-end-column="63" />
+        <state relative-caret-position="-1541">
+          <caret line="108" column="62" lean-forward="true" selection-start-line="108" selection-start-column="62" selection-end-line="108" selection-end-column="62" />
           <folding>
             <element signature="e#0#43#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/front/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="379">
+          <caret line="141" column="0" lean-forward="true" selection-start-line="141" selection-start-column="0" selection-end-line="141" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#48#0" expanded="true" />
+            <element signature="e#4104#4649#0" expanded="false" />
+            <element signature="e#6273#6700#0" expanded="false" />
+            <element signature="e#6753#7176#0" expanded="false" />
+            <element signature="e#7228#7647#0" expanded="false" />
+            <element signature="e#7700#8123#0" expanded="false" />
+            <element signature="e#8186#8550#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/front/templates/parents/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="216">
+          <caret line="27" column="53" lean-forward="true" selection-start-line="27" selection-start-column="53" selection-end-line="27" selection-end-column="53" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/front/templates/students/details.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="185">
+          <caret line="89" column="19" lean-forward="true" selection-start-line="89" selection-start-column="19" selection-end-line="89" selection-end-column="19" />
+          <folding>
+            <element signature="e#693#713#0#HTML" expanded="true" />
+            <element signature="e#1119#1139#0#HTML" expanded="true" />
+            <element signature="e#1559#1579#0#HTML" expanded="true" />
+            <element signature="e#2780#2800#0#HTML" expanded="true" />
+            <element signature="e#3030#3050#0#HTML" expanded="true" />
+            <element signature="e#3285#3305#0#HTML" expanded="true" />
+            <element signature="e#3636#3656#0#HTML" expanded="true" />
+            <element signature="e#3861#3881#0#HTML" expanded="true" />
           </folding>
         </state>
       </provider>

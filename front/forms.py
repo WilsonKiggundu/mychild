@@ -70,13 +70,9 @@ class AttachmentForm(forms.Form):
     files = forms.FileField(label='Choose files to upload', widget=forms.ClearableFileInput(attrs={'multiple': True, }))
 
 
-class PostForm(forms.Form):
-    author = forms.IntegerField(widget=forms.HiddenInput)
-    title = forms.CharField(required=False, max_length=255)
-    details = forms.CharField(max_length=2000, widget=forms.Textarea())
+class NewsFeedForm(forms.Form):
+    details = forms.CharField(max_length=20000, widget=forms.Textarea())
     files = forms.FileField(required=False, widget=forms.ClearableFileInput(attrs={'multiple': True, }))
-    viewers = forms.MultipleChoiceField(required=False, choices=VIEWERS,
-                                        widget=forms.CheckboxSelectMultiple(attrs={'class': 'inline'}))
 
 
 class CommentForm(forms.Form):
@@ -91,11 +87,10 @@ class ImportForm(forms.Form):
 
 
 class GenerateResultsTemplateForm(forms.Form):
-    class_stream = forms.ModelChoiceField(queryset=SchoolClass.objects.all(), to_field_name='__str__')
+    school_class = forms.ModelChoiceField(queryset=SchoolClass.objects.all(), to_field_name='id')
     subject = forms.ModelChoiceField(queryset=Subject.objects.all(), to_field_name='name')
     year = forms.CharField(required=True, widget=forms.Select(choices=YEARS))
     term = forms.CharField(required=True, widget=forms.Select(choices=TERMS))
-    level = forms.CharField(required=True, widget=forms.Select(choices=CURRICULUM_LEVELS))
 
 
 class ImportStudentsForm(forms.Form):
@@ -111,9 +106,4 @@ class ImportSubjectsForm(forms.Form):
 
 
 class ImportResultsForm(forms.Form):
-    class_stream = forms.ModelChoiceField(queryset=SchoolClass.objects.all(), to_field_name='__str__')
-    subject = SubjectModelChoiceField(queryset=Subject.objects.all(), to_field_name='name')
-    year = forms.CharField(required=True, widget=forms.Select(choices=YEARS))
-    term = forms.CharField(required=True, widget=forms.Select(choices=TERMS))
-    level = forms.CharField(required=True, widget=forms.Select(choices=CURRICULUM_LEVELS))
     file = forms.FileField(required=True)

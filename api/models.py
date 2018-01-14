@@ -110,6 +110,9 @@ class Profile(BaseModel):
     telephone = models.CharField(max_length=25, null=True, blank=True)
     website = models.TextField(null=True, blank=True)
 
+    def __str__(self):
+        return '%s %s' % (self.user.first_name, self.user.last_name)
+
     class Meta:
         db_table = 'mychild_profiles'
 
@@ -138,26 +141,27 @@ class SchoolEvent(BaseModel):
 
 class SchoolClass(BaseModel):
     curriculum = models.CharField(max_length=15, null=True, blank=True)
-    curriculum_specific = models.CharField(max_length=100, null=True, blank=True)
+    # curriculum_specific = models.CharField(max_length=100, null=True, blank=True)
     level = models.CharField(max_length=50, null=True, blank=True)
-    level_short = models.CharField(max_length=6, null=True, blank=True)
-    progression = models.IntegerField()
-    name = models.CharField(max_length=20, null=True, blank=True)
-    class_number = models.SmallIntegerField()
+    level_short = models.CharField(max_length=2, null=True, blank=True)
+    # progression = models.IntegerField()
+    name = models.CharField(max_length=20, default='S.1', null=False, blank=False)
+    class_number = models.SmallIntegerField(null=True, blank=True)
     stream = models.CharField(max_length=30, null=True, blank=True)
     class_teacher = models.ForeignKey(Staff, null=True, blank=True)
-    year = models.CharField(max_length=9, null=True, blank=True)
-    term = models.SmallIntegerField()
-    term_start = models.DateTimeField()
-    term_end = models.DateTimeField()
-    next_term_start = models.DateTimeField()
-    next_term_end = models.DateTimeField()
-    stage = models.CharField(max_length=12, null=True, blank=True)
+    # year = models.CharField(max_length=9, null=True, blank=True)
+    # term = models.SmallIntegerField()
+    # term_start = models.DateTimeField()
+    # term_end = models.DateTimeField()
+    # next_term_start = models.DateTimeField()
+    # next_term_end = models.DateTimeField()
+    # stage = models.CharField(max_length=12, null=True, blank=True)
 
     def __str__(self):
         return '%s %s' % (self.name, self.stream)
 
     class Meta:
+        verbose_name_plural = 'School Classes'
         db_table = 'school_classes'
 
 
@@ -193,26 +197,30 @@ class Nok(BaseModel):
 
 
 class SchoolContactPerson(BaseModel):
-    profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    profile = models.ForeignKey(User, on_delete=models.CASCADE)
 
     class Meta:
         db_table = 'school_contact_persons'
 
 
-class Post(models.Model):
-    author = models.ForeignKey(User, on_delete=models.CASCADE)
-    type = models.CharField(choices=POST_TYPE, default='Blog', max_length=15)
-    title = models.CharField(max_length=155, null=True, blank=False)
+class NewsFeed(BaseModel):
     details = models.TextField(null=True, blank=True)
     date = models.DateTimeField(auto_now=True)
-    viewers = models.CharField(max_length=155, default='1')
+    school = models.ForeignKey(School, on_delete=models.SET_NULL, null=True, blank=True)
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    parent = models.ForeignKey('self', null=True, blank=True)
+
+    def __str__(self):
+        return self.details
 
     class Meta:
-        db_table = 'user_posts'
+        verbose_name = 'News Feed'
+        verbose_name_plural = 'News Feed'
+        db_table = 'news_feed'
 
 
 class Attachment(models.Model):
-    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    post = models.ForeignKey(NewsFeed, on_delete=models.CASCADE)
     file = models.FileField(upload_to='%Y/%m/%d', null=True, blank=True)
     date = models.DateTimeField(auto_now=True)
     content_type = models.CharField(max_length=155, null=True, blank=True)
@@ -221,18 +229,8 @@ class Attachment(models.Model):
         db_table = 'user_uploads'
 
 
-class Comment(models.Model):
-    post = models.ForeignKey(Post, on_delete=models.CASCADE)
-    author = models.ForeignKey(User, on_delete=models.CASCADE)
-    details = models.TextField()
-    date = models.DateTimeField(auto_now=True)
-
-    class Meta:
-        db_table = 'user_comments'
-
-
 class Like(models.Model):
-    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    post = models.ForeignKey(NewsFeed, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     class Meta:
@@ -251,7 +249,7 @@ class ResultsBaseModel(BaseModel):
     student = models.ForeignKey(Student, null=False, blank=False)
     year = models.PositiveIntegerField(null=False, blank=False)
     term = models.PositiveIntegerField(null=False, blank=False)
-    school_subject_class = models.ForeignKey(SchoolSubjectClass, null=False, blank=False)
+    school_subject_class = models.ForeignKey(SchoolSubjectClass, null=True, blank=True)
     school_class = models.CharField(max_length=15, null=False, blank=False)
     stream = models.CharField(max_length=15, null=False, blank=False)
     type = models.PositiveSmallIntegerField(null=False, blank=False)
@@ -266,7 +264,7 @@ class AcademicsResultsLocalPrimarySubject(ResultsBaseModel):
     comment = models.TextField(null=True, blank=True)
 
     class Meta:
-        verbose_name = "Primary Subject Results"
+        verbose_name = "Primary Subject Result"
         db_table = 'academics_results_loc_p_subject'
 
 
@@ -279,7 +277,7 @@ class AcademicsResultsMarks(ResultsBaseModel):
     comment = models.TextField()
 
     class Meta:
-        verbose_name = "Student Marks"
+        verbose_name = "Student Mark"
         db_table = 'academics_results_marks'
 
 
@@ -295,7 +293,7 @@ class AcademicsResultsLocalPrimaryOverall(ResultsBaseModel):
     head_teacher_comment = models.TextField()
 
     class Meta:
-        verbose_name = "Primary Overall Results"
+        verbose_name = "Primary Overall Result"
         db_table = 'academics_results_loc_p_overall'
 
 
@@ -307,7 +305,7 @@ class AcademicsResultsLocalOLevelSubject(ResultsBaseModel):
     comment = models.TextField()
 
     class Meta:
-        verbose_name = "O-level Subject Results"
+        verbose_name = "O-level Subject Result"
         db_table = 'academics_results_loc_o_subject'
 
 
@@ -323,7 +321,7 @@ class AcademicsResultsLocalOLevelOverall(ResultsBaseModel):
     head_teacher_comment = models.TextField()
 
     class Meta:
-        verbose_name = "O-level Overall Results"
+        verbose_name = "O-level Overall Result"
         db_table = 'academics_results_loc_o_overall'
 
 
@@ -335,7 +333,7 @@ class AcademicsResultsLocalALevelSubject(ResultsBaseModel):
     comment = models.TextField()
 
     class Meta:
-        verbose_name = "A-level Subject Results"
+        verbose_name = "A-level Subject Result"
         db_table = 'academics_results_loc_a_subject'
 
 
@@ -347,7 +345,7 @@ class AcademicsResultsLocalALevelOverall(ResultsBaseModel):
     head_teacher_comment = models.TextField()
 
     class Meta:
-        verbose_name = "A-level Overall Results"
+        verbose_name = "A-level Overall Result"
         db_table = 'academics_results_loc_a_overall'
 
 

@@ -1,677 +1,564 @@
 <!DOCTYPE html>
-<html>
+<html lang="en-us" class="smart-style-2">
+
+<meta http-equiv="content-type" content="text/html;charset=utf-8"/>
 <head>
-
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-
-    <title>{{ title }}</title>
+    <!--<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">-->
 
     {% load staticfiles %}
 
-    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
-    <link href="{% static 'font-awesome/css/font-awesome.css' %}" rel="stylesheet">
-    <link href="{% static 'css/plugins/iCheck/custom.css' %}" rel="stylesheet">
+    <title> My Child </title>
+    <meta name="description" content="">
+    <meta name="author" content="Wilson Kiggundu, Ronald Sebuhinja">
 
-    <!-- FooTable -->
-    <link href="{% static 'css/plugins/footable/footable.core.css' %}" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
+    <!-- Basic Styles -->
+    <link rel="stylesheet" type="text/css" media="screen" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" type="text/css" media="screen" href="{% static 'css/font-awesome.min.css' %}">
 
-    <link href="{% static 'css/plugins/steps/jquery.steps.css' %}" rel="stylesheet">
+    <!-- SmartAdmin Styles : Caution! DO NOT change the order -->
+    <link rel="stylesheet" type="text/css" media="screen"
+          href="{% static 'css/smartadmin-production-plugins.min.css' %}">
+    <link rel="stylesheet" type="text/css" media="screen" href="{% static 'css/smartadmin-production.min.css' %}">
+    <link rel="stylesheet" type="text/css" media="screen" href="{% static 'css/smartadmin-skins.min.css' %}">
 
-    <!-- Toastr style -->
-    <link href="{% static 'css/plugins/toastr/toastr.min.css' %}" rel="stylesheet">
+    <!-- SmartAdmin RTL Support  -->
+    <link rel="stylesheet" type="text/css" media="screen" href="{% static 'css/smartadmin-rtl.min.css' %}">
 
-    <!-- Gritter -->
-    <link href="{% static 'js/plugins/gritter/jquery.gritter.css' %}" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" media="screen" href="{% static 'css/styles.css' %}">
 
-    <link href="{% static 'css/animate.css' %}" rel="stylesheet">
-    <link href="{% static 'css/style.css' %}" rel="stylesheet">
-    <link href="{% static 'css/custom.css' %}" rel="stylesheet">
+    <!-- FAVICONS -->
+    <link rel="shortcut icon" href="{% static 'img/favicon/favicon.ico' %}" type="image/x-icon">
+    <link rel="icon" href="{% static 'img/favicon/favicon.ico' %}" type="image/x-icon">
+
+    <!-- Specifying a Webpage Icon for Web Clip -->
+    <link rel="apple-touch-icon" href="{% static 'img/splash/sptouch-icon-iphone.png' %}">
+    <link rel="apple-touch-icon" sizes="76x76" href="{% static 'img/splash/touch-icon-ipad.png' %}">
+    <link rel="apple-touch-icon" sizes="120x120" href="{% static 'img/splash/touch-icon-iphone-retina.png' %}">
+    <link rel="apple-touch-icon" sizes="152x152" href="{% static 'img/splash/touch-icon-ipad-retina.png' %}">
 
 </head>
 
-<body>
+<body class="fixed-header fixed-navigation fixed-ribbon">
 
-    <div id="wrapper">
+<!-- HEADER -->
+<header id="header">
+    <div id="logo-group">
 
-    <nav class="navbar-default navbar-static-side" role="navigation">
-        <div class="sidebar-collapse">
-            <ul class="nav metismenu" id="side-menu">
-                <li class="nav-header">
-                    <div class="dropdown profile-element"> <span>
-                            <img alt="image" class="img-circle" src="{% static 'img/profile_small.jpg' %}" />
-                             </span>
-                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                            <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">David Williams</strong>
-                             </span> <span class="text-muted text-xs block">Art Director <b class="caret"></b></span> </span> </a>
-                        <ul class="dropdown-menu animated fadeInRight m-t-xs">
-                            <li><a href="profile.html">Profile</a></li>
-                            <li><a href="contacts.html">Contacts</a></li>
-                            <li><a href="mailbox.html">Mailbox</a></li>
-                            <li class="divider"></li>
-                            <li><a href="login.html">Logout</a></li>
-                        </ul>
-                    </div>
-                    <div class="logo-element">
-                        IN+
-                    </div>
-                </li>
-                <li>
-                    <a href="layouts.html"><i class="fa fa-diamond"></i> <span class="nav-label">Layouts</span></a>
-                </li>
-                <li>
-                    <a href="metrics.html"><i class="fa fa-pie-chart"></i> <span class="nav-label">Metrics</span>  </a>
-                </li>
-                <li>
-                    <a href="widgets.html"><i class="fa fa-flask"></i> <span class="nav-label">Widgets</span></a>
-                </li>
+        <!-- PLACE YOUR LOGO HERE -->
+        <span id="logo"> <img src="{% static 'img/logo-white.png' %}"></span>
+        <!-- END LOGO PLACEHOLDER -->
 
-            </ul>
+        <!-- Note: The activity badge color changes when clicked and resets the number to 0
+        Suggestion: You may want to set a flag when this happens to tick off all checked messages / notifications -->
+        <span id="activity" class="activity-dropdown"> <i class="fa fa-user"></i> <b class="badge"> 21 </b> </span>
+
+        <!-- AJAX-DROPDOWN : control this dropdown height, look and feel from the LESS variable file -->
+        <div class="ajax-dropdown">
+
+            <!-- the ID links are fetched via AJAX to the ajax container "ajax-notifications" -->
+            <div class="btn-group btn-group-justified" data-toggle="buttons">
+                <label class="btn btn-default">
+                    <input type="radio" name="activity" id="ajax/notify/mail.html">
+                    Msgs (14) </label>
+                <label class="btn btn-default">
+                    <input type="radio" name="activity" id="ajax/notify/notifications.html">
+                    notify (3) </label>
+                <label class="btn btn-default">
+                    <input type="radio" name="activity" id="ajax/notify/tasks.html">
+                    Tasks (4) </label>
+            </div>
+
+            <!-- notification content -->
+            <div class="ajax-notifications custom-scroll">
+
+                <div class="alert alert-transparent">
+                    <h4>Click a button to show messages here</h4>
+                    This blank page message helps protect your privacy, or you can show the first message here
+                    automatically.
+                </div>
+
+                <i class="fa fa-lock fa-4x fa-border"></i>
+
+            </div>
+            <!-- end notification content -->
+
+            <!-- footer: refresh area -->
+            <span> Last updated on: 12/12/2013 9:43AM
+						<button type="button" data-loading-text="<i class='fa fa-refresh fa-spin'></i> Loading..."
+                                class="btn btn-xs btn-default pull-right">
+							<i class="fa fa-refresh"></i>
+						</button>
+					</span>
+            <!-- end footer -->
 
         </div>
+        <!-- END AJAX-DROPDOWN -->
+    </div>
+
+    <!-- pulled right: nav area -->
+    <div class="pull-right">
+
+        <!-- collapse menu button -->
+        <div id="hide-menu" class="btn-header pull-right">
+            <span> <a href="javascript:void(0);" data-action="toggleMenu" title="Collapse Menu"><i
+                    class="fa fa-reorder"></i></a> </span>
+        </div>
+        <!-- end collapse menu -->
+
+        <!-- #MOBILE -->
+        <!-- Top menu profile link : this shows only when top menu is active -->
+        <ul id="mobile-profile-img" class="header-dropdown-list hidden-xs padding-5">
+            <li class="">
+                <a href="#" class="dropdown-toggle no-margin userdropdown" data-toggle="dropdown">
+                    <img src="{% static 'img/avatars/sunny.png' %}" alt="John Doe" class="online"/>
+                </a>
+                <ul class="dropdown-menu pull-right">
+                    <li>
+                        <a href="javascript:void(0);" class="padding-10 padding-top-0 padding-bottom-0"><i
+                                class="fa fa-cog"></i> Setting</a>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                        <a href="{% url 'user_profile' %}" class="padding-10 padding-top-0 padding-bottom-0"> <i
+                                class="fa fa-user"></i> <u>P</u>rofile</a>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                        <a href="javascript:void(0);" class="padding-10 padding-top-0 padding-bottom-0"
+                           data-action="toggleShortcut"><i class="fa fa-arrow-down"></i> <u>S</u>hortcut</a>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                        <a href="javascript:void(0);" class="padding-10 padding-top-0 padding-bottom-0"
+                           data-action="launchFullscreen"><i class="fa fa-arrows-alt"></i> Full <u>S</u>creen</a>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                        <a href="{% url 'logout' %}" class="padding-10 padding-top-5 padding-bottom-5"
+                           data-action="userLogout"><i
+                                class="fa fa-sign-out fa-lg"></i> <strong><u>L</u>ogout</strong></a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+
+        <!-- logout button -->
+        <div id="logout" class="btn-header transparent pull-right">
+            <span> <a href="{% url 'logout' %}" title="Sign Out" data-action="userLogout"
+                      data-logout-msg="You can improve your security further after logging out by closing this opened browser"><i
+                    class="fa fa-sign-out"></i></a> </span>
+        </div>
+        <!-- end logout button -->
+
+        <!-- search mobile button (this is hidden till mobile view port) -->
+        <div id="search-mobile" class="btn-header transparent pull-right">
+            <span> <a href="javascript:void(0)" title="Search"><i class="fa fa-search"></i></a> </span>
+        </div>
+        <!-- end search mobile button -->
+
+        <!-- input: search field -->
+        <form action="https://smartadmin-html.firebaseapp.com/search.html" class="header-search pull-right">
+            <input id="search-fld" type="text" name="param" placeholder="Find reports and more" data-autocomplete='[
+					"ActionScript",
+					"AppleScript",
+					"Asp",
+					"BASIC",
+					"C",
+					"C++",
+					"Clojure",
+					"COBOL",
+					"ColdFusion",
+					"Erlang",
+					"Fortran",
+					"Groovy",
+					"Haskell",
+					"Java",
+					"JavaScript",
+					"Lisp",
+					"Perl",
+					"PHP",
+					"Python",
+					"Ruby",
+					"Scala",
+					"Scheme"]'>
+            <button type="submit">
+                <i class="fa fa-search"></i>
+            </button>
+            <a href="javascript:void(0);" id="cancel-search-js" title="Cancel Search"><i class="fa fa-times"></i></a>
+        </form>
+        <!-- end input: search field -->
+
+
+    </div>
+    <!-- end pulled right: nav area -->
+
+</header>
+<!-- END HEADER -->
+
+<!-- Left panel : Navigation area -->
+<!-- Note: This width of the aside area can be adjusted through LESS variables -->
+<aside id="left-panel">
+
+    <!-- User info -->
+    <div class="login-info">
+        <span> <!-- User image size is adjusted inside CSS, it should stay as it -->
+
+            <a href="javascript:void(0);" id="show-shortcut" data-action="toggleShortcut">
+                <img src="{% static 'img/avatars/sunny.png' %}" alt="me" class="online"/>
+                <span>
+                    {{ request.user.first_name }} {{ request.user.last_name }}
+                </span>
+                <i class="fa fa-angle-down"></i>
+            </a>
+
+        </span>
+    </div>
+    <!-- end user info -->
+
+    <!-- NAVIGATION : This navigation is also responsive-->
+    <nav>
+        <!--
+        NOTE: Notice the gaps after each icon usage <i></i>..
+        Please note that these links work a bit different than
+        traditional href="" links. See documentation for details.
+        -->
+
+        <ul>
+            <li class="active open">
+                <a href="{% url 'home' %}" title="Dashboard"><span class="menu-item-parent">Home</span></a>
+            </li>
+
+            <li>
+                <a href="{% url 'students' %}" title="Students"><span class="menu-item-parent">Students</span></a>
+            </li>
+
+            <li>
+                <a href="{% url 'parents' %}" title="Parents"><span class="menu-item-parent">Parents</span></a>
+            </li>
+
+            {% if request.user.profile.type == 'Teacher' %}
+
+
+                <li class="top-menu-invisible">
+                    <a href="#"><span class="menu-item-parent">Import</span></a>
+                    <ul>
+                        <li class="">
+                            <a title="Import Students" href="{% url 'import_students' %}">
+                                <i class="fa fa-lg fa-fw fa-gear"></i>
+                                <span class="menu-item-parent">
+                                    Students
+                                </span>
+                            </a>
+                        </li>
+                        <li class="">
+                            <a title="Import Students" href="{% url 'import_classes' %}">
+                                <i class="fa fa-lg fa-fw fa-gear"></i>
+                                <span class="menu-item-parent">
+                                    Classes
+                                </span>
+                            </a>
+                        </li>
+                        <li class="">
+                            <a title="Import Students" href="{% url 'import_academic_results' %}">
+                                <i class="fa fa-lg fa-fw fa-gear"></i>
+                                <span class="menu-item-parent">
+                                    Results
+                                </span>
+                            </a>
+                        </li>
+                        <li class="">
+                            <a title="Import Students" href="{% url 'import_subjects' %}">
+                                <i class="fa fa-lg fa-fw fa-gear"></i>
+                                <span class="menu-item-parent">
+                                    Subjects
+                                </span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#"><span class="menu-item-parent">Generate Templates</span></a>
+                    <ul>
+                        <li class="">
+                            <a title="Import Students" href="{% url 'results_template' %}">
+                                <i class="fa fa-lg fa-fw fa-gear"></i>
+                                <span class="menu-item-parent">
+                                    Results
+                                </span>
+                            </a>
+                        </li>
+                        <li class="">
+                            <a title="Import Students" href="{% url 'class_list_template' %}">
+                                <i class="fa fa-lg fa-fw fa-gear"></i>
+                                <span class="menu-item-parent">
+                                    Classes
+                                </span>
+                            </a>
+                        </li>
+                        <li class="">
+                            <a title="Import Students" href="{% url 'subjects_list_template' %}">
+                                <i class="fa fa-lg fa-fw fa-gear"></i>
+                                <span class="menu-item-parent">
+                                    Subjects
+                                </span>
+                            </a>
+                        </li>
+                        <li class="">
+                            <a title="Import Students" href="{% url 'students_list_template' %}">
+                                <i class="fa fa-lg fa-fw fa-gear"></i>
+                                <span class="menu-item-parent">
+                                    Students
+                                </span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+            {% endif %}
+
+        </ul>
     </nav>
 
-        <div id="page-wrapper" class="gray-bg">
-        <div class="row border-bottom">
-        <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
-        <div class="navbar-header">
-            <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
-            <form role="search" class="navbar-form-custom" action="http://webapplayers.com/inspinia_admin-v2.7.1/search_results.html">
-                <div class="form-group">
-                    <input type="text" placeholder="Search for something..." class="form-control" name="top-search" id="top-search">
-                </div>
-            </form>
+</aside>
+<!-- END NAVIGATION -->
+
+<!-- MAIN PANEL -->
+<div id="main" role="main">
+
+    <!-- RIBBON -->
+    <div id="ribbon">
+
+        <span class="ribbon-button-alignment">
+            <span id="refresh" class="btn btn-ribbon" data-action="resetWidgets" data-title="refresh"
+                  rel="tooltip" data-placement="bottom"
+                  data-original-title="<i class='text-warning fa fa-warning'></i> Warning! This will reset all your widget settings."
+                  data-html="true">
+                <i class="fa fa-refresh"></i>
+            </span>
+        </span>
+
+        <!-- breadcrumb -->
+        <ol class="breadcrumb">
+            {% block breadcrumb %}{% endblock %}
+        </ol>
+        <!-- end breadcrumb -->
+
+    </div>
+    <!-- END RIBBON -->
+
+    <!-- MAIN CONTENT -->
+    <div id="content">
+        {% block content %}{% endblock %}
+    </div>
+    <!-- END MAIN CONTENT -->
+
+</div>
+<!-- END MAIN PANEL -->
+
+<!-- PAGE FOOTER -->
+<div class="page-footer">
+    <div class="row">
+        <div class="col-xs-12 col-sm-6">
+            <span class="txt-color-white">SmartAdmin 1.9.0 <span class="hidden-xs"> - Web Application Framework</span> © 2017-2019</span>
         </div>
-            <ul class="nav navbar-top-links navbar-right">
-                <li>
-                    <span class="m-r-sm text-muted welcome-message">Welcome to INSPINIA+ Admin Theme.</span>
-                </li>
-                <li class="dropdown">
-                    <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
-                        <i class="fa fa-envelope"></i>  <span class="label label-warning">16</span>
-                    </a>
-                    <ul class="dropdown-menu dropdown-messages">
+
+        <div class="col-xs-6 col-sm-6 text-right hidden-xs">
+            <div class="txt-color-white inline-block">
+                <i class="txt-color-blueLight hidden-mobile">Last account activity <i class="fa fa-clock-o"></i>
+                    <strong>52 mins ago &nbsp;</strong> </i>
+                <div class="btn-group dropup">
+                    <button class="btn btn-xs dropdown-toggle bg-color-blue txt-color-white" data-toggle="dropdown">
+                        <i class="fa fa-link"></i> <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu pull-right text-left">
                         <li>
-                            <div class="dropdown-messages-box">
-                                <a href="profile.html" class="pull-left">
-                                    <img alt="image" class="img-circle" src="img/a7.jpg">
-                                </a>
-                                <div class="media-body">
-                                    <small class="pull-right">46h ago</small>
-                                    <strong>Mike Loreipsum</strong> started following <strong>Monica Smith</strong>. <br>
-                                    <small class="text-muted">3 days ago at 7:58 pm - 10.06.2014</small>
+                            <div class="padding-5">
+                                <p class="txt-color-darken font-sm no-margin">Download Progress</p>
+                                <div class="progress progress-micro no-margin">
+                                    <div class="progress-bar progress-bar-success" style="width: 50%;"></div>
                                 </div>
                             </div>
                         </li>
                         <li class="divider"></li>
                         <li>
-                            <div class="dropdown-messages-box">
-                                <a href="profile.html" class="pull-left">
-                                    <img alt="image" class="img-circle" src="img/a4.jpg">
-                                </a>
-                                <div class="media-body ">
-                                    <small class="pull-right text-navy">5h ago</small>
-                                    <strong>Chris Johnatan Overtunk</strong> started following <strong>Monica Smith</strong>. <br>
-                                    <small class="text-muted">Yesterday 1:21 pm - 11.06.2014</small>
+                            <div class="padding-5">
+                                <p class="txt-color-darken font-sm no-margin">Server Load</p>
+                                <div class="progress progress-micro no-margin">
+                                    <div class="progress-bar progress-bar-success" style="width: 20%;"></div>
                                 </div>
                             </div>
                         </li>
                         <li class="divider"></li>
                         <li>
-                            <div class="dropdown-messages-box">
-                                <a href="profile.html" class="pull-left">
-                                    <img alt="image" class="img-circle" src="img/profile.jpg">
-                                </a>
-                                <div class="media-body ">
-                                    <small class="pull-right">23h ago</small>
-                                    <strong>Monica Smith</strong> love <strong>Kim Smith</strong>. <br>
-                                    <small class="text-muted">2 days ago at 2:30 am - 11.06.2014</small>
+                            <div class="padding-5">
+                                <p class="txt-color-darken font-sm no-margin">Memory Load <span class="text-danger">*critical*</span>
+                                </p>
+                                <div class="progress progress-micro no-margin">
+                                    <div class="progress-bar progress-bar-danger" style="width: 70%;"></div>
                                 </div>
                             </div>
                         </li>
                         <li class="divider"></li>
                         <li>
-                            <div class="text-center link-block">
-                                <a href="mailbox.html">
-                                    <i class="fa fa-envelope"></i> <strong>Read All Messages</strong>
-                                </a>
+                            <div class="padding-5">
+                                <button class="btn btn-block btn-default">refresh</button>
                             </div>
                         </li>
                     </ul>
-                </li>
-                <li class="dropdown">
-                    <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
-                        <i class="fa fa-bell"></i>  <span class="label label-primary">8</span>
-                    </a>
-                    <ul class="dropdown-menu dropdown-alerts">
-                        <li>
-                            <a href="mailbox.html">
-                                <div>
-                                    <i class="fa fa-envelope fa-fw"></i> You have 16 messages
-                                    <span class="pull-right text-muted small">4 minutes ago</span>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="profile.html">
-                                <div>
-                                    <i class="fa fa-twitter fa-fw"></i> 3 New Followers
-                                    <span class="pull-right text-muted small">12 minutes ago</span>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="grid_options.html">
-                                <div>
-                                    <i class="fa fa-upload fa-fw"></i> Server Rebooted
-                                    <span class="pull-right text-muted small">4 minutes ago</span>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <div class="text-center link-block">
-                                <a href="notifications.html">
-                                    <strong>See All Alerts</strong>
-                                    <i class="fa fa-angle-right"></i>
-                                </a>
-                            </div>
-                        </li>
-                    </ul>
-                </li>
-
-
-                <li>
-                    <a href="login.html">
-                        <i class="fa fa-sign-out"></i> Log out
-                    </a>
-                </li>
-            </ul>
-
-        </nav>
-        </div>
-            <div class="row wrapper border-bottom white-bg page-heading">
-                <div class="col-lg-10">
-                    <h2>Activity stream</h2>
-                    <ol class="breadcrumb">
-                        <li>
-                            <a href="index-2.html">Home</a>
-                        </li>
-                        <li>
-                            <a>App views</a>
-                        </li>
-                        <li class="active">
-                            <strong>Activity stream</strong>
-                        </li>
-                    </ol>
                 </div>
             </div>
-            <div class="wrapper wrapper-content  animated fadeInRight">
-
-                <div class="row">
-                    <div class="col-lg-5">
-                        <div class="ibox ">
-                            <div class="ibox-title">
-                                <h5>Expended activity stream</h5>
-                            </div>
-
-                            <div class="ibox-content">
-
-                                <div class="activity-stream">
-                                    <div class="stream">
-                                        <div class="stream-badge">
-                                            <i class="fa fa-pencil"></i>
-                                        </div>
-                                        <div class="stream-panel">
-                                            <div class="stream-info">
-                                                <a href="#">
-                                                    <img src="img/a5.jpg" />
-                                                    <span>Karen Miggel</span>
-                                                    <span class="date">Today at 01:32:40 am</span>
-                                                </a>
-                                            </div>
-                                            Add new note to the <a href="#">Martex</a>  project.
-                                        </div>
-                                    </div>
-
-                                    <div class="stream">
-                                        <div class="stream-badge">
-                                            <i class="fa fa-commenting-o"></i>
-                                        </div>
-                                        <div class="stream-panel">
-                                            <div class="stream-info">
-                                                <a href="#">
-                                                    <img src="img/a4.jpg" />
-                                                    <span>John Mikkens</span>
-                                                    <span class="date">Yesterday at 10:00:20 am</span>
-                                                </a>
-                                            </div>
-                                            Commented on <a href="#">Ariana</a> profile.
-                                        </div>
-                                    </div>
-                                    <div class="stream">
-                                        <div class="stream-badge">
-                                            <i class="fa fa-circle"></i>
-                                        </div>
-                                        <div class="stream-panel">
-                                            <div class="stream-info">
-                                                <a href="#">
-                                                    <img src="img/a2.jpg" />
-                                                    <img src="img/a3.jpg" />
-                                                    <img src="img/a4.jpg" />
-                                                    <span>Mike Johnson, Monica Smith and Karen Dortmund</span>
-                                                    <span class="date">Yesterday at 02:13:20 am</span>
-                                                </a>
-                                            </div>
-                                            Changed status of third stage in the <a href="#">Vertex</a> project.
-                                        </div>
-                                    </div>
-                                    <div class="stream">
-                                        <div class="stream-badge">
-                                            <i class="fa fa-circle"></i>
-                                        </div>
-                                        <div class="stream-panel">
-                                            <div class="stream-info">
-                                                <a href="#">
-                                                    <img src="img/a6.jpg" />
-                                                    <span>Jessica Smith</span>
-                                                    <span class="date">Yesterday at 08:14:41 am</span>
-                                                </a>
-                                            </div>
-                                            Add new files to own file sharing place.
-                                        </div>
-                                    </div>
-                                    <div class="stream">
-                                        <div class="stream-badge">
-                                            <i class="fa fa-send bg-primary"></i>
-                                        </div>
-                                        <div class="stream-panel">
-                                            <div class="stream-info">
-                                                <a href="#">
-                                                    <img src="img/a7.jpg" />
-                                                    <img src="img/a1.jpg" />
-                                                    <span>Martha Farter and Mike Rodgers</span>
-                                                    <span class="date">Yesterday at 04:18:13 am</span>
-                                                </a>
-                                            </div>
-                                            Sent email to all users participating in new project.
-                                        </div>
-                                    </div>
-                                    <div class="stream">
-                                        <div class="stream-badge">
-                                            <i class="fa fa-tag bg-warning"></i>
-                                        </div>
-                                        <div class="stream-panel">
-                                            <div class="stream-info">
-                                                <a href="#">
-                                                    <img src="img/a7.jpg" />
-                                                    <span>Mark Mickens</span>
-                                                    <span class="date">Yesterday at 06:00:30 am</span>
-                                                </a>
-                                            </div>
-                                            Has been taged in the latest comments about the new project.
-                                        </div>
-                                    </div>
-                                    <div class="stream">
-                                        <div class="stream-badge">
-                                            <i class="fa fa-circle"></i>
-                                        </div>
-                                        <div class="stream-panel">
-                                            <div class="stream-info">
-                                                <a href="#">
-                                                    <img src="img/a8.jpg" />
-                                                    <span>Mike Johnson</span>
-                                                    <span class="date">Yesterday at 02:13:20 am</span>
-                                                </a>
-                                            </div>
-                                            Changed status of second stage in the latest project.
-                                        </div>
-                                    </div>
-                                    <div class="stream">
-                                        <div class="stream-badge">
-                                            <i class="fa fa-circle"></i>
-                                        </div>
-                                        <div class="stream-panel">
-                                            <div class="stream-info">
-                                                <a href="#">
-                                                    <img src="img/a1.jpg" />
-                                                    <span>Jessica Smith</span>
-                                                    <span class="date">Yesterday at 08:14:41 am</span>
-                                                </a>
-                                            </div>
-                                            Add new files to own file sharing place.
-                                        </div>
-                                    </div>
-                                    <div class="stream">
-                                        <div class="stream-badge">
-                                            <i class="fa fa-circle"></i>
-                                        </div>
-                                        <div class="stream-panel">
-                                            <div class="stream-info">
-                                                <a href="#">
-                                                    <img src="img/a6.jpg" />
-                                                    <span>Jessica Smith</span>
-                                                    <span class="date">Yesterday at 08:14:41 am</span>
-                                                </a>
-                                            </div>
-                                            Add new files to own file sharing place.
-                                        </div>
-                                    </div>
-                                    <div class="stream">
-                                        <div class="stream-badge">
-                                            <i class="fa fa-send"></i>
-                                        </div>
-                                        <div class="stream-panel">
-                                            <div class="stream-info">
-                                                <a href="#">
-                                                    <img src="img/a7.jpg" />
-                                                    <span>Martha Farter</span>
-                                                    <span class="date">Yesterday at 04:18:13 am</span>
-                                                </a>
-                                            </div>
-                                            Sent email to all users participating in new project.
-                                        </div>
-                                    </div>
-                                    <div class="stream">
-                                        <div class="stream-badge">
-                                            <i class="fa fa-sliders bg-success"></i>
-                                        </div>
-                                        <div class="stream-panel">
-                                            <div class="stream-info">
-                                                <a href="#">
-                                                    <img src="img/a2.jpg" />
-                                                    <span>Mark Mickens</span>
-                                                    <span class="date">Yesterday at 06:00:30 am</span>
-                                                </a>
-                                            </div>
-                                            Has been taged in the latest comments about the new project.
-                                        </div>
-                                    </div>
-                                    <div class="stream">
-                                        <div class="stream-badge">
-                                            <i class="fa fa-circle"></i>
-                                        </div>
-                                        <div class="stream-panel">
-                                            <div class="stream-info">
-                                                <a href="#">
-                                                    <img src="img/a8.jpg" />
-                                                    <span>Mike Johnson</span>
-                                                    <span class="date">Yesterday at 02:13:20 am</span>
-                                                </a>
-                                            </div>
-                                            Changed status of second stage in the latest project.
-                                        </div>
-                                    </div>
-                                    <div class="stream">
-                                        <div class="stream-badge">
-                                            <i class="fa fa-circle"></i>
-                                        </div>
-                                        <div class="stream-panel">
-                                            <div class="stream-info">
-                                                <a href="#">
-                                                    <img src="img/a1.jpg" />
-                                                    <span>Jessica Smith</span>
-                                                    <span class="date">Yesterday at 08:14:41 am</span>
-                                                </a>
-                                            </div>
-                                            Add new files to own file sharing place.
-                                        </div>
-                                    </div>
-                                    <div class="stream">
-                                        <div class="stream-badge">
-                                            <i class="fa fa-pencil"></i>
-                                        </div>
-                                        <div class="stream-panel">
-                                            <div class="stream-info">
-                                                <a href="#">
-                                                    <img src="img/a5.jpg" />
-                                                    <img src="img/a2.jpg" />
-                                                    <span>Karen Johnson and Sasha Miggel</span>
-                                                    <span class="date">Today at 01:32:40 am</span>
-                                                </a>
-                                            </div>
-                                            Add new note to the <a href="#">Martex</a>  project.
-                                        </div>
-                                    </div>
-
-                                    <div class="stream">
-                                        <div class="stream-badge">
-                                            <i class="fa fa-commenting-o"></i>
-                                        </div>
-                                        <div class="stream-panel">
-                                            <div class="stream-info">
-                                                <a href="#">
-                                                    <img src="img/a4.jpg" />
-                                                    <span>John Mikkens</span>
-                                                    <span class="date">Yesterday at 10:00:20 am</span>
-                                                </a>
-                                            </div>
-                                            Commented on <a href="#">Ariana</a> profile.
-                                        </div>
-                                    </div>
-                                    <div class="stream">
-                                        <div class="stream-badge">
-                                            <i class="fa fa-circle"></i>
-                                        </div>
-                                        <div class="stream-panel">
-                                            <div class="stream-info">
-                                                <a href="#">
-                                                    <img src="img/a2.jpg" />
-                                                    <span>Mike Johnson</span>
-                                                    <span class="date">Yesterday at 02:13:20 am</span>
-                                                </a>
-                                            </div>
-                                            Changed status of third stage in the <a href="#">Vertex</a> project.
-                                        </div>
-                                    </div>
-
-                                    <div class="stream">
-                                        <div class="stream-badge">
-                                            <i class="fa fa-circle"></i>
-                                        </div>
-                                        <div class="stream-panel">
-                                            <div class="stream-info">
-                                                <a href="#">
-                                                    <img src="img/a6.jpg" />
-                                                    <span>Jessica Smith</span>
-                                                    <span class="date">Yesterday at 08:14:41 am</span>
-                                                </a>
-                                            </div>
-                                            Add new files to own file sharing place.
-
-                                        </div>
-                                    </div>
-
-
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-7">
-                        <div class="ibox ">
-                            <div class="ibox-title">
-                                <h5>Basic activity stream</h5>
-                            </div>
-
-                            <div class="ibox-content">
-
-                                <div class="stream-small">
-                                    <span class="label label-primary"> Add</span>
-                                    <span class="text-muted"> Today at 10:30:50 pm </span> / <a href="#">Mike Smith</a>  Added new contact to the user group
-                                </div>
-                                <div class="stream-small">
-                                    <span class="label label-success"> Comment</span>
-                                    <span class="text-muted"> Today at 08:10:50 am </span> / <a href="#">Michael Miggel</a>  Commented on Ariana profile.
-                                </div>
-                                <div class="stream-small">
-                                    <span class="label label-success"> Comment</span>
-                                    <span class="text-muted"> Today at 04:30:33 am </span> / <a href="#">Monica Jackson</a>  Commented on public board.
-                                </div>
-                                <div class="stream-small">
-                                    <span class="label label-success"> Comment</span>
-                                    <span class="text-muted"> Today at 11:43:59 am </span> / <a href="#">Jessica Smith</a>  Commented on public board.
-                                </div>
-                                <div class="stream-small">
-                                    <span class="label label-primary"> Add</span>
-                                    <span class="text-muted"> Yesterday at 10:02:33 pm </span> / <a href="#">Camila Farter</a> Added new file to project.
-                                </div>
-                                <div class="stream-small">
-                                    <span class="label label-warning"> Activity</span>
-                                    <span class="text-muted"> Today at 08:10:50 am </span> / <a href="#">John Dernex</a>  Add new item to stage zero.
-                                </div>
-                                <div class="stream-small">
-                                    <span class="label label-warning"> Activity</span>
-                                    <span class="text-muted"> Yesterday at 10:32:12 am </span> / <a href="#">Andrew Williams</a>  Joined to the new group.
-                                </div>
-                                <div class="stream-small">
-                                    <span class="label label-warning"> Activity</span>
-                                    <span class="text-muted"> Today at 08:10:50 am </span> / <a href="#">Michael Miggel</a>  Commented on Ariana profile.
-                                </div>
-                                <div class="stream-small">
-                                    <span class="label label-warning"> Activity</span>
-                                    <span class="text-muted"> Today at 04:30:33 am </span> / <a href="#">Monica Jackson</a>  Commented on public board.
-                                </div>
-                                <div class="stream-small">
-                                    <span class="label label-default"> Note</span>
-                                    <span class="text-muted"> Today at 08:10:50 am </span> / <a href="#">Michael Miggel</a>  Commented on Ariana profile.
-                                </div>
-                                <div class="stream-small">
-                                    <span class="label label-default"> Note</span>
-                                    <span class="text-muted"> Today at 04:30:33 am </span> / <a href="#">Monica Jackson</a>  Commented on public board.
-                                </div>
-                                <div class="stream-small">
-                                    <span class="label label-default"> Note</span>
-                                    <span class="text-muted"> Today at 11:43:59 am </span> / <a href="#">Jessica Smith</a>  Commented on public board.
-                                </div>
-                                <div class="stream-small">
-                                    <span class="label label-default"> Note</span>
-                                    <span class="text-muted"> Today at 08:10:50 am </span> / <a href="#">John Dernex</a>  Add new item to stage zero.
-                                </div>
-                                <div class="stream-small">
-                                    <span class="label label-default"> Note</span>
-                                    <span class="text-muted"> Yesterday at 10:32:12 am </span> / <a href="#">Andrew Williams</a>  Joined to the new group.
-                                </div>
-                                <div class="stream-small">
-                                    <span class="label label-default"> Note</span>
-                                    <span class="text-muted"> Today at 08:10:50 am </span> / <a href="#">Michael Miggel</a>  Commented on Ariana profile.
-                                </div>
-                                <div class="stream-small">
-                                    <span class="label label-default"> Note</span>
-                                    <span class="text-muted"> Today at 04:30:33 am </span> / <a href="#">Monica Jackson</a>  Commented on public board.
-                                </div>
-                                <div class="stream-small">
-                                    <span class="label label-default"> Note</span>
-                                    <span class="text-muted"> Today at 08:10:50 am </span> / <a href="#">John Dernex</a>  Add new item to stage zero.
-                                </div>
-                                <div class="stream-small">
-                                    <span class="label label-default"> Note</span>
-                                    <span class="text-muted"> Yesterday at 10:32:12 am </span> / <a href="#">Andrew Williams</a>  Joined to the new group.
-                                </div>
-                                <div class="stream-small">
-                                    <span class="label label-default"> Note</span>
-                                    <span class="text-muted"> Today at 08:10:50 am </span> / <a href="#">Michael Miggel</a>  Commented on Ariana profile.
-                                </div>
-                                <div class="stream-small">
-                                    <span class="label label-default"> Note</span>
-                                    <span class="text-muted"> Today at 04:30:33 am </span> / <a href="#">Monica Jackson</a>  Commented on public board.
-                                </div>
-                                <div class="stream-small">
-                                    <span class="label label-success"> Comment</span>
-                                    <span class="text-muted"> Today at 08:10:50 am </span> / <a href="#">Michael Miggel</a>  Commented on Ariana profile.
-                                </div>
-                                <div class="stream-small">
-                                    <span class="label label-success"> Comment</span>
-                                    <span class="text-muted"> Today at 04:30:33 am </span> / <a href="#">Monica Jackson</a>  Commented on public board.
-                                </div>
-                                <div class="stream-small">
-                                    <span class="label label-success"> Comment</span>
-                                    <span class="text-muted"> Today at 11:43:59 am </span> / <a href="#">Jessica Smith</a>  Commented on public board.
-                                </div>
-                                <div class="stream-small">
-                                    <span class="label label-warning"> Activity</span>
-                                    <span class="text-muted"> Today at 08:10:50 am </span> / <a href="#">John Dernex</a>  Add new item to stage zero.
-                                </div>
-                                <div class="stream-small">
-                                    <span class="label label-warning"> Activity</span>
-                                    <span class="text-muted"> Yesterday at 10:32:12 am </span> / <a href="#">Andrew Williams</a>  Joined to the new group.
-                                </div>
-                                <div class="stream-small">
-                                    <span class="label label-warning"> Activity</span>
-                                    <span class="text-muted"> Today at 08:10:50 am </span> / <a href="#">Michael Miggel</a>  Commented on Ariana profile.
-                                </div>
-                                <div class="stream-small">
-                                    <span class="label label-warning"> Activity</span>
-                                    <span class="text-muted"> Today at 04:30:33 am </span> / <a href="#">Monica Jackson</a>  Commented on public board.
-                                </div>
-                                <div class="stream-small">
-                                    <span class="label label-default"> Note</span>
-                                    <span class="text-muted"> Today at 08:10:50 am </span> / <a href="#">Michael Miggel</a>  Commented on Ariana profile.
-                                </div>
-                                <div class="stream-small">
-                                    <span class="label label-default"> Note</span>
-                                    <span class="text-muted"> Today at 04:30:33 am </span> / <a href="#">Monica Jackson</a>  Commented on public board.
-                                </div>
-                                <div class="stream-small">
-                                    <span class="label label-default"> Note</span>
-                                    <span class="text-muted"> Today at 11:43:59 am </span> / <a href="#">Jessica Smith</a>  Commented on public board.
-                                </div>
-                                <div class="stream-small">
-                                    <span class="label label-default"> Note</span>
-                                    <span class="text-muted"> Today at 08:10:50 am </span> / <a href="#">John Dernex</a>  Add new item to stage zero.
-                                </div>
-                                <div class="stream-small">
-                                    <span class="label label-default"> Note</span>
-                                    <span class="text-muted"> Yesterday at 10:32:12 am </span> / <a href="#">Andrew Williams</a>  Joined to the new group.
-                                </div>
-                                <div class="stream-small">
-                                    <span class="label label-default"> Note</span>
-                                    <span class="text-muted"> Today at 08:10:50 am </span> / <a href="#">Michael Miggel</a>  Commented on Ariana profile.
-                                </div>
-                                <div class="stream-small">
-                                    <span class="label label-default"> Note</span>
-                                    <span class="text-muted"> Today at 04:30:33 am </span> / <a href="#">Monica Jackson</a>  Commented on public board.
-                                </div>
-                                <div class="stream-small">
-                                    <span class="label label-default"> Note</span>
-                                    <span class="text-muted"> Today at 08:10:50 am </span> / <a href="#">Michael Miggel</a>  Commented on Ariana profile.
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        <div class="footer">
-            <div class="pull-right">
-                10GB of <strong>250GB</strong> Free.
-            </div>
-            <div>
-                <strong>Copyright</strong> Example Company &copy; 2014-2017
-            </div>
         </div>
+    </div>
+</div>
+<!-- END PAGE FOOTER -->
 
-        </div>
-        </div>
+<!-- SHORTCUT AREA : With large tiles (activated via clicking user name tag)
+Note: These tiles are completely responsive,
+you can add as many as you like
+-->
+<div id="shortcut">
+    <ul>
+        <li>
+            <a href="inbox.html" class="jarvismetro-tile big-cubes bg-color-blue"> <span class="iconbox"> <i
+                    class="fa fa-envelope fa-4x"></i> <span>Mail <span
+                    class="label pull-right bg-color-darken">14</span></span> </span> </a>
+        </li>
+        <li>
+            <a href="calendar.html" class="jarvismetro-tile big-cubes bg-color-orangeDark"> <span class="iconbox"> <i
+                    class="fa fa-calendar fa-4x"></i> <span>Calendar</span> </span> </a>
+        </li>
+        <li>
+            <a href="gmap-xml.html" class="jarvismetro-tile big-cubes bg-color-purple"> <span class="iconbox"> <i
+                    class="fa fa-map-marker fa-4x"></i> <span>Maps</span> </span> </a>
+        </li>
+        <li>
+            <a href="invoice.html" class="jarvismetro-tile big-cubes bg-color-blueDark"> <span class="iconbox"> <i
+                    class="fa fa-book fa-4x"></i> <span>Invoice <span class="label pull-right bg-color-darken">99</span></span> </span>
+            </a>
+        </li>
+        <li>
+            <a href="gallery.html" class="jarvismetro-tile big-cubes bg-color-greenLight"> <span class="iconbox"> <i
+                    class="fa fa-picture-o fa-4x"></i> <span>Gallery </span> </span> </a>
+        </li>
+        <li>
+            <a href="{% url 'user_profile' %}" class="jarvismetro-tile big-cubes selected bg-color-pinkDark"> <span
+                    class="iconbox"> <i
+                    class="fa fa-user fa-4x"></i> <span>My Profile </span> </span> </a>
+        </li>
+    </ul>
+</div>
+<!-- END SHORTCUT AREA -->
 
+<!--================================================== -->
 
+<!-- PACE LOADER - turn this on if you want ajax loading to show (caution: uses lots of memory on iDevices)-->
+<script data-pace-options='{ "restartOnRequestAfter": true }' src="{% static 'js/plugin/pace/pace.min.js' %}"></script>
 
-    <!-- Mainly scripts -->
-    <script src="js/jquery-3.1.1.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/plugins/metisMenu/jquery.metisMenu.js"></script>
-    <script src="js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+<!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
+<script src="{% static 'js/libs/jquery-3.2.1.min.js' %}"></script>
+<script> if (!window.jQuery) {
+    document.write('<script src="{% static 'js/libs/jquery-3.2.1.min.js' %}"><\/script>');
+} </script>
 
-    <!-- Custom and plugin javascript -->
-    <script src="js/inspinia.js"></script>
-    <script src="js/plugins/pace/pace.min.js"></script>
+<script src="{% static 'js/libs/jquery-ui-1.10.3.min.js' %}"></script>
+<script> if (!window.jQuery.ui) {
+    document.write('<script src="{% static 'js/libs/jquery-ui-1.10.3.min.js' %}"><\/script>');
+} </script>
+
+<!-- IMPORTANT: APP CONFIG -->
+<script src="{% static 'js/app.config.js' %}"></script>
+
+<!-- JS TOUCH : include this plugin for mobile drag / drop touch events-->
+<script src="{% static 'js/plugin/jquery-touch/jquery.ui.touch-punch.min.js' %}"></script>
+
+<!-- BOOTSTRAP JS -->
+<script src="{% static 'js/bootstrap/bootstrap.min.js' %}"></script>
+
+<!-- CUSTOM NOTIFICATION -->
+<script src="{% static 'js/notification/SmartNotification.min.js' %}"></script>
+
+<!-- JARVIS WIDGETS -->
+<script src="{% static 'js/smartwidgets/jarvis.widget.min.js' %}"></script>
+
+<!-- EASY PIE CHARTS -->
+<script src="{% static 'js/plugin/easy-pie-chart/jquery.easy-pie-chart.min.js' %}"></script>
+
+<!-- SPARKLINES -->
+<script src="{% static 'js/plugin/sparkline/jquery.sparkline.min.js' %}"></script>
+
+<!-- JQUERY VALIDATE -->
+<script src="{% static 'js/plugin/jquery-validate/jquery.validate.min.js' %}"></script>
+
+<!-- JQUERY MASKED INPUT -->
+<script src="{% static 'js/plugin/masked-input/jquery.maskedinput.min.js' %}"></script>
+
+<!-- JQUERY SELECT2 INPUT -->
+<script src="{% static 'js/plugin/select2/select2.min.js' %}"></script>
+
+<!-- JQUERY UI + Bootstrap Slider -->
+<script src="{% static 'js/plugin/bootstrap-slider/bootstrap-slider.min.js' %}"></script>
+
+<!-- browser msie issue fix -->
+<script src="{% static 'js/plugin/msie-fix/jquery.mb.browser.min.js' %}"></script>
+
+<!-- FastClick: For mobile devices -->
+<script src="{% static 'js/plugin/fastclick/fastclick.min.js' %}"></script>
+
+<!--[if IE 8]>
+
+		<h1>Your browser is out of date, please update your browser by going to www.microsoft.com/download</h1>
+
+<![endif]-->
+
+<!-- MAIN APP JS FILE -->
+<script src="{% static 'js/app.min.js' %}"></script>
+
+<!-- SmartChat UI : plugin -->
+<script src="{% static 'js/smart-chat-ui/smart.chat.ui.min.js' %}"></script>
+<script src="{% static 'js/smart-chat-ui/smart.chat.manager.min.js' %}"></script>
+
+<!-- PAGE RELATED PLUGIN(S) -->
+
+<!-- Flot Chart Plugin: Flot Engine, Flot Resizer, Flot Tooltip -->
+<script src="{% static 'js/plugin/flot/jquery.flot.cust.min.js' %}"></script>
+<script src="{% static 'js/plugin/flot/jquery.flot.resize.min.js' %}"></script>
+<script src="{% static 'js/plugin/flot/jquery.flot.time.min.js' %}"></script>
+<script src="{% static 'js/plugin/flot/jquery.flot.tooltip.min.js' %}"></script>
+
+<!-- Full Calendar -->
+<script src="{% static 'js/plugin/moment/moment.min.js' %}"></script>
+<script src="{% static 'js/plugin/fullcalendar/fullcalendar.min.js' %}"></script>
+
+<script>
+    $(document).ready(function () {
+
+        // DO NOT REMOVE : GLOBAL FUNCTIONS!
+        pageSetUp();
+    });
+</script>
+
+{% block scripts %}{% endblock %}
+
+<!-- Your GOOGLE ANALYTICS CODE Below -->
+{#<script>#}
+{#    var _gaq = _gaq || [];#}
+{#    _gaq.push(['_setAccount', 'UA-43548732-6']);#}
+{#    _gaq.push(['_trackPageview']);#}
+{##}
+{#    (function () {#}
+{#        var ga = document.createElement('script');#}
+{#        ga.type = 'text/javascript';#}
+{#        ga.async = true;#}
+{#        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';#}
+{#        var s = document.getElementsByTagName('script')[0];#}
+{#        s.parentNode.insertBefore(ga, s);#}
+{#    })();#}
+{##}
+{#</script>#}
 
 </body>
 
-
-<!-- Mirrored from webapplayers.com/inspinia_admin-v2.7.1/activity_stream.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 14 Aug 2017 07:37:43 GMT -->
 </html>

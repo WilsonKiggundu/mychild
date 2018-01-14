@@ -38,22 +38,27 @@ urlpatterns = [
     url('^activity/', include('actstream.urls')),
 
     # user login
-    url(r'^user/login/$', auth_login, name='auth-login'),
-    url(r'^user/signup/$', user_signup, name='signup'),
+    url(r'^login/$', auth_login, name='auth-login'),
+    url(r'^register/$', user_signup, name='signup'),
+    url(r'^logout/$', auth_logout, name='logout'),
 
     # school
     url(r'^school/register/$', register_school, name='register-school'),
+    url(r'^students/$', get_students, name='students'),
+    url(r'^student/([0-9]+)/$', student_details, name='student_details'),
 
     # profile
     url(r'^profile/create/$', create_profile, name='create-profile'),
     url(r'^user/create/$', create_user, name='create-user'),
+    url(r'^user/profile/$', user_profile, name='user_profile'),
+    url(r'^user/profile/([0-9]+)/$', user_profile, name='user_profile'),
+    url(r'^parents/$', get_parents, name='parents'),
 
     # messages
     url(r'^thanks/$', thanks, name='thanks'),
 
     # stream
     url(r'^$', home, name='home'),
-    url(r'^home/$', home, name='home'),
 
     # posts
     url(r'^post/create/$', create_post, name='create-post'),
