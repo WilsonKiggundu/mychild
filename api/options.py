@@ -56,6 +56,7 @@ POST_TYPE = (
     ('Event', 'Event'),
     ('Blog', 'Blog'),
     ('Marks', 'Marks'),
+    ('Media', 'Media')
 )
 
 ATTACHMENT_TYPE = (
@@ -81,12 +82,12 @@ IMPORTS = (
 )
 
 now = datetime.datetime.now()
-year = now.year
+current_year = now.year
 
 YEARS = (
-    (year - 1, year - 1),
-    (year, year),
-    (year + 1, year + 1)
+    (current_year - 1, current_year - 1),
+    (current_year, current_year),
+    (current_year + 1, current_year + 1)
 )
 
 TERMS = (
@@ -96,9 +97,25 @@ TERMS = (
 )
 
 
+RESULTS_CATEGORIES = (
+    ('paper', "Subject Paper Results"),
+    ('subject', "Subject Results"),
+    ('overall', "Overall Results"),
+)
+
 class Imports:
     students = 'students'
     teachers = 'teachers'
     subjects = 'subjects'
     results = 'results'
     classes = 'classes'
+
+
+class ResultsType:
+    paper = 'paper'
+    subject = 'subject'
+    overall = 'overall'
+
+
+class FeedItemType:
+    media = 'Media',

@@ -1,7 +1,7 @@
-from actstream.models import Action, user_stream
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponseRedirect
+from django.db.models.functions import Trunc
+from django.http import HttpResponseRedirect, JsonResponse
 from django.shortcuts import render
 
 from django.urls import reverse
@@ -52,24 +52,57 @@ def user_signup(request):
         if form.is_valid():
             email = request.POST['email']
             password = request.POST['password']
+            first_name = request.POST['first_name']
+            last_name = request.POST['last_name']
+            child_code = request.POST['child_code']
+            school_code = request.POST['school_code']
 
-    return render(request, 'user/register.html', {
-        'model': {
-            'form': form,
-            'action': 'signup',
-            'messages': messages
-        }
-    })
+            try:
+                # First check if the school_code and student_code are valid
+                student = Student.objects.filter(code__exact=child_code, school_id__exact=school_code).first()
+                if student is None:
+                    messages.append("Unable to register. Either the child code or school code is invalid")
+                else:
+                    # Then create a user account
+                    user = User(first_name=first_name,
+                                last_name=last_name, username=email,
+                                email=email, is_active=True)
+
+                    user.set_password(raw_password=password)
+                    user.save()
+
+                    # Then create a profile
+                    profile = Profile(user=user, school_id=school_code, ).save()
+
+                    # Attach profile student to profile
+                    StudentNok(student=student, profile=profile).save()
+
+                    # Then add user as student NOK
+                    nok = Nok(student_id=child_code, profile=profile, school_id=school_code)
+
+                    # The sign the user in
+                    authenticated = authenticate(request, username=email, password=password)
+                    if authenticated:
+                        login(request, user)
+                        return HttpResponseRedirect(reverse('home'))
+
+            except():
+                messages.append("Unable to complete registration at this time")
 
 
-def get_stream(request):
-    stream = user_stream(request.user, with_user_activity=True)
-    return render(request, 'stream.html', {'stream': stream})
+
+        else:
+            for error in form.errors:
+                messages.append(error)
+
+    return render(request, 'user/register.html', {'messages': messages})
 
 
 @login_required
 def home(request):
-    return render(request, 'home.html')
+    posts = Post.objects.order_by('-date')
+
+    return render(request, 'home.html', {'posts': posts})
 
 
 def create_user(request):
@@ -136,13 +169,52 @@ def get_students(request):
 
 @login_required
 def student_details(request, student_id):
-    student = Student.objects.filter(pk=student_id, school_id__exact=request.user.profile.school_id).first()
-    return render(request, 'students/details.html', {'student': student})
+    student = Student.objects.filter(pk=student_id, ).first()
+    return render(request, 'students/details.html', {'student': student, })
+
+
+@login_required
+def student_results(request, student_id, year=None, term=None):
+    global query
+    global overall
+    student = Student.objects.filter(pk=student_id, ).first()
+
+    if student.school_class.level_short == 'P':
+        query = AcademicsResultsMarks
+        overall = AcademicsResultsLocalPrimaryOverall
+
+    elif student.school_class.level_short == 'O':
+        query = AcademicsResultsLocalOLevelSubject
+        overall = AcademicsResultsLocalOLevelOverall
+
+    elif student.school_class.level_short == 'A':
+        query = AcademicsResultsLocalALevelSubject
+        overall = AcademicsResultsLocalALevelOverall
+
+    query = query.objects.filter(student_id=student_id).order_by('-year', 'term', 'subject')
+    period = query.values('year', 'term').all()
+
+    if year is None:
+        year = period[0]['year']
+    if term is None:
+        term = period[0]['term']
+
+    subject_results = query.filter(year__exact=year, term__exact=term).all()
+    overall_results = overall.objects.filter(student_id=student_id, year__exact=year, term__exact=term).first()
+
+    return render(request, 'students/results.html', {
+        'student': student,
+        'year': year,
+        'term': term,
+        'periods': list(period),
+        'subject_results': subject_results,
+        'overall_results': overall_results
+    })
 
 
 @login_required
 def get_parents(request):
-    parents = Nok.objects.filter(school_id__exact=request.user.profile.school_id,)
+    parents = Nok.objects.filter(school_id__exact=request.user.profile.school_id, )
     return render(request, 'parents/index.html', {'parents': parents})
 
 
@@ -172,16 +244,43 @@ def create_profile(request):
 @login_required
 def user_profile(request, profile_id=None):
     user = request.user
+    children = None
     if profile_id is not None:
         user = User.objects.filter(profile__id__exact=profile_id).first()
+    else:
+        children = StudentNok.objects.filter(profile__id__exact=request.user.profile.id)
 
     return render(request, 'user/profile.html', {
-        'user': user
+        'user': user,
+        'children': children
     })
 
 
-def thanks(request):
-    return render(request, 'thanks.html')
+@login_required
+@require_http_methods(['POST'])
+def add_child(request):
+    messages = []
+    form = AddChildForm(request.POST)
+
+    if form.is_valid():
+        child_code = request.POST['child_code']
+        school_code = request.POST['school_code']
+        student = Student.objects.filter(code=child_code, school_id=school_code).first()
+        if student:
+            StudentNok(student=student, profile=request.user.profile, school=request.user.profile.school).save()
+            return HttpResponseRedirect(reverse('user_profile'))
+        else:
+            messages.append("Invalid student code or school code")
+
+    for error in form.errors:
+        messages.append(error)
+
+    children = StudentNok.objects.filter(profile__id__exact=request.user.profile.id)
+    return render(request, 'user/profile.html', {
+        'user': request.user,
+        'children': children,
+        'messages': messages
+    })
 
 
 ''' User posts '''
@@ -190,9 +289,6 @@ def thanks(request):
 @login_required
 @require_http_methods(["GET", "POST"])
 def create_post(request):
-    user_id = request.user.id
-    school_id = request.user.profile.school_id
-
     form = NewsFeedForm()
 
     if request.method == 'POST':
@@ -201,11 +297,10 @@ def create_post(request):
         details = request.POST['details']
 
         if form.is_valid():
-            post = NewsFeed(
-                author=request.user,
+            post = Post(
+                author_id=request.user.id,
                 details=details,
-                school_id=school_id,
-                author_id=user_id,
+                school_id=request.user.profile.school_id,
             )
 
             try:
@@ -218,7 +313,8 @@ def create_post(request):
                         attachment = Attachment(file=file, post=post, content_type=file.content_type)
                         attachment.save()
 
-                return HttpResponseRedirect(reverse('thanks'))
+                return HttpResponseRedirect(reverse('home'))
+
             except():
                 pass
 
@@ -230,6 +326,21 @@ def create_post(request):
     })
 
 
+@require_http_methods(['POST'])
+def create_comment(request):
+    post_id = request.POST['post_id']
+    comment = request.POST['comment']
+    author = request.user
+
+    if post_id is not None and comment is not None:
+        Comment(post_id=post_id, comment=comment, author=author).save()
+        return HttpResponseRedirect(reverse('home'))
+
+
+def calendar(request):
+    return render(request, 'school/calendar.html', {})
+
+
 # =================
 # Imports
 # =================
@@ -237,91 +348,64 @@ def create_post(request):
 
 @login_required
 def import_academic_results(request):
-    form = ImportResultsForm()
+    message = None
     if request.method == 'POST':
-        form = ImportResultsForm(request.POST, request.FILES)
-
-        if form.is_valid():
+        try:
             process_excel_file(request, Imports.results)
-            return HttpResponseRedirect(reverse('thanks'))
+            message = "Results have been imported successfully"
+        except():
+            message = 'An error occurred while uploading the file'
 
-    return render(request, 'admin/import.html', {
-        'model': {
-            'form': form,
-            'action': 'import_academic_results'
-        }
-    })
+    return JsonResponse({'message': message})
 
 
 @login_required
 def import_students(request):
-    form = ImportStudentsForm()
-
-    if request.method == "POST":
-        form = ImportStudentsForm(request.POST, request.FILES)
-
-        if form.is_valid():
+    message = None
+    if request.method == 'POST':
+        try:
             process_excel_file(request, Imports.students)
-            return HttpResponseRedirect(reverse('thanks'))
+            message = "Students have been imported successfully"
+        except():
+            message = 'An error occurred while uploading the file'
 
-    return render(request, 'admin/import.html', {
-        'model': {
-            'form': form,
-            'action': 'import_students'
-        }
-    })
+    return JsonResponse({'message': message})
 
 
 @login_required
 def import_classes(request):
-    form = ImportClassesForm()
-
-    if request.method == "POST":
-        form = ImportClassesForm(request.POST, request.FILES)
-
-        if form.is_valid():
+    message = None
+    if request.method == 'POST':
+        try:
             process_excel_file(request, Imports.classes)
-            return HttpResponseRedirect(reverse('thanks'))
+            message = "Classes have been imported successfully"
+        except():
+            message = 'An error occurred while uploading the file'
 
-    return render(request, 'admin/import.html', {
-        'model': {
-            'form': form,
-            'action': 'import_classes'
-        }
-    })
+    return JsonResponse({'message': message})
 
 
 @login_required
 def import_subjects(request):
-    form = ImportSubjectsForm()
-
-    if request.method == "POST":
-        form = ImportSubjectsForm(request.POST, request.FILES)
-
-        if form.is_valid():
+    message = None
+    if request.method == 'POST':
+        try:
             process_excel_file(request, Imports.subjects)
-            return HttpResponseRedirect(reverse('thanks'))
+            message = "Subjects have been imported successfully"
+        except():
+            message = 'An error occurred while uploading the file'
 
-    return render(request, 'admin/import.html', {
-        'model': {
-            'form': form,
-            'action': 'import_subjects'
-        }
-    })
+    return JsonResponse({'message': message})
 
 
 @login_required
 def generate_results_template(request):
-    form = GenerateResultsTemplateForm()
-
+    response = []
     if request.method == 'POST':
-        form = GenerateResultsTemplateForm(request.POST)
-        if form.is_valid():
+        try:
             return generate_academic_results_template(request)
+        except():
+            response.append({'success': 'false'})
+            response.append({'message': 'An error occurred while generating the template'})
 
-    return render(request, 'form.html', {
-        'model': {
-            'form': form,
-            'action': 'results_template'
-        }
-    })
+    return JsonResponse({'response': response})

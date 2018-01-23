@@ -31,25 +31,14 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
-    'django.contrib.sites',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.humanize',
     'front',
     'api',
-    'actstream',
 ]
-
-
-ACTSTREAM_SETTINGS = {
-    'MANAGER': 'api.managers.ApiActionManager',
-    'FETCH_RELATIONS': True,
-    'USE_PREFETCH': True,
-    'USE_JSONFIELD': False,
-    'GFK_FETCH_DEPTH': 1,
-}
-
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -60,6 +49,8 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+SITE_ID = 1
 
 ROOT_URLCONF = 'myChild.urls'
 
@@ -130,7 +121,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'front/../front/static/uploads')
 MEDIA_URL = '/uploads/'
 
 LOGIN_URL = '/login/'

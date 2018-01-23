@@ -22,14 +22,21 @@ class UserAdmin(BaseUserAdmin):
         return obj.profile.type
 
 
-
-
 '''Profile'''
 admin.site.unregister(User)
 admin.site.register(User, UserAdmin)
 
 ''' School '''
-admin.site.register(School)
+
+
+class SchoolAdmin(admin.ModelAdmin):
+    list_display = ('name', 'email', 'telephone', 'address', 'local_curriculum',
+                    'international_curriculum',
+                    'pre_primary_curriculum')
+    list_filter = ('local_curriculum', 'international_curriculum', 'pre_primary_curriculum')
+
+
+admin.site.register(School, SchoolAdmin)
 
 
 class SchoolClassAdmin(admin.ModelAdmin):
@@ -43,8 +50,10 @@ admin.site.register(SchoolEvent)
 
 
 class SubjectAdmin(admin.ModelAdmin):
-    list_display = ('name', 'short', 'code', 'level', 'curriculum', 'standard', 'school', 'remarks')
+    list_display = ('name', 'short', 'code', 'level', 'curriculum', 'standard', 'school', )
     list_filter = ('school', 'level', 'curriculum', 'standard')
+    search_fields = ['name', 'short', 'standard']
+    list_per_page = 15
 
 
 admin.site.register(Subject, SubjectAdmin)
@@ -58,18 +67,34 @@ class ALevelOverallAdmin(admin.ModelAdmin):
     list_filter = ()
 
 
+class OLevelOverallAdmin(admin.ModelAdmin):
+    list_display = ('student', 'school', 'term', 'year', 'school_class', 'aggregate',
+                    'class_position', 'stream_position', 'total_marks', 'average_mark',
+                    'class_teacher_comment', 'house_teacher_comment', 'head_teacher_comment')
+    list_filter = ('school', 'term', 'year', 'school_class')
+    search_fields = ['student__first_name', 'student__last_name']
+
+
 admin.site.register(AcademicsResultsLocalALevelOverall, ALevelOverallAdmin)
 admin.site.register(AcademicsResultsLocalALevelSubject)
-admin.site.register(AcademicsResultsLocalOLevelOverall)
-admin.site.register(AcademicsResultsLocalOLevelSubject)
+admin.site.register(AcademicsResultsLocalOLevelOverall, OLevelOverallAdmin)
+
+
+class OLevelSubjectResultsAdmin(admin.ModelAdmin):
+    list_display = ('student','school_class', 'subject', 'mark', 'grade', 'term', 'year')
+    list_filter = ('school', 'term', 'year', 'school_class')
+    search_fields = ['student__first_name', 'student__last_name', 'subject__name']
+
+
+admin.site.register(AcademicsResultsLocalOLevelSubject, OLevelSubjectResultsAdmin)
 admin.site.register(AcademicsResultsLocalPrimaryOverall)
 admin.site.register(AcademicsResultsLocalPrimarySubject)
 
 
 class PaperResultsAdmin(admin.ModelAdmin):
-    list_display = ('id', 'student', 'subject', 'mark', 'grade', 'school_class', 'stream', 'term', 'year',
+    list_display = ('id', 'student', 'subject', 'mark', 'grade', 'school_class', 'term', 'year',
                     'stream_position', 'class_position', 'comment', 'school')
-    list_filter = ('subject', 'school_class', 'stream', 'term', 'year', 'school')
+    list_filter = ('subject', 'school_class', 'term', 'year', 'school')
 
 
 admin.site.register(AcademicsResultsMarks, PaperResultsAdmin)
@@ -78,13 +103,14 @@ admin.site.register(AcademicsResultsMarks, PaperResultsAdmin)
 
 
 class StudentAdmin(admin.ModelAdmin):
-    list_display = ('first_name', 'last_name', 'gender', 'admission_number', 'school_class', 'stream', 'code', 'school')
+    list_display = ('first_name', 'last_name', 'gender', 'admission_number',
+                    'school_class', 'code', 'school')
     list_filter = (
         'school',
         'gender',
         'school_class',
-        'stream',
     )
+    search_fields = ['first_name', 'last_name', 'admission_number']
 
 
 admin.site.register(Student, StudentAdmin)
@@ -95,12 +121,14 @@ class AttachmentsInline(admin.StackedInline):
     extra = 0
 
 
-class NewsFeedAdmin(admin.ModelAdmin):
-    list_display = ('details', 'author', 'parent', 'date', 'school',)
-    inlines = [AttachmentsInline]
+class CommentsInline(admin.StackedInline):
+    model = Comment
 
 
-admin.site.register(NewsFeed, NewsFeedAdmin)
+class PostAdmin(admin.ModelAdmin):
+    inlines = (CommentsInline,)
+    list_display = ('id', 'details', 'author', 'date')
+    list_display_links = ('id', 'details')
 
 
-
+admin.site.register(Post, PostAdmin)

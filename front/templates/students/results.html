@@ -1,0 +1,185 @@
+{% extends 'layout.html' %}
+
+{% block breadcrumb %}
+    <li><strong>{{ student.first_name }} {{ student.last_name }}</strong></li>
+    <li>{{ student.school_class }} {{ student.stream }}</li>
+{% endblock %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="col-lg-3">
+            <div class="well">
+
+                <div class="tree">
+                    {% regroup periods by year as term_list %}
+                    <ul role="tree">
+                        {% for period in term_list %}
+                            <li class="parent_li" role="treeitem">
+                                <span class="label label-primary">
+                                    <i class="fa fa-lg fa-minus-circle"></i> {{ period.grouper }}
+                                </span>
+                                <ul role="group">
+                                    {% for term in period.list %}
+                                        {% ifchanged %}
+                                            <li style="">
+                                            <span>
+                                                <a href="{% url 'student_results' student_id=student.id year=period.grouper term=term.term %}">
+                                                    Term {{ term.term }}
+                                                </a>
+                                            </span>
+                                            </li>
+                                        {% endifchanged %}
+                                    {% endfor %}
+                                </ul>
+                            </li>
+                        {% endfor %}
+                    </ul>
+
+                </div>
+                <hr/>
+                <a href="{% url 'student_details' student.id %}" class="btn btn-default" style="width: 100%">Student
+                    Details</a>
+
+            </div>
+        </div>
+        <div class="col-lg-9">
+            <div class="well">
+
+                <div class="widget-body-toolbar">
+                    <h1>Academic Results<br/>
+                        <small style="font-size: small">{{ year }} Term {{ term }}</small>
+                    </h1>
+                </div>
+                {% if subject_results %}
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <thead>
+                            <tr>
+                                <th>Subject</th>
+                                <th>Mark</th>
+                                <th>Grade</th>
+                                <th>Position</th>
+                                <th>Comment</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for result in subject_results %}
+                                <tr>
+                                    <td>{{ result.subject.name }}</td>
+                                    <td>{{ result.mark }}</td>
+                                    <td>{{ result.grade }}</td>
+                                    <td>{{ result.stream_position }} / {{ result.class_position }}</td>
+                                    <td>{{ result.comment }}</td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+
+                    {% if overall_results %}
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <div class="alert alert-success">
+                                    {% if overall_results.school_class.level_short == 'A' %}
+                                        <span>Result</span><br/>
+                                        <strong style="font-size: x-large">
+                                            {{ overall_results.result }}
+                                        </strong>
+                                    {% else %}
+                                        <span>Total Marks / Average</span><br/>
+                                        <strong style="font-size: x-large">
+                                            {{ overall_results.total_marks }} / {{ overall_results.average_mark }}
+                                        </strong>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="alert alert-success">
+                                    {% if overall_results.school_class.level_short == 'A' %}
+                                        <span>Points</span>
+                                        <strong style="font-size: x-large">
+                                            {{ overall_results.points }}
+                                        </strong>
+                                    {% else %}
+                                        <span>Aggregate in
+                                            {% if overall_results.school_class.level_short == 'P' %}
+                                                <span>4</span>
+                                            {% else %}
+                                                <span>8</span>
+                                            {% endif %}
+                                        </span><br/>
+                                        <strong style="font-size: x-large">
+                                            {{ overall_results.aggregate }}
+                                        </strong>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                {% if overall_results.school_class.level_short != 'A' %}
+                                    <div class="alert alert-success">
+                                        <span>Position in Stream / Class</span><br/>
+                                        <strong style="font-size: x-large">
+                                            {{ overall_results.stream_position }} / {{ overall_results.class_position }}
+                                        </strong>
+                                    </div>
+                                {% endif %}
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="alert alert-info">
+                                    <strong>Class teacher's comment</strong><br/><br/>
+                                    <em>
+                                        {{ overall_results.class_teacher_comment | linebreaksbr }}
+                                    </em>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="alert alert-info">
+                                    <strong>House teacher's comment</strong><br/><br/>
+                                    <em>
+                                        {{ overall_results.house_teacher_comment | linebreaksbr }}
+                                    </em>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="alert alert-info">
+                                    <strong>Head teacher's comment</strong><br/><br/>
+                                    <em>
+                                        {{ overall_results.head_teacher_comment | linebreaksbr }}
+                                    </em>
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+
+                {% else %}
+                    <div class="alert alert-warning">No results found</div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block scripts %}
+    <script>
+        $(document).ready(function () {
+
+            // PAGE RELATED SCRIPTS
+
+            $('.tree > ul').attr('role', 'tree').find('ul').attr('role', 'group');
+            $('.tree').find('li:has(ul)').addClass('parent_li').attr('role', 'treeitem').find(' > span').attr('title', 'Collapse this branch').on('click', function (e) {
+                var children = $(this).parent('li.parent_li').find(' > ul > li');
+                if (children.is(':visible')) {
+                    children.hide('fast');
+                    $(this).attr('title', 'Expand this branch').find(' > i').removeClass().addClass('fa fa-lg fa-plus-circle');
+                } else {
+                    children.show('fast');
+                    $(this).attr('title', 'Collapse this branch').find(' > i').removeClass().addClass('fa fa-lg fa-minus-circle');
+                }
+                e.stopPropagation();
+            });
+
+        })
+    </script>
+{% endblock %}

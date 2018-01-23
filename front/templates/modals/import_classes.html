@@ -1,0 +1,131 @@
+{% load static %}
+
+<!--suppress HtmlFormInputWithoutLabel -->
+<div class="modal fade" id="import_classes" tabindex="-1" role="dialog"
+     aria-labelledby="import_classes" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel">Import Classes</h4>
+            </div>
+
+            <form enctype="multipart/form-data" method="post" id="importClassesForm"
+                  action="{% url 'import_classes' %}"
+                  class="form-horizontal">
+                {% csrf_token %}
+
+                <div class="modal-body">
+                    <fieldset>
+                        <div class="form-group has-feedback">
+                            <label class="col-xs-2 col-lg-3 control-label text-right"></label>
+                            <div class="col-xs-9 col-lg-7">
+                                <div class="input-wrapper">
+                                    <input type="file" id="classes_files" multiple name="files" data-bv-field="files"/>
+                                    <button class="btn btn-primary">Choose files...</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label text-right"></label>
+                            <div class="col-xs-12 col-lg-9">
+                                <div id="classes_uploaded_files"></div>
+                            </div>
+                        </div>
+
+                    </fieldset>
+                    <div id="messages"></div>
+                </div>
+
+                <div class="modal-footer text-center">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        Close
+                    </button>
+                    <button type="submit" class="btn btn-primary">
+                        Import
+                    </button>
+                </div>
+            </form>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+{% block scripts %}
+    <script>
+
+        $("#classes_files").change(function (e) {
+            var files = e.target.files;
+            var count = files.length;
+            var label;
+            if (count > 1) {
+                label = count + " files chosen";
+            } else {
+                label = count + " file chosen";
+            }
+            $(".input-wrapper button").html(label);
+
+            $.each(files, function (key, file) {
+                $("#classes_uploaded_files").append("<span>" + file.name + "</span><br/>")
+            });
+
+        });
+
+        $('#importClassesForm').bootstrapValidator({
+            feedbackIcons: {
+                valid: 'glyphicon glyphicon-ok',
+                invalid: 'glyphicon glyphicon-remove',
+                validating: 'glyphicon glyphicon-refresh'
+            },
+            fields: {
+                files: {
+                    validators: {
+                        notEmpty: {
+                            message: 'Choose files to import'
+                        }
+                    }
+                }
+            }
+        }).on('submit', function (e) {
+            if (e.isDefaultPrevented()) {
+                // the form is invalid
+            } else {
+
+                // e.stopPropagation();
+                // e.preventDefault();
+
+                $("#classes_uploaded_files").html("<em>Uploading classes. Please wait...</em>");
+
+                var data = new FormData($("#importClassesForm").get(0));
+                var csrfToken = $("[name=csrfmiddlewaretoken]").val();
+
+                $.ajax({
+                    type: 'POST',
+                    url: '{% url 'import_classes' %}',
+                    data: data,
+                    cache: false,
+                    dataType: 'json',
+                    processData: false,
+                    contentType: false,
+                    beforeSend: function (xhr, settings) {
+                        xhr.setRequestHeader('X-CSRFToken', csrfToken)
+                    },
+                    success: function (response) {
+                        $("#classes_uploaded_files").addClass('text text-success').html(response.message);
+                    },
+                    error: function (error) {
+                        $("#classes_uploaded_files").addClass('text text-danger')
+                            .html(error.statusText + ": unable to upload the files");
+                    }
+                });
+
+                return false;
+            }
+
+        });
+
+
+    </script>
+
+{% endblock %}

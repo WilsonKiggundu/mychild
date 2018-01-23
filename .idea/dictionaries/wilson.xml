@@ -2,6 +2,9 @@
   <dictionary name="wilson">
     <words>
       <w>actstream</w>
+      <w>inlines</w>
+      <w>lightbox</w>
+      <w>linkedin</w>
     </words>
   </dictionary>
 </component>

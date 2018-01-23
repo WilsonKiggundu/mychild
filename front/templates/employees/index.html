@@ -1,0 +1,27 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Telephone</th>
+    </tr>
+    </thead>
+
+    <tbody>
+
+    {% if employees %}
+        {%  for employee in employees %}
+            <tr>
+                <td>{{ employee.first_name }}</td>
+                <td>{{ employee.email_address }}</td>
+                <td>{{ employee.telephone }}</td>
+            </tr>
+        {% endfor %}
+
+    {% endif %}
+    </tbody>
+</table>
+{% endblock %}

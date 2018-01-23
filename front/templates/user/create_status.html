@@ -1,0 +1,24 @@
+<div class="well well-sm">
+    <form method="post" action="{% url 'create-post' %}">
+        {% csrf_token %}
+        <div class="form-group">
+                <textarea class="form-control status"
+                          placeholder="What's on your mind, {{ request.user.first_name }}?"
+                          name="details"></textarea>
+            <div class="row">
+                <div class="col-xs-9">
+                    <div class="upload-button-wrapper">
+                        <button class="btn btn-default btn-sm">
+                            <i class="fa fa-image"></i> Photo/Video
+                        </button>
+                        <input type="file" name="files" multiple/>
+                    </div>
+                </div>
+                <div class="col-xs-3 text-right">
+                    <button type="submit" class="btn btn-primary btn-sm">Post</button>
+                </div>
+            </div>
+
+        </div>
+    </form>
+</div>

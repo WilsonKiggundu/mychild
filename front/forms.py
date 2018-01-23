@@ -4,7 +4,7 @@ from django import forms
 from django.forms import ModelChoiceField
 
 from api.models import School, Profile, SchoolContactPerson, SchoolClass, Subject
-from api.options import VIEWERS, IMPORTS, YEARS, TERMS, CURRICULUM_LEVELS
+from api.options import VIEWERS, IMPORTS, YEARS, TERMS, CURRICULUM_LEVELS, RESULTS_CATEGORIES
 from front.fields import SubjectModelChoiceField
 
 
@@ -29,10 +29,19 @@ class LoginForm(forms.Form):
 class SignupForm(forms.Form):
     child_code = forms.CharField(required=True, label='My Child Code')
     school_code = forms.CharField(required=True, label='School Code')
-    name = forms.CharField(required=True, label='Your name')
+    first_name = forms.CharField(required=True, label='First name')
+    last_name = forms.CharField(required=True, label='Last name')
     email = forms.CharField(required=True, label='Email', widget=forms.EmailInput)
     password = forms.CharField(label='Password', widget=forms.PasswordInput)
     confirm_password = forms.CharField(label='Confirm Password', widget=forms.PasswordInput)
+
+    def clean(self):
+        cleaned_data = super(SignupForm, self).clean()
+        password = cleaned_data.get('password')
+        confirm_password = cleaned_data.get('confirm_password')
+
+        if password != confirm_password:
+            raise forms.ValidationError('Passwords don''t match')
 
 
 class UserForm(forms.ModelForm):
@@ -71,7 +80,7 @@ class AttachmentForm(forms.Form):
 
 
 class NewsFeedForm(forms.Form):
-    details = forms.CharField(max_length=20000, widget=forms.Textarea())
+    details = forms.CharField(max_length=20000, widget=forms.Textarea(attrs={'class':'form-control'}))
     files = forms.FileField(required=False, widget=forms.ClearableFileInput(attrs={'multiple': True, }))
 
 
@@ -87,14 +96,15 @@ class ImportForm(forms.Form):
 
 
 class GenerateResultsTemplateForm(forms.Form):
+    category = forms.CharField(required=True, widget=forms.Select(choices=RESULTS_CATEGORIES))
     school_class = forms.ModelChoiceField(queryset=SchoolClass.objects.all(), to_field_name='id')
-    subject = forms.ModelChoiceField(queryset=Subject.objects.all(), to_field_name='name')
+    subject = forms.ModelChoiceField(queryset=Subject.objects.all(), to_field_name='id')
     year = forms.CharField(required=True, widget=forms.Select(choices=YEARS))
     term = forms.CharField(required=True, widget=forms.Select(choices=TERMS))
 
 
 class ImportStudentsForm(forms.Form):
-    file = forms.FileField(required=True)
+    files = forms.FileField(required=False, widget=forms.ClearableFileInput(attrs={'multiple': True, }))
 
 
 class ImportClassesForm(forms.Form):
@@ -106,4 +116,9 @@ class ImportSubjectsForm(forms.Form):
 
 
 class ImportResultsForm(forms.Form):
-    file = forms.FileField(required=True)
+    files = forms.FileField(required=False, widget=forms.ClearableFileInput(attrs={'multiple': True, }))
+
+
+class AddChildForm(forms.Form):
+    child_code = forms.CharField(required=True)
+    school_code = forms.CharField(required=True)

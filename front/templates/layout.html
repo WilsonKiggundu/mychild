@@ -6,6 +6,7 @@
     <meta charset="utf-8">
     <!--<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">-->
 
+    {% load humanize %}
     {% load staticfiles %}
 
     <title> My Child </title>
@@ -42,6 +43,10 @@
 </head>
 
 <body class="fixed-header fixed-navigation fixed-ribbon">
+
+<div class="backdrop">
+    <div class="lightbox"></div>
+</div>
 
 <!-- HEADER -->
 <header id="header">
@@ -207,7 +212,7 @@
         <span> <!-- User image size is adjusted inside CSS, it should stay as it -->
 
             <a href="javascript:void(0);" id="show-shortcut" data-action="toggleShortcut">
-                <img src="{% static 'img/avatars/sunny.png' %}" alt="me" class="online"/>
+                <img src="{% static request.user.profile.photo.url %}" alt="me" class="online"/>
                 <span>
                     {{ request.user.first_name }} {{ request.user.last_name }}
                 </span>
@@ -227,97 +232,92 @@
         -->
 
         <ul>
-            <li class="active open">
+            <li {% if request.path.name == 'home' %}class="active open"{% endif %}>
                 <a href="{% url 'home' %}" title="Dashboard"><span class="menu-item-parent">Home</span></a>
             </li>
 
-            <li>
+            <li {% if request.path == '/students/' %}class="active open"{% endif %}>
                 <a href="{% url 'students' %}" title="Students"><span class="menu-item-parent">Students</span></a>
             </li>
 
-            <li>
+            <li {% if '/parents/' in request.path or '/profile' in request.path %}class="active open"{% endif %}>
                 <a href="{% url 'parents' %}" title="Parents"><span class="menu-item-parent">Parents</span></a>
             </li>
 
-            {% if request.user.profile.type == 'Teacher' %}
+            <li {% if '/student/' in request.path %}class="active"{% endif %}>
+                <a href="#"><span class="menu-item-parent">My Children</span></a>
+                <ul>
+                    {% for child in request.user.profile.studentnok_set.all %}
+                        <li class="">
+                            <a title="{{ child.student.first_name }} {{ child.student.first_name }}"
+                               href="{% url 'student_details' child.student.id %}">
+                                <i class="fa fa-lg fa-fw fa-child"></i>
+                                <span class="menu-item-parent">
+                                    {{ child.student.first_name }} {{ child.student.last_name }}
+                                </span>
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </li>
 
 
-                <li class="top-menu-invisible">
-                    <a href="#"><span class="menu-item-parent">Import</span></a>
-                    <ul>
-                        <li class="">
-                            <a title="Import Students" href="{% url 'import_students' %}">
-                                <i class="fa fa-lg fa-fw fa-gear"></i>
-                                <span class="menu-item-parent">
-                                    Students
-                                </span>
-                            </a>
-                        </li>
-                        <li class="">
-                            <a title="Import Students" href="{% url 'import_classes' %}">
-                                <i class="fa fa-lg fa-fw fa-gear"></i>
-                                <span class="menu-item-parent">
-                                    Classes
-                                </span>
-                            </a>
-                        </li>
-                        <li class="">
-                            <a title="Import Students" href="{% url 'import_academic_results' %}">
-                                <i class="fa fa-lg fa-fw fa-gear"></i>
-                                <span class="menu-item-parent">
-                                    Results
-                                </span>
-                            </a>
-                        </li>
-                        <li class="">
-                            <a title="Import Students" href="{% url 'import_subjects' %}">
-                                <i class="fa fa-lg fa-fw fa-gear"></i>
-                                <span class="menu-item-parent">
-                                    Subjects
-                                </span>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="#"><span class="menu-item-parent">Generate Templates</span></a>
-                    <ul>
-                        <li class="">
-                            <a title="Import Students" href="{% url 'results_template' %}">
-                                <i class="fa fa-lg fa-fw fa-gear"></i>
-                                <span class="menu-item-parent">
-                                    Results
-                                </span>
-                            </a>
-                        </li>
-                        <li class="">
-                            <a title="Import Students" href="{% url 'class_list_template' %}">
-                                <i class="fa fa-lg fa-fw fa-gear"></i>
-                                <span class="menu-item-parent">
-                                    Classes
-                                </span>
-                            </a>
-                        </li>
-                        <li class="">
-                            <a title="Import Students" href="{% url 'subjects_list_template' %}">
-                                <i class="fa fa-lg fa-fw fa-gear"></i>
-                                <span class="menu-item-parent">
-                                    Subjects
-                                </span>
-                            </a>
-                        </li>
-                        <li class="">
-                            <a title="Import Students" href="{% url 'students_list_template' %}">
-                                <i class="fa fa-lg fa-fw fa-gear"></i>
-                                <span class="menu-item-parent">
-                                    Students
-                                </span>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
+            <li {% if request.path.name == 'calendar' %}class="active open"{% endif %}>
+                <a href="{% url 'calendar' %}" title="Calendar"><span class="menu-item-parent">Calendar</span></a>
+            </li>
 
-            {% endif %}
+
+            <li class="">
+                <a href="#"><span class="menu-item-parent">Import</span></a>
+                <ul>
+                    <li class="">
+                        <a data-toggle="modal" data-target="#import_classes" title="Import Classes">
+                            <span class="menu-item-parent">Classes</span>
+                        </a>
+                    </li>
+                    <li class="">
+                        <a data-toggle="modal" data-target="#import_students" title="Import Students">
+                            <span class="menu-item-parent">Students</span>
+                        </a>
+                    </li>
+                    <li class="">
+                        <a data-toggle="modal" data-target="#import_subjects" title="Import Subjects">
+                            <span class="menu-item-parent">Subjects</span>
+                        </a>
+                    </li>
+                    <li class="">
+                        <a data-toggle="modal" data-target="#import_results" title="Import Results">
+                            <span class="menu-item-parent">Results</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="#"><span class="menu-item-parent">Templates</span></a>
+                <ul>
+                    <li class="">
+                        <a title="Import Students" href="{% url 'class_list_template' %}">
+                            <span class="menu-item-parent">Classes</span>
+                        </a>
+                    </li>
+                    <li class="">
+                        <a title="Import Students" href="{% url 'students_list_template' %}">
+                            <span class="menu-item-parent">Students</span>
+                        </a>
+                    </li>
+                    <li class="">
+                        <a title="Import Students" href="{% url 'subjects_list_template' %}">
+                            <span class="menu-item-parent">Subjects</span>
+                        </a>
+                    </li>
+                    <li class="">
+                        <a data-toggle="modal" data-target="#generate_results_template" title="Import Students">
+                            <span class="menu-item-parent">Results </span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
 
         </ul>
     </nav>
@@ -422,22 +422,8 @@ you can add as many as you like
 <div id="shortcut">
     <ul>
         <li>
-            <a href="inbox.html" class="jarvismetro-tile big-cubes bg-color-blue"> <span class="iconbox"> <i
-                    class="fa fa-envelope fa-4x"></i> <span>Mail <span
-                    class="label pull-right bg-color-darken">14</span></span> </span> </a>
-        </li>
-        <li>
-            <a href="calendar.html" class="jarvismetro-tile big-cubes bg-color-orangeDark"> <span class="iconbox"> <i
+            <a href="{% url 'calendar' %}" class="jarvismetro-tile big-cubes bg-color-orangeDark"> <span class="iconbox"> <i
                     class="fa fa-calendar fa-4x"></i> <span>Calendar</span> </span> </a>
-        </li>
-        <li>
-            <a href="gmap-xml.html" class="jarvismetro-tile big-cubes bg-color-purple"> <span class="iconbox"> <i
-                    class="fa fa-map-marker fa-4x"></i> <span>Maps</span> </span> </a>
-        </li>
-        <li>
-            <a href="invoice.html" class="jarvismetro-tile big-cubes bg-color-blueDark"> <span class="iconbox"> <i
-                    class="fa fa-book fa-4x"></i> <span>Invoice <span class="label pull-right bg-color-darken">99</span></span> </span>
-            </a>
         </li>
         <li>
             <a href="gallery.html" class="jarvismetro-tile big-cubes bg-color-greenLight"> <span class="iconbox"> <i
@@ -541,6 +527,13 @@ you can add as many as you like
 </script>
 
 {% block scripts %}{% endblock %}
+
+<script src="{% static 'js/plugin/bootstrapvalidator/bootstrapValidator.min.js' %}"></script>
+{% include 'modals/generate_results_template.html' %}
+{% include 'modals/import_students.html' %}
+{% include 'modals/import_classes.html' %}
+{% include 'modals/import_subjects.html' %}
+{% include 'modals/import_results.html' %}
 
 <!-- Your GOOGLE ANALYTICS CODE Below -->
 {#<script>#}

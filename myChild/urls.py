@@ -1,19 +1,6 @@
-"""myChild URL Configuration
 
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/1.11/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  url(r'^$', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  url(r'^$', Home.as_view(), name='home')
-Including another URLconf
-    1. Import the include() function: from django.conf.urls import url, include
-    2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
-"""
-from django.conf.urls import url, include
+from django.conf import settings
+from django.conf.urls import url, include, static
 from django.contrib import admin
 from api.resources import *
 from api.views import user_login
@@ -25,7 +12,7 @@ profile_resource = ProfileResource()
 user_resource = UserResource()
 
 urlpatterns = [
-    url(r'^administration/', include(admin.site.urls), name='admin'),
+    url(r'^admin/', include(admin.site.urls), name='admin'),
 
     # api
     url(r'^api/', include(school_resource.urls)),
@@ -33,9 +20,6 @@ urlpatterns = [
     url(r'^api/', include(profile_resource.urls)),
     url(r'^api/', include(user_resource.urls)),
     url(r'^api/docs', include(user_resource.urls)),
-
-    # stream
-    url('^activity/', include('actstream.urls')),
 
     # user login
     url(r'^login/$', auth_login, name='auth-login'),
@@ -45,7 +29,11 @@ urlpatterns = [
     # school
     url(r'^school/register/$', register_school, name='register-school'),
     url(r'^students/$', get_students, name='students'),
-    url(r'^student/([0-9]+)/$', student_details, name='student_details'),
+    url(r'^student/([0-9]+)/details/$', student_details, name='student_details'),
+    url(r'^student/(?P<student_id>[0-9]+)/(?P<year>[0-9]{4})/(?P<term>[0-9])/results/$',
+        student_results, name='student_results'),
+    url(r'^student/(?P<student_id>[0-9]+)/results/$', student_results, name='student_results'),
+    url(r'^calendar/$', calendar, name='calendar'),
 
     # profile
     url(r'^profile/create/$', create_profile, name='create-profile'),
@@ -53,19 +41,20 @@ urlpatterns = [
     url(r'^user/profile/$', user_profile, name='user_profile'),
     url(r'^user/profile/([0-9]+)/$', user_profile, name='user_profile'),
     url(r'^parents/$', get_parents, name='parents'),
+    url(r'^profile/add/child', add_child, name='add_child'),
 
     # messages
-    url(r'^thanks/$', thanks, name='thanks'),
 
     # stream
     url(r'^$', home, name='home'),
 
     # posts
     url(r'^post/create/$', create_post, name='create-post'),
+    url(r'^comment/$', create_comment, name='create_comment'),
 
     # imports
     url(r'^import/students/$', import_students, name='import_students'),
-    url(r'^import/results/$', import_academic_results, name='import_academic_results'),
+    url(r'^import/results/$', import_academic_results, name='import_results'),
     url(r'^import/classes/$', import_classes, name='import_classes'),
     url(r'^import/subjects/$', import_subjects, name='import_subjects'),
 

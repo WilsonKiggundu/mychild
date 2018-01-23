@@ -1,1 +1,459 @@
-{% include 'form.html' with form=form %}
+<!DOCTYPE html>
+<html lang="en-us" id="extr-page">
+
+<meta http-equiv="content-type" content="text/html;charset=utf-8"/>
+<head>
+    <meta charset="utf-8">
+    <title> My Child </title>
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    {% load staticfiles %}
+
+    <!-- #CSS Links -->
+    <!-- Basic Styles -->
+    <link rel="stylesheet" type="text/css" media="screen" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" type="text/css" media="screen" href="{% static 'css/font-awesome.min.css' %}">
+
+    <!-- SmartAdmin Styles : Caution! DO NOT change the order -->
+    <link rel="stylesheet" type="text/css" media="screen"
+          href="{% static 'css/smartadmin-production-plugins.min.css' %}">
+    <link rel="stylesheet" type="text/css" media="screen"
+          href="{% static 'css/smartadmin-production.min.css' %}">
+    <link rel="stylesheet" type="text/css" media="screen"
+          href="{% static 'css/smartadmin-skins.min.css' %}">
+
+    <!-- SmartAdmin RTL Support -->
+    <link rel="stylesheet" type="text/css" media="screen"
+          href="{% static 'css/smartadmin-rtl.min.css' %}">
+
+    <link rel="stylesheet" type="text/css" media="screen"
+          href="{% static 'css/styles.css' %}">
+
+    <!-- #FAVICONS -->
+    <link rel="shortcut icon" href="{% static 'img/favicon/favicon.ico' %}" type="image/x-icon">
+    <link rel="icon" href="{% static 'img/favicon/favicon.ico' %}" type="image/x-icon">
+
+</head>
+
+<body class="animated fadeInDown">
+
+<header id="header">
+
+    <div id="logo-group">
+        <span id="logo"><img src="{% static 'img/logo-black.png' %}"></span>
+    </div>
+
+    {% block top_right %}{% endblock %}
+
+
+</header>
+
+<div id="main" role="main">
+
+    {% load static %}
+
+    <!-- MAIN CONTENT -->
+    <div id="content" class="container">
+        <form id="wizard-1" novalidate="novalidate">
+            <div class="row">
+                <div id="bootstrap-wizard-1" class="col-sm-12">
+                    <div class="form-bootstrapWizard">
+                        <ul class="bootstrapWizard form-wizard">
+                            <li class="active" data-target="#step1">
+                                <a href="#tab1" data-toggle="tab">
+                                    <span class="step">1</span>
+                                    <span class="title"><strong>School Details</strong></span>
+                                </a>
+                            </li>
+                            <li data-target="#step2">
+                                <a href="#tab2" data-toggle="tab">
+                                    <span class="step">2</span>
+                                    <span class="title"><strong>About you</strong></span>
+                                </a>
+                            </li>
+                            <li data-target="#step3">
+                                <a href="#tab3" data-toggle="tab">
+                                    <span class="step">3</span>
+                                    <span class="title"><strong>Login credentials</strong></span>
+                                </a>
+                            </li>
+                            <li data-target="#step4">
+                                <a href="#tab4" data-toggle="tab">
+                                    <span class="step">4</span>
+                                    <span class="title"><strong>Finish</strong></span>
+                                </a>
+                            </li>
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="tab1">
+
+                            <div class="row">
+                                <div class="col-xs-12 col-lg-offset-2 col-lg-8">
+                                    <br/><br/><br/><br/>
+                                    <p style="font-size: larger">Before yor account is created, we need to know more
+                                        about your school.
+                                        <br/>The details you provide will be used for verification before the account is
+                                        created.</p>
+                                    <br/>
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                        <i class="fa fa-building fa-lg fa-fw"></i>
+                                                    </span>
+                                            <input class="form-control input-lg"
+                                                   placeholder="What's your school's name?"
+                                                   type="text" name="school_name" id="school_name">
+
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                        <i class="fa fa-envelope fa-lg fa-fw"></i>
+                                                    </span>
+                                            <input class="form-control input-lg"
+                                                   placeholder="What's the school's official email address?"
+                                                   type="text" name="email_address" id="email_address">
+
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                        <i class="fa fa-phone fa-lg fa-fw"></i>
+                                                    </span>
+                                            <input class="form-control input-lg"
+                                                   placeholder="What's the school's official telephone contact?"
+                                                   type="text" name="telephone" id="telephone">
+
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                        <i class="fa fa-location-arrow fa-lg fa-fw"></i>
+                                                    </span>
+                                            <input class="form-control input-lg"
+                                                   placeholder="Where is the school located?"
+                                                   type="text" name="physical_address" id="physical_address">
+
+                                        </div>
+                                    </div>
+
+                                    <div class="smart-form">
+                                        <fieldset class="no-padding">
+                                            <section>
+                                                <div class="inline-group">
+                                                    <label class="checkbox">
+                                                        <input type="checkbox" name="checkbox" checked="checked">
+                                                        <i></i>
+                                                        <span style="font-size: larger">Local Curricula</span>
+                                                    </label>
+                                                    <label class="checkbox">
+                                                        <input type="checkbox" name="checkbox">
+                                                        <i></i>
+                                                        <span style="font-size: larger">International Curricula</span>
+                                                    </label>
+                                                </div>
+                                            </section>
+                                        </fieldset>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="tab-pane" id="tab2">
+                            <br/><br/><br/><br/>
+
+                            <div class="row">
+                                <div class="col-lg-offset-2 col-lg-8">
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                        <i class="fa fa-question-circle fa-lg fa-fw"></i>
+                                                    </span>
+                                            <input class="form-control input-lg"
+                                                   placeholder="What's your name?"
+                                                   type="text" name="contact_name" id="contact_name">
+
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                        <i class="fa fa-phone fa-lg fa-fw"></i>
+                                                    </span>
+                                            <input class="form-control input-lg"
+                                                   placeholder="What's your telephone contact?"
+                                                   type="text" name="contact_telephone" id="contact_telephone">
+
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                        <i class="fa fa-user fa-lg fa-fw"></i>
+                                                    </span>
+                                            <input class="form-control input-lg"
+                                                   placeholder="What's your role in the school?"
+                                                   type="text" name="contact_role" id="contact_role">
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="tab-pane" id="tab3">
+                            <br/><br/><br/><br/>
+                            <div class="row">
+                                <div class="col-lg-offset-2 col-lg-8">
+
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                        <i class="fa fa-envelope fa-lg fa-fw"></i>
+                                                    </span>
+                                            <input class="form-control input-lg"
+                                                   placeholder="What's your email address?"
+                                                   type="text" name="contact_email_address" id="contact_email_address">
+
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                        <i class="fa fa-lock fa-lg fa-fw"></i>
+                                                    </span>
+                                            <input class="form-control input-lg"
+                                                   placeholder="What's your preffered password?"
+                                                   type="password" name="password" id="password">
+
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                        <i class="fa fa-lock fa-lg fa-fw"></i>
+                                                    </span>
+                                            <input class="form-control input-lg"
+                                                   placeholder="Enter the password again"
+                                                   type="password" name="confirm_password" id="confirm_password">
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="tab-pane" id="tab4">
+                            <br/><br/><br/><br/>
+                            <h1 class="text-center text-success"><strong><i class="fa fa-check fa-lg"></i>
+                                Complete</strong>
+                            </h1>
+                            <h4 class="text-center">Click next to finish</h4>
+                            <br>
+                            <br>
+                        </div>
+
+                        <div class="form-actions">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <ul class="pager wizard no-margin no-steps-container">
+                                        <!--<li class="previous first disabled">
+                                        <a href="javascript:void(0);" class="btn btn-lg btn-default"> First </a>
+                                        </li>-->
+                                        <li class="previous disabled">
+                                            <a href="javascript:void(0);" class="btn btn-lg btn-default">
+                                                Previous </a>
+                                        </li>
+                                        <li>
+                                            <em>* All fields are required in order to setup your account</em>
+                                        </li>
+                                        <!--<li class="next last">
+                                        <a href="javascript:void(0);" class="btn btn-lg btn-primary"> Last </a>
+                                        </li>-->
+                                        <li class="next">
+                                            <a href="javascript:void(0);" class="btn btn-lg txt-color-darken">
+                                                Next </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+</div>
+
+<!--================================================== -->
+
+<!-- PACE LOADER - turn this on if you want ajax loading to show (caution: uses lots of memory on iDevices)-->
+<script src="{% static 'js/plugin/pace/pace.min.js' %}"></script>
+
+<!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
+<script src="{% static 'js/libs/jquery-3.2.1.min.js' %}"></script>
+<script> if (!window.jQuery) {
+    document.write('<script src="{% static 'js/libs/jquery-3.2.1.min.js' %}"><\/script>');
+} </script>
+
+<script src="{% static 'js/libs/jquery-ui-1.10.3.min.js' %}"></script>
+<script> if (!window.jQuery.ui) {
+    document.write('<script src="{% static 'js/libs/jquery-ui-1.10.3.min.js' %}"><\/script>');
+} </script>
+
+<!-- IMPORTANT: APP CONFIG -->
+<script src="{% static 'js/app.config.js' %}"></script>
+
+<!-- JS TOUCH : include this plugin for mobile drag / drop touch events
+<script src="js/plugin/jquery-touch/jquery.ui.touch-punch.min.js"></script> -->
+
+<!-- BOOTSTRAP JS -->
+<script src="{% static 'js/bootstrap/bootstrap.min.js' %}"></script>
+
+<!-- JQUERY VALIDATE -->
+<script src="{% static 'js/plugin/jquery-validate/jquery.validate.min.js' %}"></script>
+
+<!-- JQUERY MASKED INPUT -->
+<script src="{% static 'js/plugin/masked-input/jquery.maskedinput.min.js' %}"></script>
+
+<!--[if IE 8]>
+
+    <h1>Your browser is out of date, please update your browser by going to www.microsoft.com/download</h1>
+
+<![endif]-->
+
+<!-- MAIN APP JS FILE -->
+<script src="{% static 'js/app.min.js' %}"></script>
+<script src="{% static 'js/plugin/bootstrap-wizard/jquery.bootstrap.wizard.min.js' %}"></script>
+<script src="{% static 'js/plugin/fuelux/wizard/wizard.min.js' %}"></script>
+
+<script>
+    $(function () {
+        //Bootstrap Wizard Validations
+
+        var $validator = $("#wizard-1").validate({
+
+            rules: {
+                school_name: {
+                    required: true,
+                },
+                email_address: {
+                    required: true,
+                    email: "The email address is invalid."
+                },
+                telephone: {
+                    required: true,
+                    minlength: 9
+                },
+                physical_address: {
+                    required: true
+                },
+                contact_name: {
+                    required: true
+                },
+                contact_telephone: {
+                    required: true,
+                    minlength: 9
+                },
+                contact_role: {
+                    required: true
+                },
+                contact_email_address: {
+                    required: true,
+                    email: "The email address is invalid"
+                },
+                password: {
+                    required: true
+                },
+                confirm_password: {
+                    required: true
+                }
+            },
+
+            messages: {
+                school_name: "We need to know the name of your school.",
+                email_address: {
+                    required: "We need the school's email address to contact you",
+                    email: "The email address must be in the format of name@domain.com"
+                },
+                telephone: "The school telephone is required.",
+                physical_address: "In case we need to visit the school, we need to know where it is located",
+                contact_name: "We need to know your name for future correspondence.",
+                contact_telephone: "Your telephone number is required.",
+                contact_role: "We need to know your role at the school.",
+                contact_email_address: "Your email address will be your username. " +
+                "We shall send you a link to verify your email address.",
+                password: "You need a password in order to login to your account."
+            },
+
+            highlight: function (element) {
+                $(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+            },
+            unhighlight: function (element) {
+                $(element).closest('.form-group').removeClass('has-error').addClass('has-success');
+            },
+            errorElement: 'span',
+            errorClass: 'help-block',
+            errorPlacement: function (error, element) {
+                if (element.parent('.input-group').length) {
+                    error.insertAfter(element.parent());
+                } else {
+                    error.insertAfter(element);
+                }
+            }
+        });
+
+        $('#bootstrap-wizard-1').bootstrapWizard({
+            'tabClass': 'form-wizard',
+            'onNext': function (tab, navigation, index) {
+                var $valid = $("#wizard-1").valid();
+                if (!$valid) {
+                    $validator.focusInvalid();
+                    return false;
+                } else {
+                    $('#bootstrap-wizard-1').find('.form-wizard').children('li').eq(index - 1).addClass(
+                        'complete');
+                    $('#bootstrap-wizard-1').find('.form-wizard').children('li').eq(index - 1).find('.step')
+                        .html('<i class="fa fa-check"></i>');
+                }
+            }
+        });
+
+
+        // fuelux wizard
+        var wizard = $('.wizard').wizard();
+
+        wizard.on('finished', function (e, data) {
+            $.smallBox({
+                title: "Congratulations! Your form was submitted",
+                content: "<i class='fa fa-clock-o'></i> <i>1 seconds ago...</i>",
+                color: "#5F895F",
+                iconSmall: "fa fa-check bounce animated",
+                timeout: 4000
+            });
+
+        });
+    });
+</script>
+
+</body>
+
+</html>

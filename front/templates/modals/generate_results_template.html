@@ -1,0 +1,185 @@
+{% load static %}
+
+<!--suppress HtmlFormInputWithoutLabel -->
+<div class="modal fade" id="generate_results_template" tabindex="-1" role="dialog"
+     aria-labelledby="generate_results_template" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel">Generate Results Template</h4>
+            </div>
+
+            <form method="post" id="generateResultsTemplateForm" action="{% url 'results_template' %}"
+                  class="form-horizontal">
+                {% csrf_token %}
+
+                <div class="modal-body">
+                    <fieldset>
+                        <div class="form-group has-feedback">
+                            <label class="col-xs-2 col-lg-3 control-label text-right">Category</label>
+                            <div class="col-xs-9 col-lg-7 selectContainer">
+                                <select class="form-control" name="category" data-bv-field="category">
+                                    <option value="">Choose a category</option>
+                                    <option value="paper">Subject Paper Results</option>
+                                    <option value="subject">Subject Results</option>
+                                    <option value="overall">Overall Results</option>
+                                </select>
+                            </div>
+                        </div>
+                    </fieldset>
+
+                    <fieldset>
+                        <div class="form-group has-feedback">
+                            <label class="col-xs-2 col-lg-3 control-label text-right">Class</label>
+                            <div class="col-xs-9 col-lg-7 selectContainer">
+
+                                {% regroup request.user.profile.school.schoolclass_set.all by level as classes %}
+
+                                <select class="form-control" name="school_class" data-bv-field="school_class">
+                                    <option value="">Choose a class</option>
+                                    {% for school_class in classes %}
+                                        <optgroup label="{{ school_class.grouper }}">
+                                            {% for class in school_class.list %}
+                                                <option value="{{ class.id }}">{{ class.name }} {{ class.stream }}</option>
+                                            {% endfor %}
+                                        </optgroup>
+
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                    </fieldset>
+
+                    <fieldset>
+                        <div class="form-group has-feedback">
+                            <label class="col-xs-2 col-lg-3 control-label text-right">Subject</label>
+                            <div class="col-xs-9 col-lg-7 selectContainer">
+                                {% regroup request.user.profile.school.subject_set.all by level as subjects %}
+
+                                <select class="form-control" name="subject" data-bv-field="subject">
+                                    <option value="">Choose a subject</option>
+                                    {% for subject in subjects %}
+                                        <optgroup label="{{ subject.grouper }}">
+                                            {% for sub in subject.list %}
+                                                <option value="{{ sub.id }}">{{ sub.name }}</option>
+                                            {% endfor %}
+                                        </optgroup>
+
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                    </fieldset>
+
+                    <fieldset>
+                        <div class="form-group has-feedback">
+                            <label class="col-xs-2 col-lg-3 control-label text-right">Year</label>
+                            <div class="col-xs-9 col-lg-7 selectContainer">
+                                <select class="form-control" name="year" data-bv-field="year">
+                                    <option value="">Choose a year</option>
+                                    <option value="{% now 'Y' %}">{% now 'Y' %}</option>
+                                </select>
+                            </div>
+                        </div>
+                    </fieldset>
+
+                    <fieldset>
+                        <div class="form-group has-feedback">
+                            <label class="col-xs-2 col-lg-3 control-label text-right">Term</label>
+                            <div class="col-xs-9 col-lg-7 selectContainer">
+                                <select required class="form-control" name="term" data-bv-field="term">
+                                    <option value="">Choose a term</option>
+                                    <option value="1">First Term</option>
+                                    <option value="2">Second Term</option>
+                                    <option value="3">Third Term</option>
+                                </select>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <div id="messages"></div>
+                </div>
+
+                <div class="modal-footer text-center">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        Close
+                    </button>
+                    <button type="submit" class="btn btn-primary">
+                        Generate
+                    </button>
+                </div>
+            </form>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+{% block scripts %}
+    <script>
+        $('#generateResultsTemplateForm').bootstrapValidator({
+            feedbackIcons: {
+                valid: 'glyphicon glyphicon-ok',
+                invalid: 'glyphicon glyphicon-remove',
+                validating: 'glyphicon glyphicon-refresh'
+            },
+            fields: {
+                category: {
+                    validators: {
+                        notEmpty: {
+                            message: 'The category is required'
+                        }
+                    }
+                },
+                school_class: {
+                    validators: {
+                        notEmpty: {
+                            message: 'The school class is required'
+                        }
+                    }
+                },
+                subject: {
+                    validators: {
+                        notEmpty: {
+                            message: 'The subject is required'
+                        }
+                    }
+                },
+                year: {
+                    validators: {
+                        notEmpty: {
+                            message: 'The year is required'
+                        }
+                    }
+                },
+                term: {
+                    validators: {
+                        notEmpty: {
+                            message: 'The term is required'
+                        }
+                    }
+                }
+            }
+        }).on('submit', function (e) {
+            if (e.isDefaultPrevented()) {
+                // the form is invalid
+            } else {
+                $.ajax({
+                    type: 'POST',
+                    url: '{% url 'results_template' %}',
+                    data: $("#generateResultsTemplateForm").serialize(),
+                    success: function (response) {
+                        if(response.message !== undefined){
+                            $("#messages").addClass('alert alert-danger').html(response);
+                        }
+
+                    }
+                });
+            }
+
+        });
+
+
+    </script>
+
+{% endblock %}

@@ -1,111 +1,96 @@
 {% extends 'layout.html' %}
 
+{% load staticfiles %}
+
 {% block breadcrumb %}
     <li><strong>{{ student.first_name }} {{ student.last_name }}</strong></li>
-    <li>{{ student.school_class }} {{ student.stream }}</li>
+    <li>{{ student.school }}</li>
+    <li>{{ student.school_class }}</li>
 {% endblock %}
 
 {% block content %}
-
     <div class="row">
-        <div class="col-lg-3">
-            <div class="tree smart-form">
-                <ul>
-                    <li>
-                        <span><i class="fa fa-lg fa-folder-open"></i> Parent</span>
-                        <ul>
-                            <li>
-                                <span><i class="fa fa-lg fa-plus-circle"></i> Administrators</span>
-                                <ul>
-                                    <li style="display:none">
-                                        <span> <label class="checkbox inline-block">
-                                                <input type="checkbox"
-                                                       name="checkbox-inline">
-                                                <i></i>Michael.Jackson</label> </span>
-                                    </li>
-                                    <li style="display:none">
-                                        <span> <label class="checkbox inline-block">
-                                                <input type="checkbox" checked="checked"
-                                                       name="checkbox-inline">
-                                                <i></i>Sunny.Ahmed</label> </span>
-                                    </li>
-                                    <li style="display:none">
-                                        <span> <label class="checkbox inline-block">
-                                                <input type="checkbox" checked="checked"
-                                                       name="checkbox-inline">
-                                                <i></i>Jackie.Chan</label> </span>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li>
-                                <span><i class="fa fa-lg fa-minus-circle"></i> Child</span>
-                                <ul>
-                                    <li>
-                                        <span><i class="icon-leaf"></i> Grand Child</span>
-                                    </li>
-                                    <li>
-                                        <span><i class="icon-leaf"></i> Grand Child</span>
-                                    </li>
-                                    <li>
-                                        <span><i class="fa fa-lg fa-plus-circle"></i> Grand Child</span>
-                                        <ul>
-                                            <li style="display:none">
-                                                <span><i class="fa fa-lg fa-plus-circle"></i> Great Grand Child</span>
-                                                <ul>
-                                                    <li style="display:none">
-                                                        <span><i class="icon-leaf"></i> Great great Grand Child</span>
-                                                    </li>
-                                                    <li style="display:none">
-                                                        <span><i class="icon-leaf"></i> Great great Grand Child</span>
-                                                    </li>
-                                                </ul>
-                                            </li>
-                                            <li style="display:none">
-                                                <span><i class="icon-leaf"></i> Great Grand Child</span>
-                                            </li>
-                                            <li style="display:none">
-                                                <span><i class="icon-leaf"></i> Great Grand Child</span>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <span><i class="fa fa-lg fa-folder-open"></i> Parent2</span>
-                        <ul>
-                            <li>
-                                <span><i class="icon-leaf"></i> Child</span>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
+        <div class="col-sm-12 col-md-12 col-lg-6">
+            <div class="well well-sm">
+                <div class="no-margin no-padding">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div id="myCarousel" class="carousel fade profile-carousel">
+                                <div class="air air-top-left padding-10">
+                                    <h4 class="txt-color-white font-md">{{ student.school_class }}</h4>
+                                </div>
+                                <div class="carousel-inner">
+                                    <!-- Slide 1 -->
+                                    <div class="item active">
+                                        <img src="{% static 'img/demo/s1.jpg' %}" alt="demo user">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-12">
+
+                            <div class="row">
+
+                                <div class="col-sm-3 profile-pic">
+                                    <img src="{% static student.photo.url %}" alt="{{ student.last_name }}">
+                                </div>
+                                <div class="col-sm-6">
+                                    <h1>{{ student.first_name }} <span
+                                            class="semi-bold">{{ student.last_name }}</span>
+                                        <br>
+                                        <small> {{ student.school_class }} </small>
+                                    </h1>
+                                    <br/><br/>
+                                    <a href="{% url 'student_results' student.id %}" class="btn btn-danger btn-md">
+                                        View Academic Results
+                                    </a>
+
+                                    <br/><br/>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
             </div>
         </div>
+
+        <div class="col-sm-12 col-md-12 col-lg-6">
+
+            <div class="well well-sm">
+                <span style="font-size: x-large">Next of Kin</span>
+                <hr/>
+                {% for nok in student.studentnok_set.all %}
+                    <div class="row">
+                        <div class="col-xs-2">
+                            <img src="{% static nok.profile.photo.url %}" class="img-responsive">
+                        </div>
+                        <div class="col-xs-10">
+                                    <span style="font-size: larger">
+                                        <a href="{% url 'user_profile' nok.profile.id %}">
+                                            {{ nok.profile.user.first_name }} {{ nok.profile.user.last_name }}
+                                            {% if nok.profile.id == request.user.profile.id %}
+                                                &nbsp;(you)
+                                            {% endif %}
+                                        </a>
+                                    </span><br/>
+                            <span>
+                                        {{ nok.profile.user.email }}
+                                    </span><br/>
+                            <span>
+                                        <em>{{ nok.profile.telephone }}</em>
+                                    </span>
+
+                        </div>
+                    </div>
+
+                    <hr/>
+                {% endfor %}
+            </div>
+
+        </div>
+
     </div>
-
-{% endblock %}
-
-{% block scripts %}
-    <script>
-        $(document).ready(function () {
-
-            // PAGE RELATED SCRIPTS
-
-            $('.tree > ul').attr('role', 'tree').find('ul').attr('role', 'group');
-            $('.tree').find('li:has(ul)').addClass('parent_li').attr('role', 'treeitem').find(' > span').attr('title', 'Collapse this branch').on('click', function (e) {
-                var children = $(this).parent('li.parent_li').find(' > ul > li');
-                if (children.is(':visible')) {
-                    children.hide('fast');
-                    $(this).attr('title', 'Expand this branch').find(' > i').removeClass().addClass('fa fa-lg fa-plus-circle');
-                } else {
-                    children.show('fast');
-                    $(this).attr('title', 'Collapse this branch').find(' > i').removeClass().addClass('fa fa-lg fa-minus-circle');
-                }
-                e.stopPropagation();
-            });
-
-        })
-    </script>
 {% endblock %}
