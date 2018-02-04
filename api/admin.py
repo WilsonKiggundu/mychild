@@ -11,9 +11,11 @@ class ProfileInline(admin.StackedInline):
     verbose_name_plural = 'profile'
 
 
-class UserAdmin(BaseUserAdmin):
+class UserAdmin(admin.ModelAdmin):
     inlines = (ProfileInline,)
     list_display = ('first_name', 'last_name', 'email', 'type', 'school')
+    list_filter = ('profile__school', 'profile__type')
+    search_fields = ('first_name', 'last_name', 'email',)
 
     def school(self, obj):
         return obj.profile.school
@@ -30,7 +32,7 @@ admin.site.register(User, UserAdmin)
 
 
 class SchoolAdmin(admin.ModelAdmin):
-    list_display = ('name', 'email', 'telephone', 'address', 'local_curriculum',
+    list_display = ('school_name', 'email_address', 'telephone', 'physical_address', 'local_curriculum',
                     'international_curriculum',
                     'pre_primary_curriculum')
     list_filter = ('local_curriculum', 'international_curriculum', 'pre_primary_curriculum')

@@ -10,17 +10,19 @@ def student_photo_directory(instance, filename):
 
 
 class School(models.Model):
-    name = models.CharField(max_length=50, blank=False, null=False)
-    email = models.EmailField(max_length=50, blank=False, null=False)
-    telephone = models.CharField(max_length=50, blank=False, null=False)
-    address = models.TextField(blank=True, null=True)
-    local_curriculum = models.CharField(choices=YES_NO, default='N', max_length=1, null=True, blank=True)
-    international_curriculum = models.CharField(choices=YES_NO, default='N', max_length=1, null=True, blank=True)
-    pre_primary_curriculum = models.CharField(choices=YES_NO, default='N', max_length=1, null=True, blank=True)
+    school_name = models.CharField(max_length=50, blank=True, null=True)
+    email_address = models.EmailField(max_length=50, blank=True, null=True)
+    telephone = models.CharField(max_length=50, blank=True, null=True)
+    physical_address = models.TextField(blank=True, null=True)
+    local_curriculum = models.BooleanField(default=False)
+    international_curriculum = models.BooleanField(default=False)
+    pre_primary_curriculum = models.BooleanField(default=False)
     status = models.CharField(choices=STATUS, default='INACTIVE', max_length=10, null=True, blank=True)
+    validated = models.BooleanField(default=False)
+    registration_date = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.name
+        return self.school_name
 
     class Meta:
         db_table = 'school_settings'
@@ -106,7 +108,7 @@ class Profile(BaseModel):
     user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, blank=True)
     bio = models.TextField(null=True, blank=True)
     type = models.CharField(choices=PROFILE_TYPE, max_length=15, blank=False, null=False)
-    child_code = models.CharField(max_length=12, blank=False, null=False)
+    child_code = models.CharField(max_length=12, blank=True, null=True)
     receive_news = models.BooleanField(default=True)
     twitter_handle = models.CharField(max_length=25, null=True, blank=True)
     facebook_profile = models.TextField(null=True, blank=True)
@@ -209,7 +211,8 @@ class StudentNok(BaseModel):
 
 
 class SchoolContactPerson(BaseModel):
-    profile = models.ForeignKey(User, on_delete=models.CASCADE)
+    profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    role = models.CharField(max_length=20, null=True, blank=True)
 
     class Meta:
         db_table = 'school_contact_persons'

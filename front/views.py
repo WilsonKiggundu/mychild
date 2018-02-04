@@ -27,10 +27,20 @@ def auth_login(request):
             user = authenticate(request, username=email, password=password)
 
             if user:
-                login(request, user)
-                return HttpResponseRedirect(reverse('home'))
+                # check if the user school is validated if the trial period has expired
+                school = user.profile.school
+                validated = school.validated
+                reg_date = school.registration_date
 
-            message = "Invalid email and/or password"
+                if not validated:
+                    message = "You are unable to login because the trial period for your school has expired."
+                else:
+                    login(request, user)
+                    return HttpResponseRedirect(reverse('home'))
+            else:
+                message = "Invalid email and/or password"
+        else:
+            message = 'Both email and password are required'
 
     return render(request, 'user/login.html', {
         'message': message
@@ -138,27 +148,76 @@ def create_user(request):
 
 @require_http_methods(['GET', 'POST'])
 def register_school(request):
-    form = SchoolForm()
+    messages = []
+    status_code = 500
+
     if request.method == 'POST':
-        form = SchoolForm(request.POST)
-        if form.is_valid():
-            school = form.save()
-            if school:
-                user = request.user.id
+        school_name = request.POST['school_name']
+        email_address = request.POST['email_address']
+        telephone = request.POST['telephone']
+        physical_address = request.POST['physical_address']
+        contact_first_name = request.POST['contact_first_name']
+        contact_last_name = request.POST['contact_last_name']
+        contact_telephone = request.POST['contact_telephone']
+        contact_role = request.POST['contact_role']
+        contact_email_address = request.POST['contact_email_address']
+        password = request.POST['password']
 
-                return render(request, 'profile/create.html', {
-                    'model': {
-                        'form': ProfileForm({'school': school.pk, 'user': user, 'type': 'Teacher'}),
-                        'action': 'create-profile',
-                    }
-                })
+        local_curriculum = False
+        international_curriculum = False
+        curricula = request.POST.getlist('checks[]')
 
-    return render(request, 'school/register.html', {
-        'model': {
-            'form': form,
-            'action': 'register-school'
-        }
-    })
+        # return JsonResponse({'messages': messages, 'status_code': 200})
+
+        if '1' in curricula:
+            local_curriculum = True
+        if '2' in curricula:
+            international_curriculum = True
+
+        try:
+
+            # create the user
+            user = User(first_name=contact_first_name, last_name=contact_last_name, email=contact_email_address,
+                        username=contact_email_address, is_active=True, )
+            user.set_password(raw_password=password)
+            user.save()
+
+            if user is not None:
+
+                # create the school
+                school = School(school_name=school_name, email_address=email_address, telephone=telephone,
+                                physical_address=physical_address, status='ACTIVE', validated=False,
+                                local_curriculum=local_curriculum, international_curriculum=international_curriculum,)
+
+                school.save()
+
+                if school is not None:
+
+                    # Create user profile
+                    profile = Profile(school=school, user=user, type='Teacher', telephone=contact_telephone)
+                    profile.save()
+
+                    if profile is not None:
+
+                        contact = SchoolContactPerson(profile=profile, school=school, role=contact_role)
+                        contact.save()
+
+                        if contact is not None:
+
+                            status_code = 200
+                            messages.append('success')
+
+                            login(request, user)
+
+        except Exception as e:
+            messages.append(str(e))
+
+        except IntegrityError as error:
+            messages.append(str(error))
+
+        return JsonResponse({'messages': messages, 'status_code': status_code})
+
+    return render(request, 'school/register.html')
 
 
 @login_required

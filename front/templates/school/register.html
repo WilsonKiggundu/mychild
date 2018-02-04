@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!--suppress ALL -->
 <html lang="en-us" id="extr-page">
 
 <meta http-equiv="content-type" content="text/html;charset=utf-8"/>
@@ -15,6 +16,7 @@
     <!-- Basic Styles -->
     <link rel="stylesheet" type="text/css" media="screen" href="{% static 'css/bootstrap.min.css' %}">
     <link rel="stylesheet" type="text/css" media="screen" href="{% static 'css/font-awesome.min.css' %}">
+    <link rel="stylesheet" type="text/css" media="screen" href="{% static 'css/toastr.min.css' %}">
 
     <!-- SmartAdmin Styles : Caution! DO NOT change the order -->
     <link rel="stylesheet" type="text/css" media="screen"
@@ -56,10 +58,11 @@
 
     <!-- MAIN CONTENT -->
     <div id="content" class="container">
-        <form id="wizard-1" novalidate="novalidate">
+        <form id="formWizard" novalidate="novalidate" method="post" action="{% url 'register-school' %}">
+            {% csrf_token %}
             <div class="row">
-                <div id="bootstrap-wizard-1" class="col-sm-12">
-                    <div class="form-bootstrapWizard">
+                <div id="wizard" class="col-sm-12">
+                    <div class="form-bootstrapWizard steps-container">
                         <ul class="bootstrapWizard form-wizard">
                             <li class="active" data-target="#step1">
                                 <a href="#tab1" data-toggle="tab">
@@ -152,12 +155,13 @@
                                             <section>
                                                 <div class="inline-group">
                                                     <label class="checkbox">
-                                                        <input type="checkbox" name="checkbox" checked="checked">
+                                                        <input type="checkbox" name="checks[]" value="1"
+                                                               checked="checked">
                                                         <i></i>
                                                         <span style="font-size: larger">Local Curricula</span>
                                                     </label>
                                                     <label class="checkbox">
-                                                        <input type="checkbox" name="checkbox">
+                                                        <input type="checkbox" name="checks[]" value="2">
                                                         <i></i>
                                                         <span style="font-size: larger">International Curricula</span>
                                                     </label>
@@ -175,13 +179,29 @@
                             <div class="row">
                                 <div class="col-lg-offset-2 col-lg-8">
                                     <div class="form-group">
-                                        <div class="input-group">
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <div class="input-group">
                                                     <span class="input-group-addon">
                                                         <i class="fa fa-question-circle fa-lg fa-fw"></i>
                                                     </span>
-                                            <input class="form-control input-lg"
-                                                   placeholder="What's your name?"
-                                                   type="text" name="contact_name" id="contact_name">
+                                                    <input class="form-control input-lg"
+                                                           placeholder="First name"
+                                                           type="text" name="contact_first_name"
+                                                           id="contact_first_name">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                        <i class="fa fa-question-circle fa-lg fa-fw"></i>
+                                                    </span>
+                                                    <input class="form-control input-lg"
+                                                           placeholder="Last name"
+                                                           type="text" name="contact_last_name"
+                                                           id="contact_last_name">
+                                                </div>
+                                            </div>
 
                                         </div>
                                     </div>
@@ -203,9 +223,12 @@
                                                     <span class="input-group-addon">
                                                         <i class="fa fa-user fa-lg fa-fw"></i>
                                                     </span>
-                                            <input class="form-control input-lg"
-                                                   placeholder="What's your role in the school?"
-                                                   type="text" name="contact_role" id="contact_role">
+                                            <select class="form-control input-lg" name="contact_role" id="contact_role">
+                                                <option>What's your role in the school?</option>
+                                                <option value="Owner">School Owner</option>
+                                                <option value="Head Teacher">Head Teacher</option>
+                                                <option value="Teacher">I am a Teacher</option>
+                                            </select>
 
                                         </div>
                                     </div>
@@ -261,10 +284,14 @@
                         </div>
                         <div class="tab-pane" id="tab4">
                             <br/><br/><br/><br/>
-                            <h1 class="text-center text-success"><strong><i class="fa fa-check fa-lg"></i>
-                                Complete</strong>
-                            </h1>
-                            <h4 class="text-center">Click next to finish</h4>
+
+                            <div class="row">
+                                <div class="text-center">
+                                    <h1 class="text-center text-success"><strong><i class="fa fa-check fa-lg"></i>
+                                        Complete Registration</strong></h1>
+                                    <h4 class="text-center">Click next to finish</h4>
+                                </div>
+                            </div>
                             <br>
                             <br>
                         </div>
@@ -272,22 +299,18 @@
                         <div class="form-actions">
                             <div class="row">
                                 <div class="col-sm-12">
-                                    <ul class="pager wizard no-margin no-steps-container">
-                                        <!--<li class="previous first disabled">
-                                        <a href="javascript:void(0);" class="btn btn-lg btn-default"> First </a>
-                                        </li>-->
+                                    <ul class="pager wizard no-margin">
                                         <li class="previous disabled">
                                             <a href="javascript:void(0);" class="btn btn-lg btn-default">
                                                 Previous </a>
                                         </li>
-                                        <li>
-                                            <em>* All fields are required in order to setup your account</em>
-                                        </li>
-                                        <!--<li class="next last">
-                                        <a href="javascript:void(0);" class="btn btn-lg btn-primary"> Last </a>
-                                        </li>-->
                                         <li class="next">
                                             <a href="javascript:void(0);" class="btn btn-lg txt-color-darken">
+                                                Next </a>
+                                        </li>
+                                        <li data-last="Finish" class="finish pull-right">
+                                            <a href="javascript:void(0);"
+                                               class="btn btn-lg btn-success txt-color-darken">
                                                 Next </a>
                                         </li>
                                     </ul>
@@ -344,12 +367,13 @@
 <script src="{% static 'js/app.min.js' %}"></script>
 <script src="{% static 'js/plugin/bootstrap-wizard/jquery.bootstrap.wizard.min.js' %}"></script>
 <script src="{% static 'js/plugin/fuelux/wizard/wizard.min.js' %}"></script>
+<script src="{% static 'js/plugin/toastr/toastr.min.js' %}"></script>
 
 <script>
     $(function () {
         //Bootstrap Wizard Validations
 
-        var $validator = $("#wizard-1").validate({
+        var $validator = $("#formWizard").validate({
 
             rules: {
                 school_name: {
@@ -366,7 +390,10 @@
                 physical_address: {
                     required: true
                 },
-                contact_name: {
+                contact_first_name: {
+                    required: true
+                },
+                contact_last_name: {
                     required: true
                 },
                 contact_telephone: {
@@ -384,7 +411,8 @@
                     required: true
                 },
                 confirm_password: {
-                    required: true
+                    required: true,
+                    equalTo: '#password'
                 }
             },
 
@@ -421,36 +449,49 @@
             }
         });
 
-        $('#bootstrap-wizard-1').bootstrapWizard({
+        $("#wizard > .steps-container li").click(function (e) {
+            return false;
+        });
+
+        $('#wizard').bootstrapWizard({
             'tabClass': 'form-wizard',
             'onNext': function (tab, navigation, index) {
-                var $valid = $("#wizard-1").valid();
+                var $valid = $("#formWizard").valid();
                 if (!$valid) {
                     $validator.focusInvalid();
                     return false;
                 } else {
-                    $('#bootstrap-wizard-1').find('.form-wizard').children('li').eq(index - 1).addClass(
+                    $('#wizard').find('.form-wizard').children('li').eq(index - 1).addClass(
                         'complete');
-                    $('#bootstrap-wizard-1').find('.form-wizard').children('li').eq(index - 1).find('.step')
+                    $('#wizard').find('.form-wizard').children('li').eq(index - 1).find('.step')
                         .html('<i class="fa fa-check"></i>');
                 }
+            },
+            'onFinish': function (tab, navigation, index) {
+
+                $.ajax({
+                    type: "POST",
+                    url: $('#formWizard').attr('action'),
+                    data: $('#formWizard').serialize(),
+                    success: function (response) {
+                        if(response.status_code === 200){
+                            console.log(response.messages)
+                            window.location.href = '{% url 'home' %}'
+                        }else{
+                            $.each(response.messages, function (e, message) {
+                                toastr.error(message)
+                            })
+                        }
+                    },
+                    error: function (error) {
+                        toastr.error(error)
+                    }
+                })
+
+                return false;
             }
         });
 
-
-        // fuelux wizard
-        var wizard = $('.wizard').wizard();
-
-        wizard.on('finished', function (e, data) {
-            $.smallBox({
-                title: "Congratulations! Your form was submitted",
-                content: "<i class='fa fa-clock-o'></i> <i>1 seconds ago...</i>",
-                color: "#5F895F",
-                iconSmall: "fa fa-check bounce animated",
-                timeout: 4000
-            });
-
-        });
     });
 </script>
 
