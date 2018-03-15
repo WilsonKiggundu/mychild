@@ -27,16 +27,9 @@ def auth_login(request):
             user = authenticate(request, username=email, password=password)
 
             if user:
-                # check if the user school is validated if the trial period has expired
-                school = user.profile.school
-                validated = school.validated
-                reg_date = school.registration_date
-
-                if not validated:
-                    message = "You are unable to login because the trial period for your school has expired."
-                else:
-                    login(request, user)
-                    return HttpResponseRedirect(reverse('home'))
+                login(request, user)
+                return HttpResponseRedirect(reverse('user_profile'))
+                # return HttpResponseRedirect(reverse('home'))
             else:
                 message = "Invalid email and/or password"
         else:
@@ -53,7 +46,6 @@ def auth_logout(request):
 
 
 def user_signup(request):
-    form = SignupForm()
     messages = []
 
     if request.method == 'POST':
@@ -64,42 +56,24 @@ def user_signup(request):
             password = request.POST['password']
             first_name = request.POST['first_name']
             last_name = request.POST['last_name']
-            child_code = request.POST['child_code']
-            school_code = request.POST['school_code']
 
             try:
-                # First check if the school_code and student_code are valid
-                student = Student.objects.filter(code__exact=child_code, school_id__exact=school_code).first()
-                if student is None:
-                    messages.append("Unable to register. Either the child code or school code is invalid")
-                else:
-                    # Then create a user account
-                    user = User(first_name=first_name,
-                                last_name=last_name, username=email,
-                                email=email, is_active=True)
+                # Then create a user account
+                user = User(first_name=first_name,
+                            last_name=last_name, username=email,
+                            email=email, is_active=True)
 
-                    user.set_password(raw_password=password)
-                    user.save()
+                user.set_password(raw_password=password)
+                user.save()
 
-                    # Then create a profile
-                    profile = Profile(user=user, school_id=school_code, ).save()
-
-                    # Attach profile student to profile
-                    StudentNok(student=student, profile=profile).save()
-
-                    # Then add user as student NOK
-                    nok = Nok(student_id=child_code, profile=profile, school_id=school_code)
-
-                    # The sign the user in
-                    authenticated = authenticate(request, username=email, password=password)
-                    if authenticated:
-                        login(request, user)
-                        return HttpResponseRedirect(reverse('home'))
+                # The sign the user in
+                authenticated = authenticate(request, username=email, password=password)
+                if authenticated:
+                    login(request, user)
+                    return HttpResponseRedirect(reverse('user_profile'))
 
             except():
                 messages.append("Unable to complete registration at this time")
-
-
 
         else:
             for error in form.errors:
@@ -113,6 +87,28 @@ def home(request):
     posts = Post.objects.order_by('-date')
 
     return render(request, 'home.html', {'posts': posts})
+
+
+def get_schools(request):
+    schools = [
+        {'id': 1, 'text': 'Old Kampala SSS'},
+        {'id': 2, 'text': 'Mt. St. Marys College Namagunga'},
+        {'id': 3, 'text': 'Gayaza High School'}
+    ]
+    return JsonResponse(data={'results': schools}, safe=False)
+
+
+@require_http_methods(['POST'])
+def add_school(request):
+    school_id = request.POST['school']
+    result = ProfileSchool(school_id=school_id, user_id=request.user.id).save()
+
+    if result is not None:
+        message = 'success'
+    else:
+        message = 'failure'
+
+    return JsonResponse({'message': message})
 
 
 def create_user(request):
@@ -187,27 +183,25 @@ def register_school(request):
                 # create the school
                 school = School(school_name=school_name, email_address=email_address, telephone=telephone,
                                 physical_address=physical_address, status='ACTIVE', validated=False,
-                                local_curriculum=local_curriculum, international_curriculum=international_curriculum,)
+                                local_curriculum=local_curriculum, international_curriculum=international_curriculum, )
 
                 school.save()
 
                 if school is not None:
-
                     # Create user profile
-                    profile = Profile(school=school, user=user, type='Teacher', telephone=contact_telephone)
-                    profile.save()
+                    # profile = Profile(school=school, user=user, type='Teacher', telephone=contact_telephone)
+                    # profile.save()
 
-                    if profile is not None:
+                    # if profile is not None:
+                    #
+                    #     contact = SchoolContactPerson(profile=profile, school=school, role=contact_role)
+                    #     contact.save()
+                    #
+                    #     if contact is not None:
+                    #         status_code = 200
+                    #         messages.append('success')
 
-                        contact = SchoolContactPerson(profile=profile, school=school, role=contact_role)
-                        contact.save()
-
-                        if contact is not None:
-
-                            status_code = 200
-                            messages.append('success')
-
-                            login(request, user)
+                    login(request, user)
 
         except Exception as e:
             messages.append(str(e))
@@ -305,13 +299,16 @@ def user_profile(request, profile_id=None):
     user = request.user
     children = None
     if profile_id is not None:
-        user = User.objects.filter(profile__id__exact=profile_id).first()
+        user = User.objects.filter(pk=profile_id).first()
     else:
-        children = StudentNok.objects.filter(profile__id__exact=request.user.profile.id)
+        children = StudentNok.objects.filter(user__nok__id__exact=request.user.id)
+
+    schools = ProfileSchool.objects.filter(user_id=request.user.id)
 
     return render(request, 'user/profile.html', {
         'user': user,
-        'children': children
+        'children': children,
+        'schools': schools
     })
 
 
@@ -324,9 +321,9 @@ def add_child(request):
     if form.is_valid():
         child_code = request.POST['child_code']
         school_code = request.POST['school_code']
-        student = Student.objects.filter(code=child_code, school_id=school_code).first()
+        student = Student.objects.filter(code=child_code, school_id__exact=school_code).first()
         if student:
-            StudentNok(student=student, profile=request.user.profile, school=request.user.profile.school).save()
+            StudentNok(student=student, user=request.user, school_id=school_code).save()
             return HttpResponseRedirect(reverse('user_profile'))
         else:
             messages.append("Invalid student code or school code")
@@ -334,7 +331,7 @@ def add_child(request):
     for error in form.errors:
         messages.append(error)
 
-    children = StudentNok.objects.filter(profile__id__exact=request.user.profile.id)
+    children = StudentNok.objects.filter(user__nok__id__exact=request.user.id)
     return render(request, 'user/profile.html', {
         'user': request.user,
         'children': children,
@@ -359,7 +356,7 @@ def create_post(request):
             post = Post(
                 author_id=request.user.id,
                 details=details,
-                school_id=request.user.profile.school_id,
+                # school_id=request.user.profile.school_id,
             )
 
             try:

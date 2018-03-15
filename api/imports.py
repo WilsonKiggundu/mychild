@@ -37,7 +37,7 @@ SUBJECT_GROUP_COLUMNS = ['GROUP', 'NAME', 'LEVEL']
 def generate_academic_results_template(request):
     school = request.user.profile.school
     school_id = school.id
-    school_name = school.name
+    school_name = school.school_name
     title = "Academic Results Upload Template"
     year = request.POST['year']
     term = request.POST['term']
@@ -174,7 +174,7 @@ def generate_academic_results_template(request):
 
 def generate_class_list_template(request):
     school = request.user.profile.school
-    school_name = school.name
+    school_name = school.school_name
     title = "School Classes"
 
     # create a workbook in memory
@@ -207,7 +207,7 @@ def generate_class_list_template(request):
 
 def generate_students_list_template(request):
     school = request.user.profile.school
-    school_name = school.name
+    school_name = school.school_name
     title = "Students List"
 
     # create a workbook in memory
@@ -240,7 +240,7 @@ def generate_students_list_template(request):
 
 def generate_subjects_list_template(request):
     school = request.user.profile.school
-    school_name = school.name
+    school_name = school.school_name
     title = "Subjects List"
 
     # create a workbook in memory

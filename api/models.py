@@ -1,4 +1,6 @@
-from django.contrib.auth.models import User
+import uuid
+
+from django.contrib.auth.models import AbstractUser
 from django.db import models
 
 # Create your models here.
@@ -7,6 +9,42 @@ from api.options import *
 
 def student_photo_directory(instance, filename):
     return 'students/%s/photos/%s' % (instance.user.profile.school.id, filename)
+
+
+class BaseModel(models.Model):
+    id = models.AutoField(primary_key=True, null=False, blank=False)
+    school = models.ForeignKey('School', on_delete=models.CASCADE, null=True, blank=True)
+
+    class Meta:
+        abstract = True
+
+
+class User(AbstractUser):
+    photo = models.FileField(upload_to='%Y/%m/%d/profile_pics', default='avatar_default.jpg', null=True, blank=True)
+    bio = models.TextField(null=True, blank=True)
+    type = models.CharField(choices=PROFILE_TYPE, max_length=15, blank=False, null=False)
+
+    receive_news = models.BooleanField(default=True)
+
+    twitter_handle = models.CharField(max_length=25, null=True, blank=True)
+    facebook_profile = models.TextField(null=True, blank=True)
+    linkedin_profile = models.TextField(null=True, blank=True)
+    website = models.TextField(null=True, blank=True)
+
+    telephone = models.CharField(max_length=25, null=True, blank=True)
+
+    def __str__(self):
+        return '%s %s' % (self.first_name, self.last_name)
+
+    class Meta:
+        db_table = 'users'
+
+
+class ProfileSchool(BaseModel):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
+
+    class Meta:
+        db_table = 'profile_schools'
 
 
 class School(models.Model):
@@ -26,14 +64,6 @@ class School(models.Model):
 
     class Meta:
         db_table = 'school_settings'
-
-
-class BaseModel(models.Model):
-    id = models.AutoField(primary_key=True, null=False, blank=False)
-    school = models.ForeignKey(School, on_delete=models.CASCADE, null=True, blank=True)
-
-    class Meta:
-        abstract = True
 
 
 class AssessmentType(BaseModel):
@@ -101,26 +131,6 @@ class Staff(BaseModel):
 
     class Meta:
         db_table = 'staff_general'
-
-
-class Profile(BaseModel):
-    photo = models.FileField(upload_to='%Y/%m/%d/profile_pics', default='avatar_default.jpg', null=True, blank=True)
-    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, blank=True)
-    bio = models.TextField(null=True, blank=True)
-    type = models.CharField(choices=PROFILE_TYPE, max_length=15, blank=False, null=False)
-    child_code = models.CharField(max_length=12, blank=True, null=True)
-    receive_news = models.BooleanField(default=True)
-    twitter_handle = models.CharField(max_length=25, null=True, blank=True)
-    facebook_profile = models.TextField(null=True, blank=True)
-    linkedin_profile = models.TextField(null=True, blank=True)
-    telephone = models.CharField(max_length=25, null=True, blank=True)
-    website = models.TextField(null=True, blank=True)
-
-    def __str__(self):
-        return '%s %s' % (self.user.first_name, self.user.last_name)
-
-    class Meta:
-        db_table = 'user_profiles'
 
 
 class SchoolCommunication(BaseModel):
@@ -195,7 +205,7 @@ class Nok(BaseModel):
     occupation = models.CharField(max_length=155, null=True, blank=True)
     relationship = models.CharField(choices=NOK_TYPE, max_length=10, null=True, blank=True)
     student = models.ForeignKey(Student, on_delete=models.CASCADE, null=True, blank=True)
-    profile = models.OneToOneField(Profile, on_delete=models.CASCADE, null=True, blank=True)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, blank=True)
     nin = models.CharField(max_length=20, null=True, blank=True, verbose_name="National Identification Number")
 
     class Meta:
@@ -204,14 +214,14 @@ class Nok(BaseModel):
 
 class StudentNok(BaseModel):
     student = models.ForeignKey(Student)
-    profile = models.ForeignKey(Profile)
+    user = models.ForeignKey(User)
 
     class Meta:
         db_table = "students_and_nok"
 
 
 class SchoolContactPerson(BaseModel):
-    profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
     role = models.CharField(max_length=20, null=True, blank=True)
 
     class Meta:

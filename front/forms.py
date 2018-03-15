@@ -3,8 +3,8 @@ from django.contrib.auth.models import User
 from django import forms
 from django.forms import ModelChoiceField
 
-from api.models import School, Profile, SchoolContactPerson, SchoolClass, Subject
-from api.options import VIEWERS, IMPORTS, YEARS, TERMS, CURRICULUM_LEVELS, RESULTS_CATEGORIES
+from api.models import *
+from api.options import *
 from front.fields import SubjectModelChoiceField
 
 
@@ -27,8 +27,6 @@ class LoginForm(forms.Form):
 
 
 class SignupForm(forms.Form):
-    child_code = forms.CharField(required=True, label='My Child Code')
-    school_code = forms.CharField(required=True, label='School Code')
     first_name = forms.CharField(required=True, label='First name')
     last_name = forms.CharField(required=True, label='Last name')
     email = forms.CharField(required=True, label='Email', widget=forms.EmailInput)
@@ -67,12 +65,6 @@ class UserForm(forms.ModelForm):
         if commit:
             user.save()
         return user
-
-
-class ProfileForm(forms.ModelForm):
-    class Meta:
-        model = Profile
-        fields = ('type', 'school', 'user', 'telephone', 'bio')
 
 
 class AttachmentForm(forms.Form):

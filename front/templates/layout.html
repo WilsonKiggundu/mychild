@@ -28,6 +28,9 @@
     <!-- SmartAdmin RTL Support  -->
     <link rel="stylesheet" type="text/css" media="screen" href="{% static 'css/smartadmin-rtl.min.css' %}">
 
+    <!-- Select2 -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/select2.css' %}" />
+
     <link rel="stylesheet" type="text/css" media="screen" href="{% static 'css/styles.css' %}">
 
     <!-- FAVICONS -->
@@ -158,44 +161,6 @@
         </div>
         <!-- end logout button -->
 
-        <!-- search mobile button (this is hidden till mobile view port) -->
-        <div id="search-mobile" class="btn-header transparent pull-right">
-            <span> <a href="javascript:void(0)" title="Search"><i class="fa fa-search"></i></a> </span>
-        </div>
-        <!-- end search mobile button -->
-
-        <!-- input: search field -->
-        <form action="https://smartadmin-html.firebaseapp.com/search.html" class="header-search pull-right">
-            <input id="search-fld" type="text" name="param" placeholder="Find reports and more" data-autocomplete='[
-					"ActionScript",
-					"AppleScript",
-					"Asp",
-					"BASIC",
-					"C",
-					"C++",
-					"Clojure",
-					"COBOL",
-					"ColdFusion",
-					"Erlang",
-					"Fortran",
-					"Groovy",
-					"Haskell",
-					"Java",
-					"JavaScript",
-					"Lisp",
-					"Perl",
-					"PHP",
-					"Python",
-					"Ruby",
-					"Scala",
-					"Scheme"]'>
-            <button type="submit">
-                <i class="fa fa-search"></i>
-            </button>
-            <a href="javascript:void(0);" id="cancel-search-js" title="Cancel Search"><i class="fa fa-times"></i></a>
-        </form>
-        <!-- end input: search field -->
-
 
     </div>
     <!-- end pulled right: nav area -->
@@ -212,7 +177,7 @@
         <span> <!-- User image size is adjusted inside CSS, it should stay as it -->
 
             <a href="javascript:void(0);" id="show-shortcut" data-action="toggleShortcut">
-                <img src="{% static request.user.profile.photo.url %}" alt="me" class="online"/>
+                <img src="{% static request.user.photo.url %}" alt="me" class="online"/>
                 <span>
                     {{ request.user.first_name }} {{ request.user.last_name }}
                 </span>
@@ -359,6 +324,7 @@
 <!-- END MAIN PANEL -->
 
 <!-- PAGE FOOTER -->
+<!--
 <div class="page-footer">
     <div class="row">
         <div class="col-xs-12 col-sm-6">
@@ -413,6 +379,7 @@
         </div>
     </div>
 </div>
+-->
 <!-- END PAGE FOOTER -->
 
 <!-- SHORTCUT AREA : With large tiles (activated via clicking user name tag)
@@ -518,11 +485,15 @@ you can add as many as you like
 <script src="{% static 'js/plugin/moment/moment.min.js' %}"></script>
 <script src="{% static 'js/plugin/fullcalendar/fullcalendar.min.js' %}"></script>
 
+<!-- Select2 -->
+<script src="{% static 'js/select2.full.min.js' %}"></script>
+
 <script>
     $(document).ready(function () {
 
         // DO NOT REMOVE : GLOBAL FUNCTIONS!
         pageSetUp();
+
     });
 </script>
 
@@ -534,6 +505,9 @@ you can add as many as you like
 {% include 'modals/import_classes.html' %}
 {% include 'modals/import_subjects.html' %}
 {% include 'modals/import_results.html' %}
+{% include 'modals/add_school_to_profile.html' %}
+
+
 
 <!-- Your GOOGLE ANALYTICS CODE Below -->
 {#<script>#}

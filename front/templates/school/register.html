@@ -47,7 +47,10 @@
         <span id="logo"><img src="{% static 'img/logo-black.png' %}"></span>
     </div>
 
-    {% block top_right %}{% endblock %}
+    <span id="extr-page-header-space">
+        <span class="hidden-mobile hiddex-xs">Already signed up?</span>
+        <a href="{% url 'auth-login' %}" class="btn btn-primary">Login</a>
+    </span>
 
 
 </header>

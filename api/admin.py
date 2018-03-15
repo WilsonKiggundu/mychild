@@ -5,27 +5,15 @@ from .models import *
 
 # Register your models here.
 
-class ProfileInline(admin.StackedInline):
-    model = Profile
-    can_delete = False
-    verbose_name_plural = 'profile'
-
-
 class UserAdmin(admin.ModelAdmin):
-    inlines = (ProfileInline,)
-    list_display = ('first_name', 'last_name', 'email', 'type', 'school')
-    list_filter = ('profile__school', 'profile__type')
+    list_display = ('first_name', 'last_name', 'email', 'type')
     search_fields = ('first_name', 'last_name', 'email',)
 
-    def school(self, obj):
-        return obj.profile.school
-
-    def type(self, obj):
+    @staticmethod
+    def type(obj):
         return obj.profile.type
 
 
-'''Profile'''
-admin.site.unregister(User)
 admin.site.register(User, UserAdmin)
 
 ''' School '''

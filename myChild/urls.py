@@ -8,7 +8,6 @@ from front.views import *
 
 school_resource = SchoolResource()
 student_resource = StudentResource()
-profile_resource = ProfileResource()
 user_resource = UserResource()
 
 urlpatterns = [
@@ -17,7 +16,6 @@ urlpatterns = [
     # api
     url(r'^api/', include(school_resource.urls)),
     url(r'^api/', include(student_resource.urls)),
-    url(r'^api/', include(profile_resource.urls)),
     url(r'^api/', include(user_resource.urls)),
     url(r'^api/docs', include(user_resource.urls)),
 
@@ -41,7 +39,9 @@ urlpatterns = [
     url(r'^user/profile/$', user_profile, name='user_profile'),
     url(r'^user/profile/([0-9]+)/$', user_profile, name='user_profile'),
     url(r'^parents/$', get_parents, name='parents'),
-    url(r'^profile/add/child', add_child, name='add_child'),
+    url(r'^profile/add/child/$', add_child, name='add_child'),
+    url(r'^profile/add/school/$', add_school, name='add_school'),
+    url(r'^schools/$', get_schools, name='get_schools'),
 
     # messages
 

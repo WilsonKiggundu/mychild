@@ -53,6 +53,7 @@ MIDDLEWARE = [
 SITE_ID = 1
 
 ROOT_URLCONF = 'myChild.urls'
+AUTH_USER_MODEL = 'api.User'
 
 TEMPLATES = [
     {
@@ -77,11 +78,17 @@ WSGI_APPLICATION = 'myChild.wsgi.application'
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
 DATABASES = {
-    'default': {
+    'sqlite': {
         'NAME': 'db.sqlite3',
         'ENGINE': 'django.db.backends.sqlite3',
-        # 'USER': 'postgres',
-        # 'PASSWORD': 'sw33th0m3'
+    },
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'mychild_database',
+        'USER': 'smuser',
+        'PASSWORD': 'res1ums',
+        'HOST': '127.0.0.1',
+        'PORT': '3306',
     }
 }
 
@@ -125,5 +132,3 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'front/../front/static/uploads')
 MEDIA_URL = '/uploads/'
 
 LOGIN_URL = '/login/'
-
-

@@ -1,0 +1,99 @@
+{% load static %}
+
+<!--suppress HtmlFormInputWithoutLabel -->
+<div class="modal fade" id="add_school" tabindex="-1" role="dialog"
+     aria-labelledby="add_school" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel">Associate schools</h4>
+            </div>
+
+            <form method="post" id="addSchoolForm"
+                  action="{% url 'add_school' %}"
+                  class="form-horizontal">
+                {% csrf_token %}
+
+                <div class="modal-body">
+                    <fieldset>
+                        <div class="form-group has-feedback">
+                            <label class="col-xs-2 col-lg-3 control-label text-right"></label>
+                            <div class="col-xs-9 col-lg-7">
+                                <div class="input-wrapper">
+                                    <select id="schools" name="school" class="form-control"></select>
+                                </div>
+                            </div>
+                        </div>
+
+                    </fieldset>
+                    <div id="response_message"></div>
+                </div>
+
+                <div class="modal-footer text-center">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        Close
+                    </button>
+                    <button type="submit" class="btn btn-primary">
+                        Associate
+                    </button>
+                </div>
+            </form>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+{% block scripts %}
+    <script>
+
+        $(document).ready(function () {
+            $("select").select2({
+                width: "100%",
+                ajax: {
+                    url: '{% url 'get_schools' %}',
+                    dataType: 'json'
+                }
+            });
+        });
+
+        $('#addSchoolForm').on('submit', function (e) {
+            if (e.isDefaultPrevented()) {
+                // the form is invalid
+            } else {
+
+                $("#response_message").html("<em>Associating you with schools. Please wait....</em>");
+
+                var csrfToken = $("[name=csrfmiddlewaretoken]").val();
+
+                $.ajax({
+                    type: 'POST',
+                    url: '{% url 'add_school' %}',
+                    data: {
+                        school: $('#schools').val()
+                    },
+                    beforeSend: function (xhr, settings) {
+                        xhr.setRequestHeader('X-CSRFToken', csrfToken)
+                    },
+                    success: function (response) {
+                        $("#response_message").addClass('text text-success').html(response.message);
+                    },
+                    error: function (error) {
+
+                        console.log(error);
+
+                        $("#response_message").addClass('text text-danger')
+                            .html(error.statusText + ": unable to upload the files");
+                    }
+                });
+
+                return false;
+            }
+
+        });
+
+
+    </script>
+
+{% endblock %}

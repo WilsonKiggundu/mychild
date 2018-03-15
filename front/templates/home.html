@@ -28,7 +28,7 @@
 
                             <li>
                                 <div class="smart-timeline-icon">
-                                    <img src="{% static post.author.profile.photo.url %}" width="32" height="32"
+                                    <img src="{% static post.author.photo.url %}" width="32" height="32"
                                          alt="user"/>
                                 </div>
                                 <div class="smart-timeline-time">
@@ -36,7 +36,7 @@
                                 </div>
                                 <div class="smart-timeline-content">
                                     <p>
-                                        <a href="{% url 'user_profile' post.author.profile.id %}">
+                                        <a href="{% url 'user_profile' post.author.id %}">
                                             <strong>{{ post.author.first_name }} {{ post.author.last_name }}</strong>
                                         </a>
                                     </p>
@@ -65,7 +65,7 @@
                                             {% for comment in post.comment_set.all %}
                                                 <div class="row">
                                                     <div class="col-xs-1">
-                                                        <img src="{% static comment.author.profile.photo.url %}"
+                                                        <img src="{% static comment.author.photo.url %}"
                                                              width="32"
                                                              height="32" alt="user"/>
                                                     </div>
@@ -74,7 +74,7 @@
                                                         <span class="pull-right">
                                                             {{ comment.date | naturaltime }}
                                                         </span>
-                                                            <a href="{% url 'user_profile' comment.author.profile.id %}">
+                                                            <a href="{% url 'user_profile' comment.author.id %}">
                                                                 <strong>{{ comment.author.first_name }} {{ comment.author.last_name }}</strong>
                                                             </a>
                                                             <br/>
@@ -95,7 +95,7 @@
 
                                             <div class="row">
                                                 <div class="col-xs-1">
-                                                    <img src="{% static request.user.profile.photo.url %}" width="32"
+                                                    <img src="{% static request.user.photo.url %}" width="32"
                                                          height="32" alt="user"/>
                                                 </div>
                                                 <div class="col-xs-9">

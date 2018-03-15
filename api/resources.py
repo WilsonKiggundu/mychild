@@ -23,13 +23,6 @@ class StudentResource(ModelResource):
         authorization = Authorization()
 
 
-class ProfileResource(ModelResource):
-    class Meta:
-        queryset = Profile.objects.all()
-        resource_name = 'user/profile'
-        authorization = Authorization()
-
-
 class UserResource(ModelResource):
     class Meta:
         queryset = User.objects.all()

@@ -40,20 +40,20 @@
                                     <div class="row">
 
                                         <div class="col-sm-3 profile-pic">
-                                            <img src="{% static user.profile.photo.url %}" alt="{{ user.last_name }}">
+                                            <img src="{% static user.photo.url %}" alt="{{ user.last_name }}">
                                         </div>
                                         <div class="col-sm-6">
                                             <h1>{{ user.first_name }} <span
                                                     class="semi-bold">{{ user.last_name }}</span>
                                                 <br>
-                                                <small> {{ user.profile.occupation }} </small>
+                                                <small> {{ user.occupation }} </small>
                                             </h1>
 
                                             <ul class="list-unstyled">
                                                 <li>
                                                     <p class="text-muted">
                                                         <i class="fa fa-phone"></i>&nbsp;&nbsp;
-                                                        <span>{{ user.profile.telephone }}</span>
+                                                        <span>{{ user.telephone }}</span>
                                                     </p>
                                                 </li>
                                                 <li>
@@ -65,16 +65,37 @@
                                                 <li>
                                                     <p class="text-muted">
                                                         <i class="fa fa-linkedin-square"></i>&nbsp;&nbsp;<span
-                                                            class="txt-color-darken">{{ user.profile.linkedin_profile }}</span>
+                                                            class="txt-color-darken">{{ user.linkedin_profile }}</span>
                                                     </p>
                                                 </li>
                                                 <li>
                                                     <p class="text-muted">
                                                         <i class="fa fa-facebook-square"></i>&nbsp;&nbsp;<span
-                                                            class="txt-color-darken">{{ user.profile.facebook_profile }}</span>
+                                                            class="txt-color-darken">{{ user.facebook_profile }}</span>
                                                     </p>
                                                 </li>
                                             </ul>
+                                            <br>
+
+                                            {% if request.user.id != user.id %}
+                                                <a class="btn btn-default btn-md"><i
+                                                        class="fa fa-envelope-o"></i> Send Message</a>
+                                            {% endif %}
+
+                                            <ol>
+                                                {% for school in schools %}
+                                                    <li>{{ school.school.school_name }}</li>
+                                                {% endfor %}
+                                            </ol>
+
+
+                                            {% if request.user.id == user.id %}
+                                                <a data-toggle="modal" data-target="#add_school"
+                                                   class="btn btn-primary btn-md"><i
+                                                        class="fa fa-link"></i> Add schools to your profile</a>
+                                            {% endif %}
+
+                                            <br>
                                             <br>
                                             <p class="font-md">
                                                 <i>A little about me...</i>
@@ -82,10 +103,6 @@
                                             <p>
                                                 {{ user.profile.bio | linebreaksbr }}
                                             </p>
-                                            <br>
-                                            <a href="javascript:void(0);" class="btn btn-default btn-xs"><i
-                                                    class="fa fa-envelope-o"></i> Send Message</a>
-                                            <br>
                                             <br>
 
                                         </div>
